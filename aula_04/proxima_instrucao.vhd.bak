@@ -1,0 +1,40 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity proxima_instrucao is
+   generic (
+          dataWidth: natural := 8;
+    );
+   port (
+          CLK : in 	std_logic;
+          INSTRUCTION : out std_logic_vector (dataWidth-1 DOWNTO 0)
+    );
+end entity;
+
+
+architecture arch_name of proxima_instrucao is
+
+PC	: entity work.registradorGenerico 	generic map(larguraDados => larguraDados)
+		port map (
+			DIN 	=> PC_IN,		-- 
+			DOUT 	=> PC_OUT,		-- saída pc que é ligada na memória e na próxima instrução
+			ENABLE => '1', 
+			CLK => CLK, 
+			RST => RST_PC
+		);
+			
+SOMA_CONST 	: entity work.soma_constante 			generic map(DATA_WIDTH => larguraDados, CONST => 1)
+		port map (
+			entrada 	=> PC_OUT,
+			saida 	=> PC_IN
+		);
+
+-- ROM da máquina de busca
+ROM 			: entity work.memoriaROM   			generic map (dataWidth => 4, addrWidth => larguraDados)
+		port map (
+			Endereco => PC_OUT, 
+			Dado 		=> Instrucoes_Decodificador -- width = 13
+		);
+
+end architecture;

@@ -1,0 +1,31 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity decodificador is
+  generic   (
+    DATA_WIDTH  : natural :=  8;
+  );
+
+  port   (
+    -- Input ports
+    opcode  	: in  std_logic_vector(DATA_WIDTH-1 downto 0);
+	 -- Output ports
+    SelMUX 		: out std_logic;
+	 EnbA			: out std_logic;
+	 RstA			: out std_logic;
+	 Operation	: out std_logic;
+  );
+end entity;
+
+
+architecture arch_name of decodificador is
+  -- signal <name> : std_logic;
+  -- signal <name> : std_logic_vector(<msb_index> downto <lsb_index>);
+begin
+
+  -- Para instanciar, a atribuição de sinais (e generics) segue a ordem: (nomeSinalArquivoDefinicaoComponente => nomeSinalNesteArquivo)
+  -- regA:  entity work.nome_do_componente generic map (DATA_WIDTH => DATA_WIDTH)
+  --        port map (dataIN => dataIN, dataOUT =>  RegAmuxA, enable =>  habRegA, clk =>  clk, rst => rst);
+
+end architecture;
