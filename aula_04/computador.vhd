@@ -10,8 +10,7 @@ entity computador is
 	port   (
 		CLOCK_50 : in 	std_logic;
 		KEY		: in 	std_logic_vector(3 downto 0);
-		SW			: in 	std_logic_vector(9 downto 0);
-		LEDR  	: out std_logic_vector(9 downto 0)
+		SAIDA		: out std_logic_vector(7 downto 0)
 	);
 end entity;
 
@@ -38,7 +37,9 @@ architecture arquitetura of computador is
 	signal SelMUX 								: std_logic;
 	signal Habilita_A 						: std_logic;
 	signal Reset_A 							: std_logic;
-
+	
+	signal Saida_LEDS							: std_logic_vector (7 downto 0);
+	
 begin
 
 -- Instanciando os componentes:
@@ -52,12 +53,14 @@ else generate
 end generate;
 
 ----------- CONFIGURAÇÃO IN/OUT -----------
-selMUX 			<= Sinais_Controle(3);
-Habilita_A 		<= Sinais_Controle(2);
-Operacao_ULA 	<= Sinais_Controle(1 downto 0);
-RST_PC 			<= not(KEY(3));
+-- SelMUX 			<= Sinais_Controle(3);
+-- Habilita_A 		<= Sinais_Controle(2);
+-- Operacao_ULA 	<= Sinais_Controle(1 downto 0);
+RST_PC 			<= '0'; -- not(KEY(3));
 
-LEDR(7 downto 0) <= SAIDA_REG_A;
+Saida_LEDS 		  <= SAIDA_REG_A;
+ 
+SAIDA				  <= SAIDA_REG_A;
 
 -----------------------------------------
 -----------------------------------------
@@ -67,10 +70,10 @@ LEDR(7 downto 0) <= SAIDA_REG_A;
 MUX1 :  	entity work.muxGenerico2x1  generic map (larguraDados => 8)
 			port map(
 				entradaA_MUX 	=> MUX_IN_0,
-				entradaB_MUX 	=> Saida_ULA,
+				entradaB_MUX 	=> instrucoes_decodificador(7 downto 0),
 				seletor_MUX 	=> SelMUX,
 				saida_MUX 		=> MUX_ULA_B
-			);	
+			);
 
 -- O port map completo do Acumulador.
 REG_A : 	entity work.registradorGenerico   generic map (larguraDados => 8)
@@ -93,12 +96,12 @@ ULA1 : 	entity work.ULASomaSub  	generic map(larguraDados => 8)
 
 	 
 -- port map do decodificador
-DECODER: entity work.decoder 		generic map(DATA_WIDTH => 4)
+DECODER: entity work.decoder 		generic map(DATA_WIDTH => 4) -- "0000 0 0000 0000"
 			port map (
 				OP_CODE 			=> instrucoes_decodificador(12 downto 9),		-- largura 4
-				SEL_MUX 			=> Sinais_Controle(3),
-				HAB_A				=> Sinais_Controle(2),
-				OP_ULA			=> Sinais_Controle(1 downto 0),
+				SEL_MUX 			=> SelMUX,
+				HAB_A				=> Habilita_A,
+				OP_ULA			=> Operacao_ULA,
 				ENABLE_READ 	=> habilita_leitura,
 				ENABLE_WRITE	=> habilita_escrita
 			);
@@ -108,17 +111,17 @@ MDADOS:	entity work.memoriaRAM	generic map(dataWidth => 8, addrWidth => 8)
 				addr     		=> instrucoes_decodificador(7 downto 0), -- largura 8
 				we					=> habilita_escrita, -- write enable
 				re   				=> habilita_leitura, -- read enable
-				habilita 		=> instrucoes_decodificador(8), -- 12 - 8 = 4 (ordem reversa) 
+				habilita 		=> instrucoes_decodificador(8),
 				clk      		=> CLK,
 				dado_in  		=> SAIDA_REG_A,
 				dado_out 		=> MUX_IN_0
 			);
 			
-INSTR : 	entity work.proxima_instrucao generic map (DATA_WIDTH => 13)
+INSTR : 	entity work.proxima_instrucao generic map(DATA_WIDTH => 13)
 			port map (
-				CLK 			=> CLK,
-				RESET 		=> RST_PC,
-				INSTRUCTION => instrucoes_decodificador	-- largura 13
+				CLK 				=> CLK,
+				RESET 			=> RST_PC,
+				INSTRUCTION 	=> instrucoes_decodificador	-- largura 13
 			);
 
 			

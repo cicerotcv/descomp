@@ -5,27 +5,15 @@ KEY[0] => memoriaram:MDADOS.clk
 KEY[0] => proxima_instrucao:INSTR.CLK
 KEY[1] => ~NO_FANOUT~
 KEY[2] => ~NO_FANOUT~
-KEY[3] => proxima_instrucao:INSTR.RESET
-SW[0] => ~NO_FANOUT~
-SW[1] => ~NO_FANOUT~
-SW[2] => ~NO_FANOUT~
-SW[3] => ~NO_FANOUT~
-SW[4] => ~NO_FANOUT~
-SW[5] => ~NO_FANOUT~
-SW[6] => ~NO_FANOUT~
-SW[7] => ~NO_FANOUT~
-SW[8] => ~NO_FANOUT~
-SW[9] => ~NO_FANOUT~
-LEDR[0] <= registradorgenerico:REG_A.DOUT[0]
-LEDR[1] <= registradorgenerico:REG_A.DOUT[1]
-LEDR[2] <= registradorgenerico:REG_A.DOUT[2]
-LEDR[3] <= registradorgenerico:REG_A.DOUT[3]
-LEDR[4] <= registradorgenerico:REG_A.DOUT[4]
-LEDR[5] <= registradorgenerico:REG_A.DOUT[5]
-LEDR[6] <= registradorgenerico:REG_A.DOUT[6]
-LEDR[7] <= registradorgenerico:REG_A.DOUT[7]
-LEDR[8] <= <GND>
-LEDR[9] <= <GND>
+KEY[3] => ~NO_FANOUT~
+SAIDA[0] <= registradorgenerico:REG_A.DOUT[0]
+SAIDA[1] <= registradorgenerico:REG_A.DOUT[1]
+SAIDA[2] <= registradorgenerico:REG_A.DOUT[2]
+SAIDA[3] <= registradorgenerico:REG_A.DOUT[3]
+SAIDA[4] <= registradorgenerico:REG_A.DOUT[4]
+SAIDA[5] <= registradorgenerico:REG_A.DOUT[5]
+SAIDA[6] <= registradorgenerico:REG_A.DOUT[6]
+SAIDA[7] <= registradorgenerico:REG_A.DOUT[7]
 
 
 |computador|muxGenerico2x1:MUX1

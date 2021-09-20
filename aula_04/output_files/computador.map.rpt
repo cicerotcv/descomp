@@ -1,5 +1,5 @@
 Analysis & Synthesis report for computador
-Mon Sep 13 17:38:40 2021
+Mon Sep 20 20:14:02 2021
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -13,23 +13,25 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Logic Cells Representing Combinational Loops
+  8. Registers Removed During Synthesis
   9. General Register Statistics
- 10. Parameter Settings for User Entity Instance: Top-level Entity: |computador
- 11. Parameter Settings for User Entity Instance: muxGenerico2x1:MUX1
- 12. Parameter Settings for User Entity Instance: registradorGenerico:REG_A
- 13. Parameter Settings for User Entity Instance: ULASomaSub:ULA1
- 14. Parameter Settings for User Entity Instance: decoder:DECODER
- 15. Parameter Settings for User Entity Instance: memoriaRAM:MDADOS
- 16. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR
- 17. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR|registradorGenerico:PC
- 18. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR|soma_constante:SOMA_CONST
- 19. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR|memoriaROM:ROM
- 20. Port Connectivity Checks: "proxima_instrucao:INSTR|registradorGenerico:PC"
- 21. Port Connectivity Checks: "registradorGenerico:REG_A"
- 22. Post-Synthesis Netlist Statistics for Top Partition
- 23. Elapsed Time Per Partition
- 24. Analysis & Synthesis Messages
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |computador
+ 12. Parameter Settings for User Entity Instance: muxGenerico2x1:MUX1
+ 13. Parameter Settings for User Entity Instance: registradorGenerico:REG_A
+ 14. Parameter Settings for User Entity Instance: ULASomaSub:ULA1
+ 15. Parameter Settings for User Entity Instance: decoder:DECODER
+ 16. Parameter Settings for User Entity Instance: memoriaRAM:MDADOS
+ 17. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR
+ 18. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR|registradorGenerico:PC
+ 19. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR|soma_constante:SOMA_CONST
+ 20. Parameter Settings for User Entity Instance: proxima_instrucao:INSTR|memoriaROM:ROM
+ 21. Port Connectivity Checks: "proxima_instrucao:INSTR|registradorGenerico:PC"
+ 22. Port Connectivity Checks: "proxima_instrucao:INSTR"
+ 23. Port Connectivity Checks: "registradorGenerico:REG_A"
+ 24. Post-Synthesis Netlist Statistics for Top Partition
+ 25. Elapsed Time Per Partition
+ 26. Analysis & Synthesis Messages
 
 
 
@@ -56,14 +58,14 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Sep 13 17:38:40 2021       ;
+; Analysis & Synthesis Status     ; Successful - Mon Sep 20 20:14:02 2021       ;
 ; Quartus Prime Version           ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                   ; computador                                  ;
 ; Top-level Entity Name           ; computador                                  ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 17                                          ;
-; Total pins                      ; 25                                          ;
+; Total registers                 ; 81                                          ;
+; Total pins                      ; 13                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -182,49 +184,49 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                 ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                          ; Library ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------+---------+
-; ULASomaSub.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/ULASomaSub.vhd          ;         ;
-; soma_constante.vhd               ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/soma_constante.vhd      ;         ;
-; registradorGenerico.vhd          ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/registradorGenerico.vhd ;         ;
-; muxGenerico2x1.vhd               ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/muxGenerico2x1.vhd      ;         ;
-; memoriaROM.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaROM.vhd          ;         ;
-; decoder.vhd                      ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/decoder.vhd             ;         ;
-; computer_constants.vhd           ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/computer_constants.vhd  ;         ;
-; computador.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd          ;         ;
-; proxima_instrucao.vhd            ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/proxima_instrucao.vhd   ;         ;
-; memoriaRAM.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd          ;         ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                            ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                     ; Library ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------+---------+
+; ULASomaSub.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/ULASomaSub.vhd          ;         ;
+; soma_constante.vhd               ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/soma_constante.vhd      ;         ;
+; registradorGenerico.vhd          ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/registradorGenerico.vhd ;         ;
+; muxGenerico2x1.vhd               ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/muxGenerico2x1.vhd      ;         ;
+; memoriaROM.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaROM.vhd          ;         ;
+; decoder.vhd                      ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/decoder.vhd             ;         ;
+; computer_constants.vhd           ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computer_constants.vhd  ;         ;
+; computador.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd          ;         ;
+; proxima_instrucao.vhd            ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/proxima_instrucao.vhd   ;         ;
+; memoriaRAM.vhd                   ; yes             ; User VHDL File  ; C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd          ;         ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------+---------+
 
 
-+------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                          ;
-+---------------------------------------------+--------------------------------------------------------+
-; Resource                                    ; Usage                                                  ;
-+---------------------------------------------+--------------------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 17                                                     ;
-;                                             ;                                                        ;
-; Combinational ALUT usage for logic          ; 33                                                     ;
-;     -- 7 input functions                    ; 0                                                      ;
-;     -- 6 input functions                    ; 0                                                      ;
-;     -- 5 input functions                    ; 8                                                      ;
-;     -- 4 input functions                    ; 13                                                     ;
-;     -- <=3 input functions                  ; 12                                                     ;
-;                                             ;                                                        ;
-; Dedicated logic registers                   ; 17                                                     ;
-;                                             ;                                                        ;
-; I/O pins                                    ; 25                                                     ;
-;                                             ;                                                        ;
-; Total DSP Blocks                            ; 0                                                      ;
-;                                             ;                                                        ;
-; Maximum fan-out node                        ; proxima_instrucao:INSTR|registradorGenerico:PC|DOUT[8] ;
-; Maximum fan-out                             ; 19                                                     ;
-; Total fan-out                               ; 208                                                    ;
-; Average fan-out                             ; 2.08                                                   ;
-+---------------------------------------------+--------------------------------------------------------+
++------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                ;
++---------------------------------------------+--------------+
+; Resource                                    ; Usage        ;
++---------------------------------------------+--------------+
+; Estimate of Logic utilization (ALMs needed) ; 63           ;
+;                                             ;              ;
+; Combinational ALUT usage for logic          ; 83           ;
+;     -- 7 input functions                    ; 0            ;
+;     -- 6 input functions                    ; 14           ;
+;     -- 5 input functions                    ; 23           ;
+;     -- 4 input functions                    ; 35           ;
+;     -- <=3 input functions                  ; 11           ;
+;                                             ;              ;
+; Dedicated logic registers                   ; 81           ;
+;                                             ;              ;
+; I/O pins                                    ; 13           ;
+;                                             ;              ;
+; Total DSP Blocks                            ; 0            ;
+;                                             ;              ;
+; Maximum fan-out node                        ; KEY[0]~input ;
+; Maximum fan-out                             ; 81           ;
+; Total fan-out                               ; 623          ;
+; Average fan-out                             ; 3.28         ;
++---------------------------------------------+--------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -232,11 +234,12 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node        ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                           ; Entity Name         ; Library Name ;
 +-----------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------+---------------------+--------------+
-; |computador                       ; 33 (0)              ; 17 (0)                    ; 0                 ; 0          ; 25   ; 0            ; |computador                                                   ; computador          ; work         ;
-;    |ULASomaSub:ULA1|              ; 17 (17)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|ULASomaSub:ULA1                                   ; ULASomaSub          ; work         ;
-;    |decoder:DECODER|              ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|decoder:DECODER                                   ; decoder             ; work         ;
-;    |proxima_instrucao:INSTR|      ; 14 (0)              ; 9 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|proxima_instrucao:INSTR                           ; proxima_instrucao   ; work         ;
-;       |memoriaROM:ROM|            ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|proxima_instrucao:INSTR|memoriaROM:ROM            ; memoriaROM          ; work         ;
+; |computador                       ; 83 (0)              ; 81 (0)                    ; 0                 ; 0          ; 13   ; 0            ; |computador                                                   ; computador          ; work         ;
+;    |ULASomaSub:ULA1|              ; 18 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|ULASomaSub:ULA1                                   ; ULASomaSub          ; work         ;
+;    |decoder:DECODER|              ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|decoder:DECODER                                   ; decoder             ; work         ;
+;    |memoriaRAM:MDADOS|            ; 41 (41)             ; 64 (64)                   ; 0                 ; 0          ; 0    ; 0            ; |computador|memoriaRAM:MDADOS                                 ; memoriaRAM          ; work         ;
+;    |proxima_instrucao:INSTR|      ; 19 (0)              ; 9 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|proxima_instrucao:INSTR                           ; proxima_instrucao   ; work         ;
+;       |memoriaROM:ROM|            ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|proxima_instrucao:INSTR|memoriaROM:ROM            ; memoriaROM          ; work         ;
 ;       |registradorGenerico:PC|    ; 1 (1)               ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|proxima_instrucao:INSTR|registradorGenerico:PC    ; registradorGenerico ; work         ;
 ;       |soma_constante:SOMA_CONST| ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|proxima_instrucao:INSTR|soma_constante:SOMA_CONST ; soma_constante      ; work         ;
 ;    |registradorGenerico:REG_A|    ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |computador|registradorGenerico:REG_A                         ; registradorGenerico ; work         ;
@@ -244,15 +247,77 @@ https://fpgasoftware.intel.com/eula.
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+------------------------------------------------------------+
-; Logic Cells Representing Combinational Loops               ;
-+--------------------------------------------------------+---+
-; Logic Cell Name                                        ;   ;
-+--------------------------------------------------------+---+
-; ULASomaSub:ULA1|saida[0]~0                             ;   ;
-; Number of logic cells representing combinational loops ; 1 ;
-+--------------------------------------------------------+---+
-Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
++--------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                   ;
++----------------------------------------+---------------------------------------------+
+; Register name                          ; Reason for Removal                          ;
++----------------------------------------+---------------------------------------------+
+; memoriaRAM:MDADOS|ram~97               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~105              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~81               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~89               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~129              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~137              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~113              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~121              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~98               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~130              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~106              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~138              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~82               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~114              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~90               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~122              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~99               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~107              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~83               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~91               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~131              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~139              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~115              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~123              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~100              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~132              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~108              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~140              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~84               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~116              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~92               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~124              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~101              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~109              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~85               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~93               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~133              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~141              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~117              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~125              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~102              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~134              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~110              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~142              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~86               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~118              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~94               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~126              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~103              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~111              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~87               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~95               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~135              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~143              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~119              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~127              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~104              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~136              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~112              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~144              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~88               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~120              ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~96               ; Stuck at GND due to stuck port clock_enable ;
+; memoriaRAM:MDADOS|ram~128              ; Stuck at GND due to stuck port clock_enable ;
+; Total Number of Removed Registers = 64 ;                                             ;
++----------------------------------------+---------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -260,14 +325,23 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 17    ;
+; Total registers                              ; 81    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 9     ;
+; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 8     ;
+; Number of registers using Clock Enable       ; 72    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |computador|decoder:DECODER|OP_ULA[0] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
 
 
 +----------------------------------------------------------------------------+
@@ -383,6 +457,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------+-------+----------+------------------------------------------------+
 
 
++-----------------------------------------------------+
+; Port Connectivity Checks: "proxima_instrucao:INSTR" ;
++-------+-------+----------+--------------------------+
+; Port  ; Type  ; Severity ; Details                  ;
++-------+-------+----------+--------------------------+
+; reset ; Input ; Info     ; Stuck at GND             ;
++-------+-------+----------+--------------------------+
+
+
 +-------------------------------------------------------+
 ; Port Connectivity Checks: "registradorGenerico:REG_A" ;
 +------+-------+----------+-----------------------------+
@@ -397,25 +480,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 17                          ;
-;     CLR               ; 9                           ;
-;     ENA               ; 8                           ;
-; arriav_lcell_comb     ; 34                          ;
+; arriav_ff             ; 81                          ;
+;     ENA               ; 72                          ;
+;     plain             ; 9                           ;
+; arriav_lcell_comb     ; 83                          ;
 ;     arith             ; 17                          ;
-;         1 data inputs ; 7                           ;
+;         1 data inputs ; 8                           ;
 ;         2 data inputs ; 1                           ;
 ;         4 data inputs ; 1                           ;
-;         5 data inputs ; 8                           ;
-;     normal            ; 17                          ;
-;         0 data inputs ; 1                           ;
+;         5 data inputs ; 7                           ;
+;     normal            ; 66                          ;
 ;         1 data inputs ; 1                           ;
-;         2 data inputs ; 2                           ;
 ;         3 data inputs ; 1                           ;
-;         4 data inputs ; 12                          ;
-; boundary_port         ; 25                          ;
+;         4 data inputs ; 34                          ;
+;         5 data inputs ; 16                          ;
+;         6 data inputs ; 14                          ;
+; boundary_port         ; 13                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 4.80                        ;
-; Average LUT depth     ; 3.34                        ;
+; Max LUT depth         ; 6.70                        ;
+; Average LUT depth     ; 4.73                        ;
 +-----------------------+-----------------------------+
 
 
@@ -434,92 +517,80 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Mon Sep 13 17:38:30 2021
+    Info: Processing started: Mon Sep 20 20:13:51 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off computador -c computador
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file ulasomasub.vhd
-    Info (12022): Found design unit 1: ULASomaSub-comportamento File: C:/Users/elm_t/Documents/grad/descomp/aula_04/ULASomaSub.vhd Line: 14
-    Info (12023): Found entity 1: ULASomaSub File: C:/Users/elm_t/Documents/grad/descomp/aula_04/ULASomaSub.vhd Line: 5
+    Info (12022): Found design unit 1: ULASomaSub-comportamento File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/ULASomaSub.vhd Line: 14
+    Info (12023): Found entity 1: ULASomaSub File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/ULASomaSub.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file soma_constante.vhd
-    Info (12022): Found design unit 1: soma_constante-comportamento File: C:/Users/elm_t/Documents/grad/descomp/aula_04/soma_constante.vhd Line: 18
-    Info (12023): Found entity 1: soma_constante File: C:/Users/elm_t/Documents/grad/descomp/aula_04/soma_constante.vhd Line: 5
+    Info (12022): Found design unit 1: soma_constante-comportamento File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/soma_constante.vhd Line: 18
+    Info (12023): Found entity 1: soma_constante File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/soma_constante.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file registradorgenerico.vhd
-    Info (12022): Found design unit 1: registradorGenerico-comportamento File: C:/Users/elm_t/Documents/grad/descomp/aula_04/registradorGenerico.vhd Line: 16
-    Info (12023): Found entity 1: registradorGenerico File: C:/Users/elm_t/Documents/grad/descomp/aula_04/registradorGenerico.vhd Line: 4
+    Info (12022): Found design unit 1: registradorGenerico-comportamento File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/registradorGenerico.vhd Line: 16
+    Info (12023): Found entity 1: registradorGenerico File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/registradorGenerico.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file muxgenerico2x1.vhd
-    Info (12022): Found design unit 1: muxGenerico2x1-comportamento File: C:/Users/elm_t/Documents/grad/descomp/aula_04/muxGenerico2x1.vhd Line: 15
-    Info (12023): Found entity 1: muxGenerico2x1 File: C:/Users/elm_t/Documents/grad/descomp/aula_04/muxGenerico2x1.vhd Line: 5
+    Info (12022): Found design unit 1: muxGenerico2x1-comportamento File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/muxGenerico2x1.vhd Line: 15
+    Info (12023): Found entity 1: muxGenerico2x1 File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/muxGenerico2x1.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file memoriarom.vhd
-    Info (12022): Found design unit 1: memoriaROM-assincrona File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaROM.vhd Line: 18
-    Info (12023): Found entity 1: memoriaROM File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaROM.vhd Line: 7
+    Info (12022): Found design unit 1: memoriaROM-assincrona File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaROM.vhd Line: 18
+    Info (12023): Found entity 1: memoriaROM File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaROM.vhd Line: 7
 Info (12021): Found 3 design units, including 1 entities, in source file edgedetector.vhd
-    Info (12022): Found design unit 1: edgeDetector-bordaSubida File: C:/Users/elm_t/Documents/grad/descomp/aula_04/edgeDetector.vhd Line: 10
-    Info (12022): Found design unit 2: edgeDetector-bordaDescida File: C:/Users/elm_t/Documents/grad/descomp/aula_04/edgeDetector.vhd Line: 23
-    Info (12023): Found entity 1: edgeDetector File: C:/Users/elm_t/Documents/grad/descomp/aula_04/edgeDetector.vhd Line: 4
+    Info (12022): Found design unit 1: edgeDetector-bordaSubida File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/edgeDetector.vhd Line: 10
+    Info (12022): Found design unit 2: edgeDetector-bordaDescida File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/edgeDetector.vhd Line: 23
+    Info (12023): Found entity 1: edgeDetector File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/edgeDetector.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file decoder.vhd
-    Info (12022): Found design unit 1: decoder-arch_name File: C:/Users/elm_t/Documents/grad/descomp/aula_04/decoder.vhd Line: 23
-    Info (12023): Found entity 1: decoder File: C:/Users/elm_t/Documents/grad/descomp/aula_04/decoder.vhd Line: 7
+    Info (12022): Found design unit 1: decoder-arch_name File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/decoder.vhd Line: 23
+    Info (12023): Found entity 1: decoder File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/decoder.vhd Line: 7
 Info (12021): Found 1 design units, including 0 entities, in source file computer_constants.vhd
-    Info (12022): Found design unit 1: mnemonics File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computer_constants.vhd Line: 3
+    Info (12022): Found design unit 1: mnemonics File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computer_constants.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file computador.vhd
-    Info (12022): Found design unit 1: computador-arquitetura File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 19
-    Info (12023): Found entity 1: computador File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 4
+    Info (12022): Found design unit 1: computador-arquitetura File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 18
+    Info (12023): Found entity 1: computador File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file proxima_instrucao.vhd
-    Info (12022): Found design unit 1: proxima_instrucao-arch_name File: C:/Users/elm_t/Documents/grad/descomp/aula_04/proxima_instrucao.vhd Line: 15
-    Info (12023): Found entity 1: proxima_instrucao File: C:/Users/elm_t/Documents/grad/descomp/aula_04/proxima_instrucao.vhd Line: 5
+    Info (12022): Found design unit 1: proxima_instrucao-arch_name File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/proxima_instrucao.vhd Line: 15
+    Info (12023): Found entity 1: proxima_instrucao File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/proxima_instrucao.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file memoriaram.vhd
-    Info (12022): Found design unit 1: memoriaRAM-rtl File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 21
-    Info (12023): Found entity 1: memoriaRAM File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 5
+    Info (12022): Found design unit 1: memoriaRAM-rtl File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 21
+    Info (12023): Found entity 1: memoriaRAM File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 5
 Info (12127): Elaborating entity "computador" for the top level hierarchy
-Warning (10873): Using initial value X (don't care) for net "LEDR[9..8]" at computador.vhd(14) File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 14
-Info (12128): Elaborating entity "muxGenerico2x1" for hierarchy "muxGenerico2x1:MUX1" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 67
-Info (12128): Elaborating entity "registradorGenerico" for hierarchy "registradorGenerico:REG_A" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 76
-Info (12128): Elaborating entity "ULASomaSub" for hierarchy "ULASomaSub:ULA1" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 86
-Info (12128): Elaborating entity "decoder" for hierarchy "decoder:DECODER" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 96
-Info (12128): Elaborating entity "memoriaRAM" for hierarchy "memoriaRAM:MDADOS" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 106
-Info (12128): Elaborating entity "proxima_instrucao" for hierarchy "proxima_instrucao:INSTR" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 117
-Info (12128): Elaborating entity "registradorGenerico" for hierarchy "proxima_instrucao:INSTR|registradorGenerico:PC" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/proxima_instrucao.vhd Line: 25
-Info (12128): Elaborating entity "soma_constante" for hierarchy "proxima_instrucao:INSTR|soma_constante:SOMA_CONST" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/proxima_instrucao.vhd Line: 35
-Info (12128): Elaborating entity "memoriaROM" for hierarchy "proxima_instrucao:INSTR|memoriaROM:ROM" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/proxima_instrucao.vhd Line: 42
+Warning (10036): Verilog HDL or VHDL warning at computador.vhd(41): object "Saida_LEDS" assigned a value but never read File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 41
+Info (12128): Elaborating entity "muxGenerico2x1" for hierarchy "muxGenerico2x1:MUX1" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 70
+Info (12128): Elaborating entity "registradorGenerico" for hierarchy "registradorGenerico:REG_A" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 79
+Info (12128): Elaborating entity "ULASomaSub" for hierarchy "ULASomaSub:ULA1" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 89
+Info (12128): Elaborating entity "decoder" for hierarchy "decoder:DECODER" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 99
+Info (12128): Elaborating entity "memoriaRAM" for hierarchy "memoriaRAM:MDADOS" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 109
+Info (12128): Elaborating entity "proxima_instrucao" for hierarchy "proxima_instrucao:INSTR" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 120
+Info (12128): Elaborating entity "registradorGenerico" for hierarchy "proxima_instrucao:INSTR|registradorGenerico:PC" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/proxima_instrucao.vhd Line: 25
+Info (12128): Elaborating entity "soma_constante" for hierarchy "proxima_instrucao:INSTR|soma_constante:SOMA_CONST" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/proxima_instrucao.vhd Line: 35
+Info (12128): Elaborating entity "memoriaROM" for hierarchy "proxima_instrucao:INSTR|memoriaROM:ROM" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/proxima_instrucao.vhd Line: 42
 Info (276014): Found 1 instances of uninferred RAM logic
-    Info (276007): RAM logic "memoriaRAM:MDADOS|ram" is uninferred due to asynchronous read logic File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 27
+    Info (276007): RAM logic "memoriaRAM:MDADOS|ram" is uninferred due to asynchronous read logic File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 27
 Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[0]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[1]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[2]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[3]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[4]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[5]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[6]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[7]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/aula_04/memoriaRAM.vhd Line: 17
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LEDR[8]" is stuck at GND File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 14
-    Warning (13410): Pin "LEDR[9]" is stuck at GND File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 14
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[0]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[1]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[2]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[3]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[4]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[5]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[6]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
+    Warning (13049): Converted tri-state buffer "memoriaRAM:MDADOS|dado_out[7]" feeding internal logic into a wire File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/memoriaRAM.vhd Line: 17
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 13 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "CLOCK_50" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 11
-    Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 12
-    Warning (15610): No output dependent on input pin "KEY[2]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 12
-    Warning (15610): No output dependent on input pin "SW[0]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[1]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[2]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[3]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[4]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[5]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[6]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[7]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[8]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-    Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/elm_t/Documents/grad/descomp/aula_04/computador.vhd Line: 13
-Info (21057): Implemented 58 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 15 input pins
-    Info (21059): Implemented 10 output pins
-    Info (21061): Implemented 33 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 27 warnings
-    Info: Peak virtual memory: 4839 megabytes
-    Info: Processing ended: Mon Sep 13 17:38:40 2021
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:24
+Warning (21074): Design contains 4 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "CLOCK_50" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 11
+    Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 12
+    Warning (15610): No output dependent on input pin "KEY[2]" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 12
+    Warning (15610): No output dependent on input pin "KEY[3]" File: C:/Users/elm_t/Documents/grad/descomp/atividades/aula_04/computador.vhd Line: 12
+Info (21057): Implemented 160 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 8 output pins
+    Info (21061): Implemented 147 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 15 warnings
+    Info: Peak virtual memory: 4836 megabytes
+    Info: Processing ended: Mon Sep 20 20:14:02 2021
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:25
 
 

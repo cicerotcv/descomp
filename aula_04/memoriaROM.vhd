@@ -24,11 +24,17 @@ architecture assincrona of memoriaROM is
   begin
 	  -- Inicializa os endereços:
 
-        tmp(0) := LDA 	& '1' & x"00";
-        tmp(1) := LDA 	& '1' & x"00";
-        tmp(2) := SOMA 	& '1' & x"00";
-        tmp(3) := SOMA	& '1' & x"00";
-		  tmp(4) := SUBA	& '1' & x"00";
+        tmp(0) 	:= LDI 	& '0' & x"0a"; -- A = 10
+        tmp(1) 	:= STA   & '1' & x"00"; -- MEM[0] = 10
+        tmp(2) 	:= SOMA 	& '1' & x"00"; -- A = A + MEM[0] = 20
+        tmp(3) 	:= SOMA	& '1' & x"00"; -- A = A + MEM[0] = 30
+        tmp(4)		:= STA   & '1' & x"01"; -- MEM[1] = 30
+        tmp(5) 	:= LDI 	& '0' & x"04"; -- A = 4
+        tmp(6) 	:= STA   & '1' & x"02"; -- MEM[2] = 4
+        tmp(7) 	:= LDA   & '1' & x"01"; -- A = MEM[1] = 30
+		  tmp(8) 	:= SUBA	& '1' & x"02"; -- A = A - B = 30 - MEM[2] = 30 - 4 = 26
+        tmp(9) 	:= STA   & '1' & x"04"; -- MEM[4] = 26
+        tmp(10) 	:= NOP 	& '0' & x"00"; --
 		  
         return tmp;
     end initMemory;

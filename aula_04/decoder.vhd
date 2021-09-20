@@ -22,47 +22,51 @@ end entity;
 
 architecture arch_name of decoder is
 
+	
+
+
 begin
 	
 	process (OP_CODE)
 	begin
 	
-		if (OP_CODE = NOP) 		then -- 0000
+		if (OP_CODE = NOP) 		then -- 0000 | 00 00 00 |  00 10 00
+			-- saida <= "000000";
 			SEL_MUX 			<= '0';
 			HAB_A				<= '0';
 			OP_ULA			<= "00";
 			ENABLE_READ		<= '0';
 			ENABLE_WRITE	<= '0';
 			
-		elsif (OP_CODE = LDA) 	then -- 0001
+		elsif (OP_CODE = LDA) 	then -- 0001 | 01 10 10 | 01 10 10
 			SEL_MUX 			<= '0';
 			HAB_A				<= '1';
 			OP_ULA			<= "10";
 			ENABLE_READ		<= '1';
 			ENABLE_WRITE	<= '0';
 		
-		elsif (OP_CODE = SOMA) 	then -- 0010
+		elsif (OP_CODE = SOMA) 	then -- 0010 | 01 01 10 | 01 01 00
 			SEL_MUX 			<= '0';
 			HAB_A				<= '1'; 
 			OP_ULA			<= "01";
 			ENABLE_READ		<= '1';
 			ENABLE_WRITE	<= '0';
 		
-		elsif (OP_CODE = SUBA) 	then -- 0011
+		elsif (OP_CODE = SUBA) 	then -- 0011 | 01 00 10 | 01 00 00
 			SEL_MUX 			<= '0';
 			HAB_A				<= '1';
 			OP_ULA			<= "00";
 			ENABLE_READ		<= '1';
 			ENABLE_WRITE	<= '0';
 		
-		elsif (OP_CODE = LDI) 	then -- 0100
+		elsif (OP_CODE = LDI) 	then -- 0100 | 11 10 00 | 11 10 00
 			SEL_MUX 			<= '1';
 			HAB_A				<= '1';
 			OP_ULA			<= "10";
 			ENABLE_READ		<= '0';
 			ENABLE_WRITE	<= '0';
 		
-		elsif (OP_CODE = STA) 	then -- 0101
+		elsif (OP_CODE = STA) 	then -- 0101 | 01 10 01 | 01 10 01 
 			SEL_MUX 			<= '0';
 			HAB_A				<= '0';
 			OP_ULA			<= "00";

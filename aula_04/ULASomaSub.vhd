@@ -23,6 +23,6 @@ begin
       subtracao 	<= STD_LOGIC_VECTOR(unsigned(entradaA) - unsigned(entradaB));
 		passa 		<= STD_LOGIC_VECTOR(unsigned(entradaB));
 		
-      saida 		<= soma 			when (seletor = "00") else 
-							subtracao 	when (seletor = "01") else passa;
+      saida 		<= soma 			when (seletor = "01") else 
+							subtracao 	when (seletor = "00") else passa;
 end architecture;

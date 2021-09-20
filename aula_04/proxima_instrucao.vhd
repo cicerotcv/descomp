@@ -34,7 +34,7 @@ PC:
 SOMA_CONST:
 		entity work.soma_constante 			generic map(DATA_WIDTH => 9, CONST => 1)
 		port map (
-			entrada 	=> PC_OUT,
+			entrada 	=> PC_OUT,		-- largura 9
 			saida 	=> PC_IN
 		);
 
