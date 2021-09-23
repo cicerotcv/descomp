@@ -23,19 +23,32 @@ architecture assincrona of memoriaROM is
         return blocoMemoria is variable tmp : blocoMemoria := (others => (others => '0'));
   begin
 	  -- Inicializa os endereços:
-
-        tmp(0) 	:= LDI 	& '0' & x"0a"; -- A = 10
-        tmp(1) 	:= STA   & '1' & x"00"; -- MEM[0] = 10
-        tmp(2) 	:= SOMA 	& '1' & x"00"; -- A = A + MEM[0] = 20
-        tmp(3) 	:= SOMA	& '1' & x"00"; -- A = A + MEM[0] = 30
-        tmp(4)		:= STA   & '1' & x"01"; -- MEM[1] = 30
-        tmp(5) 	:= LDI 	& '0' & x"04"; -- A = 4
-        tmp(6) 	:= STA   & '1' & x"02"; -- MEM[2] = 4
-        tmp(7) 	:= LDA   & '1' & x"01"; -- A = MEM[1] = 30
-		  tmp(8)		:= JMP	& '0' & x"0b"; -- GOTO tmp(11)
- 		  tmp(9) 	:= SUBA	& '1' & x"02"; -- A = A - MEM[2] = 30 - MEM[2] = 30 - 4 = 26
-        tmp(10) 	:= STA   & '1' & x"04"; -- MEM[4] = 26
-        tmp(11) 	:= NOP 	& '0' & x"00"; --
+			tmp(0) 	:= JMP 	& '0' & x"04"; -- jmp 4
+			tmp(1)	:= JEQ	& '0' & x"09"; -- jeq 9
+			tmp(2)	:= NOP	& '0' & x"00"; -- 
+			tmp(3)	:= NOP	& '0' & x"00";
+			tmp(4)	:= LDI	& '0' & x"05";
+			tmp(5)	:= STA 	& '1' & x"00";
+			tmp(6)  	:= CEQ   & '1' & x"00";
+			tmp(7)	:= JMP	& '0' & x"01";
+			tmp(8)	:= NOP	& '0' & x"00";
+			tmp(9)	:= LDI	& '0' & x"04";
+			tmp(10) 	:= CEQ   & '1' & x"00";
+			tmp(11)	:= JEQ	& '0' & x"03";
+			tmp(12)	:= JMP	& '0' & x"0c";
+			
+--        tmp(0) 	:= LDI 	& '0' & x"0a"; -- A = 10
+--        tmp(1) 	:= STA   & '1' & x"00"; -- MEM[0] = 10
+--        tmp(2) 	:= SOMA 	& '1' & x"00"; -- A = A + MEM[0] = 20
+--        tmp(3) 	:= SOMA	& '1' & x"00"; -- A = A + MEM[0] = 30
+--        tmp(4)		:= STA   & '1' & x"01"; -- MEM[1] = 30
+--        tmp(5) 	:= LDI 	& '0' & x"04"; -- A = 4
+--        tmp(6) 	:= STA   & '1' & x"02"; -- MEM[2] = 4
+--        tmp(7) 	:= LDA   & '1' & x"01"; -- A = MEM[1] = 30
+--		  	 tmp(8)		:= JMP	& '0' & x"0b"; -- GOTO tmp(11)
+-- 		 tmp(9) 	:= SUBA	& '1' & x"02"; -- A = A - MEM[2] = 30 - MEM[2] = 30 - 4 = 26
+--        tmp(10) 	:= STA   & '1' & x"04"; -- MEM[4] = 26
+--        tmp(11) 	:= NOP 	& '0' & x"00"; --
 		  
         return tmp;
     end initMemory;

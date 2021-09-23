@@ -26,7 +26,7 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Thu Sep 23 01:34:38 2021
+    Info: Processing started: Thu Sep 23 17:25:14 2021
 Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off computador -c computador --vector_source=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_05/Waveform.vwf --testbench_file=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_05/simulation/qsim/Waveform.vwf.vht
 Info (119006): Selected device 5CEBA4F23C7 for design "computador"
 
@@ -53,14 +53,14 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Thu Sep 23 01:34:39 2021
+    Info: Processing started: Thu Sep 23 17:25:15 2021
 Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_05/simulation/qsim/ computador -c computador
 Info (119006): Selected device 5CEBA4F23C7 for design "computador"
 Info (204019): Generated file computador.vho in folder "C:/Users/elm_t/Documents/grad/descomp/atividades/aula_05/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4716 megabytes
-    Info: Processing ended: Thu Sep 23 01:34:39 2021
-    Info: Elapsed time: 00:00:00
+    Info: Peak virtual memory: 4715 megabytes
+    Info: Processing ended: Thu Sep 23 17:25:16 2021
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 Completed successfully. 
@@ -79,17 +79,16 @@ Reading pref.tcl
 
 # 2020.1
 
+
 # do computador.do
+# ** Warning: (vlib-34) Library already exists at "work".
 
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 01:34:41 on Sep 23,2021
+# Start time: 17:25:17 on Sep 23,2021
 # vcom -work work computador.vho 
-
 # -- Loading package STANDARD
-
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-
 # -- Loading package VITAL_Timing
 # -- Loading package VITAL_Primitives
 # -- Loading package dffeas_pack
@@ -100,21 +99,22 @@ Reading pref.tcl
 # -- Compiling entity computador
 # -- Compiling architecture structure of computador
 
-# End time: 01:34:41 on Sep 23,2021, Elapsed time: 0:00:00
+# End time: 17:25:17 on Sep 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
+
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 01:34:41 on Sep 23,2021
+# Start time: 17:25:17 on Sep 23,2021
 # vcom -work work Waveform.vwf.vht 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity computador_vhd_vec_tst
 # -- Compiling architecture computador_arch of computador_vhd_vec_tst
-# End time: 01:34:41 on Sep 23,2021, Elapsed time: 0:00:00
+# End time: 17:25:17 on Sep 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 
 # vsim -c -t 1ps -L cyclonev -L altera -L altera_mf -L 220model -L sgate -L altera_lnsim work.computador_vhd_vec_tst 
-# Start time: 01:34:41 on Sep 23,2021
+# Start time: 17:25:17 on Sep 23,2021
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -132,11 +132,11 @@ Reading pref.tcl
 # Loading cyclonev.cyclonev_io_ibuf(arch)
 # Loading cyclonev.cyclonev_lcell_comb(vital_lcell_comb)
 # Loading altera.dffeas(vital_dffeas)
-# ** Warning: Design size of 45992 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
+# ** Warning: Design size of 23094 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
 # Expect performance to be adversely affected.
-# after#32
+# after#34
 
-# End time: 01:34:42 on Sep 23,2021, Elapsed time: 0:00:01
+# End time: 17:25:18 on Sep 23,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 1
 
 Completed successfully. 
@@ -149,7 +149,7 @@ Reading C:/Users/elm_t/Documents/grad/descomp/atividades/aula_05/simulation/qsim
 
 Processing channel transitions... 
 
-Writing the resulting VWF to C:/Users/elm_t/Documents/grad/descomp/atividades/aula_05/simulation/qsim/computador_20210923013443.sim.vwf
+Writing the resulting VWF to C:/Users/elm_t/Documents/grad/descomp/atividades/aula_05/simulation/qsim/computador_20210923172518.sim.vwf
 
 Finished VCD to VWF conversion.
 

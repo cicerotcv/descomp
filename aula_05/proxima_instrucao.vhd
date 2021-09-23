@@ -49,13 +49,14 @@ ROM:
 			Dado 		=> OUTPUT 		-- saída da instrução		[12...0]
 		);
  
-MUX2 :  	entity work.muxGenerico2x1  generic map (larguraDados => 9)
-	port map(
-		entradaA_MUX 	=> MUX_IN_0,
-		entradaB_MUX 	=> MUX_IN_1,
-		seletor_MUX 	=> JUMP,
-		saida_MUX 		=> MUX_OUT
-	);
+MUX2:  	
+		entity work.muxGenerico2x1  generic map (larguraDados => 9)
+		port map(
+			entradaA_MUX 	=> MUX_IN_0,
+			entradaB_MUX 	=> MUX_IN_1,
+			seletor_MUX 	=> JUMP,
+			saida_MUX 		=> MUX_OUT
+		);
 
 MUX_IN_1		<= OUTPUT(8 downto 0);
 RST_PC 		<= RESET;

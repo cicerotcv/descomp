@@ -36,6 +36,30 @@
 					"strict" : false
 				},
 				{
+					"name" : "FLAG_JMP",
+					"strict" : false
+				},
+				{
+					"name" : "DEST[0]",
+					"strict" : false
+				},
+				{
+					"name" : "DEST[1]",
+					"strict" : false
+				},
+				{
+					"name" : "DEST[2]",
+					"strict" : false
+				},
+				{
+					"name" : "DEST[3]",
+					"strict" : false
+				},
+				{
+					"name" : "DEST[8]",
+					"strict" : false
+				},
+				{
 					"name" : "KEY[0]",
 					"strict" : false
 				}

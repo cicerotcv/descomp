@@ -10,7 +10,9 @@ entity computador is
 	port   (
 		CLOCK_50 : in 	std_logic;
 		KEY		: in 	std_logic_vector(3 downto 0);
-		SAIDA		: out std_logic_vector(7 downto 0)
+		SAIDA		: out std_logic_vector(7 downto 0);
+		FLAG_JMP : out std_logic;
+		DEST		: out std_logic_vector(8 downto 0)
 	);
 end entity;
 
@@ -38,7 +40,11 @@ architecture arquitetura of computador is
 	signal Habilita_A 						: std_logic;
 	signal Reset_A 							: std_logic;
 	signal JUMP									: std_logic;
-	
+	signal JUMP_EQ								: std_logic;
+	signal DESV_JUMP							: std_logic;
+	signal ULA_FLAG							: std_logic;
+	signal FLAG_EQ								: std_logic;
+	signal habilita_flag						: std_logic;
 	signal Saida_LEDS							: std_logic_vector (7 downto 0);
 	
 begin
@@ -62,6 +68,8 @@ RST_PC 			<= '0'; -- not(KEY(3));
 Saida_LEDS 		  <= SAIDA_REG_A;
  
 SAIDA				  <= SAIDA_REG_A;
+FLAG_JMP			  <= DESV_JUMP;
+DEST				  <= instrucoes_decodificador(8 downto 0);
 
 -----------------------------------------
 -----------------------------------------
@@ -91,9 +99,20 @@ ULA1 : 	entity work.ULASomaSub  	generic map(larguraDados => 8)
 			port map (
 				entradaA => SAIDA_REG_A, 
 				entradaB => MUX_ULA_B, 
-				saida 	=> Saida_ULA, 
+				saida 	=> Saida_ULA,
+				flag 		=> ULA_FLAG,
 				seletor 	=> Operacao_ULA	-- largura 2 bits
 			);
+
+FLAG :	entity work.registradorGenerico   generic map (larguraDados => 1)
+			port map (
+				DIN(0)	=> ULA_FLAG, 
+				DOUT(0)	=> FLAG_EQ,
+				ENABLE 	=> habilita_flag,
+				CLK 		=> CLK,
+				RST 		=> '0'
+			);		
+
 
 	 
 -- port map do decodificador
@@ -101,12 +120,24 @@ DECODER: entity work.decoder 		generic map(DATA_WIDTH => 4) -- "0000 0 0000 0000
 			port map (
 				OP_CODE 			=> instrucoes_decodificador(12 downto 9),		-- largura 4
 				JUMP				=> JUMP,
+				JUMP_EQ			=> JUMP_EQ,
 				SEL_MUX 			=> SelMUX,
 				HAB_A				=> Habilita_A,
 				OP_ULA			=> Operacao_ULA,
+				HAB_FLAG			=> habilita_flag,
 				ENABLE_READ 	=> habilita_leitura,
 				ENABLE_WRITE	=> habilita_escrita
 			);
+			
+LOG_DESVIO:
+			entity work.logica_desvio
+			port map (
+				JUMP				=> JUMP,
+				JUMP_EQ			=> JUMP_EQ,
+				FLAG_EQ			=> FLAG_EQ,
+				DESV_JUMP		=> DESV_JUMP
+			);
+			
 			
 MDADOS:	entity work.memoriaRAM	generic map(dataWidth => 8, addrWidth => 8)
 			port map (
@@ -123,7 +154,7 @@ INSTR : 	entity work.proxima_instrucao generic map(DATA_WIDTH => 13)
 			port map (
 				CLK 				=> CLK,
 				RESET 			=> RST_PC,
-				JUMP  			=> JUMP,
+				JUMP  			=> DESV_JUMP,
 				INSTRUCTION 	=> instrucoes_decodificador	-- largura 13
 			);
 

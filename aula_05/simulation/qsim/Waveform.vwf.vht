@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "09/23/2021 01:34:38"
+-- Generated on "09/23/2021 17:25:15"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          computador
 -- 
@@ -35,11 +35,15 @@ ARCHITECTURE computador_arch OF computador_vhd_vec_tst IS
 -- constants                                                 
 -- signals                                                   
 SIGNAL CLOCK_50 : STD_LOGIC;
+SIGNAL DEST : STD_LOGIC_VECTOR(8 DOWNTO 0);
+SIGNAL FLAG_JMP : STD_LOGIC;
 SIGNAL KEY : STD_LOGIC_VECTOR(3 DOWNTO 0);
 SIGNAL SAIDA : STD_LOGIC_VECTOR(7 DOWNTO 0);
 COMPONENT computador
 	PORT (
 	CLOCK_50 : IN STD_LOGIC;
+	DEST : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
+	FLAG_JMP : OUT STD_LOGIC;
 	KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 	SAIDA : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
 	);
@@ -49,6 +53,8 @@ BEGIN
 	PORT MAP (
 -- list connections between master ports and signals
 	CLOCK_50 => CLOCK_50,
+	DEST => DEST,
+	FLAG_JMP => FLAG_JMP,
 	KEY => KEY,
 	SAIDA => SAIDA
 	);

@@ -1,6 +1,7 @@
 |computador
 CLOCK_50 => ~NO_FANOUT~
 KEY[0] => registradorgenerico:REG_A.CLK
+KEY[0] => registradorgenerico:FLAG.CLK
 KEY[0] => memoriaram:MDADOS.clk
 KEY[0] => proxima_instrucao:INSTR.CLK
 KEY[1] => ~NO_FANOUT~
@@ -14,6 +15,16 @@ SAIDA[4] <= registradorgenerico:REG_A.DOUT[4]
 SAIDA[5] <= registradorgenerico:REG_A.DOUT[5]
 SAIDA[6] <= registradorgenerico:REG_A.DOUT[6]
 SAIDA[7] <= registradorgenerico:REG_A.DOUT[7]
+FLAG_JMP <= logica_desvio:LOG_DESVIO.DESV_JUMP
+DEST[0] <= proxima_instrucao:INSTR.INSTRUCTION[0]
+DEST[1] <= proxima_instrucao:INSTR.INSTRUCTION[1]
+DEST[2] <= proxima_instrucao:INSTR.INSTRUCTION[2]
+DEST[3] <= proxima_instrucao:INSTR.INSTRUCTION[3]
+DEST[4] <= proxima_instrucao:INSTR.INSTRUCTION[4]
+DEST[5] <= proxima_instrucao:INSTR.INSTRUCTION[5]
+DEST[6] <= proxima_instrucao:INSTR.INSTRUCTION[6]
+DEST[7] <= proxima_instrucao:INSTR.INSTRUCTION[7]
+DEST[8] <= proxima_instrucao:INSTR.INSTRUCTION[8]
 
 
 |computador|muxGenerico2x1:MUX1
@@ -147,6 +158,15 @@ saida[4] <= saida.DB_MAX_OUTPUT_PORT_TYPE
 saida[5] <= saida.DB_MAX_OUTPUT_PORT_TYPE
 saida[6] <= saida.DB_MAX_OUTPUT_PORT_TYPE
 saida[7] <= saida.DB_MAX_OUTPUT_PORT_TYPE
+flag <= Equal2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|registradorGenerico:FLAG
+DIN[0] => DOUT[0]~reg0.DATAIN
+DOUT[0] <= DOUT[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ENABLE => DOUT[0]~reg0.ENA
+CLK => DOUT[0]~reg0.CLK
+RST => DOUT[0]~reg0.ACLR
 
 
 |computador|decoder:DECODER
@@ -157,6 +177,8 @@ OP_CODE[0] => Equal3.IN3
 OP_CODE[0] => Equal4.IN2
 OP_CODE[0] => Equal5.IN3
 OP_CODE[0] => Equal6.IN1
+OP_CODE[0] => Equal7.IN3
+OP_CODE[0] => Equal8.IN2
 OP_CODE[1] => Equal0.IN2
 OP_CODE[1] => Equal1.IN2
 OP_CODE[1] => Equal2.IN3
@@ -164,6 +186,8 @@ OP_CODE[1] => Equal3.IN2
 OP_CODE[1] => Equal4.IN1
 OP_CODE[1] => Equal5.IN1
 OP_CODE[1] => Equal6.IN3
+OP_CODE[1] => Equal7.IN2
+OP_CODE[1] => Equal8.IN1
 OP_CODE[2] => Equal0.IN1
 OP_CODE[2] => Equal1.IN1
 OP_CODE[2] => Equal2.IN1
@@ -171,6 +195,8 @@ OP_CODE[2] => Equal3.IN1
 OP_CODE[2] => Equal4.IN3
 OP_CODE[2] => Equal5.IN2
 OP_CODE[2] => Equal6.IN2
+OP_CODE[2] => Equal7.IN1
+OP_CODE[2] => Equal8.IN0
 OP_CODE[3] => Equal0.IN0
 OP_CODE[3] => Equal1.IN0
 OP_CODE[3] => Equal2.IN0
@@ -178,13 +204,29 @@ OP_CODE[3] => Equal3.IN0
 OP_CODE[3] => Equal4.IN0
 OP_CODE[3] => Equal5.IN0
 OP_CODE[3] => Equal6.IN0
-JUMP <= JUMP$latch.DB_MAX_OUTPUT_PORT_TYPE
+OP_CODE[3] => Equal7.IN0
+OP_CODE[3] => Equal8.IN3
+JUMP <= JUMP.DB_MAX_OUTPUT_PORT_TYPE
+JUMP_EQ <= JUMP_EQ.DB_MAX_OUTPUT_PORT_TYPE
 SEL_MUX <= SEL_MUX.DB_MAX_OUTPUT_PORT_TYPE
 HAB_A <= HAB_A.DB_MAX_OUTPUT_PORT_TYPE
 OP_ULA[0] <= OP_ULA.DB_MAX_OUTPUT_PORT_TYPE
 OP_ULA[1] <= OP_ULA.DB_MAX_OUTPUT_PORT_TYPE
+HAB_FLAG <= HAB_FLAG.DB_MAX_OUTPUT_PORT_TYPE
 ENABLE_READ <= ENABLE_READ.DB_MAX_OUTPUT_PORT_TYPE
 ENABLE_WRITE <= ENABLE_WRITE.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|logica_desvio:LOG_DESVIO
+JUMP => DESV_JUMP.IN0
+JUMP => DESV_JUMP.IN0
+JUMP => DESV_JUMP.IN0
+JUMP_EQ => DESV_JUMP.IN1
+JUMP_EQ => DESV_JUMP.IN1
+JUMP_EQ => DESV_JUMP.IN1
+FLAG_EQ => DESV_JUMP.IN1
+FLAG_EQ => DESV_JUMP.IN1
+DESV_JUMP <= DESV_JUMP.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |computador|memoriaRAM:MDADOS
