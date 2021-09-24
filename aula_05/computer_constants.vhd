@@ -13,17 +13,25 @@ package controls is
 	constant JMP	: std_logic_vector(3 downto 0) := "0110"; -- 6
 	constant JEQ	: std_logic_vector(3 downto 0) := "0111"; -- 7
 	constant CEQ	: std_logic_vector(3 downto 0) := "1000"; -- 8
+	constant JSR	: std_logic_vector(3 downto 0) := "1001"; -- 9
+	constant RET	: std_logic_vector(3 downto 0) := "1010"; -- 10
 	
-	-- CONTROL INSTRUCTIONS --
-	constant CTRL_NOP		: std_logic_vector(8 downto 0) := b"0000_00_000";
-	constant CTRL_LDA		: std_logic_vector(8 downto 0) := b"0001_10_010";
-	constant CTRL_SOMA	: std_logic_vector(8 downto 0) := b"0001_01_010";
-	constant CTRL_SUBA	: std_logic_vector(8 downto 0) := b"0001_00_010";
-	constant CTRL_LDI		: std_logic_vector(8 downto 0) := b"0011_10_000";
-	constant CTRL_STA		: std_logic_vector(8 downto 0) := b"0000_00_001";
-	constant CTRL_JMP		: std_logic_vector(8 downto 0) := b"1000_00_000";
-	constant CTRL_JEQ		: std_logic_vector(8 downto 0) := b"0100_00_000";
-	constant CTRL_CEQ		: std_logic_vector(8 downto 0) := b"0000_00_110";
+	
+	
+	constant INST_WIDTH : integer := 12;	
+	
+	-- CONTROL INSTRUCTIONS -- HAB_RET | JMP | RET | JSR | JEQ | SEL_MUX | HAB_A || OP_ULA || HAB_FLAG | HAB_READ | HAB_WRITE
+	constant CTRL_NOP		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??000_00_000";
+	constant CTRL_LDA		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??001_10_010";
+	constant CTRL_SOMA	: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??001_01_010";
+	constant CTRL_SUBA	: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??001_00_010";
+	constant CTRL_LDI		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??011_10_000";
+	constant CTRL_STA		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??000_00_001";
+	constant CTRL_JMP		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?1??000_00_000";
+	constant CTRL_JEQ		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??100_00_000";
+	constant CTRL_CEQ		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??000_00_110";
+	constant CTRL_JSR		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??000_00_000"; -- editar
+	constant CTRL_RET		: std_logic_vector(INST_WIDTH-1 downto 0) := b"?0??000_00_000"; -- editar
 	
 	
 end package controls;

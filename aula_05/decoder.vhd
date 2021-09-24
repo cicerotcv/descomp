@@ -25,23 +25,31 @@ end entity;
 
 architecture arch_name of decoder is
 
-	signal sinais_controle : std_logic_vector(8 downto 0);
+	signal sinais_controle : std_logic_vector(INST_WIDTH-1 downto 0);
 
 begin
 	
-	sinais_controle <= 
-		CTRL_NOP		when (OP_CODE = NOP) 	else
-		CTRL_LDA 	when (OP_CODE = LDA) 	else
-		CTRL_SOMA 	when (OP_CODE = SOMA) 	else  
-		CTRL_SUBA	when (OP_CODE = SUBA) 	else
-		CTRL_LDI 	when (OP_CODE = LDI) 	else
-		CTRL_STA  	when (OP_CODE = STA) 	else
-		CTRL_JMP		when (OP_CODE = JMP) 	else
-		CTRL_JEQ 	when (OP_CODE = JEQ) 	else
-		CTRL_CEQ 	when (OP_CODE = CEQ) 	else CTRL_NOP;
-
+	sinais_controle <=
+	
+		CTRL_NOP		when	(OP_CODE = NOP) 	else -- 0000
+		CTRL_LDA 	when 	(OP_CODE = LDA) 	else -- 0001
+		CTRL_SOMA 	when 	(OP_CODE = SOMA) 	else -- 0010
+		CTRL_SUBA	when 	(OP_CODE = SUBA) 	else -- 0011
+		CTRL_LDI 	when 	(OP_CODE = LDI) 	else -- 0100
+		CTRL_STA  	when 	(OP_CODE = STA) 	else -- 0101
+		CTRL_JMP		when 	(OP_CODE = JMP) 	else -- 0110
+		CTRL_JEQ 	when 	(OP_CODE = JEQ) 	else -- 0111
+		CTRL_CEQ 	when 	(OP_CODE = CEQ) 	else -- 1000
+		CTRL_JSR		when 	(OP_CODE = JSR)	else -- 1001
+		CTRL_RET		when 	(OP_CODE = RET)	else -- 1010
 		
-	JUMP				<=  sinais_controle(8);
+		CTRL_NOP;
+
+	
+	ENABLE_RET		<=  sinais_controle(11); -- configurar
+	JUMP				<=  sinais_controle(10);
+	RET_SR			<=  sinais_controle(9);  -- configurar
+	JUMP_SR			<=  sinais_controle(8);	 -- configurar
 	JUMP_EQ			<=  sinais_controle(7);
 	SEL_MUX 			<=  sinais_controle(6);
 	HAB_A				<=  sinais_controle(5);
