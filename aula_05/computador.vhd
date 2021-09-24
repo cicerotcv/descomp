@@ -84,7 +84,7 @@ MUX1 :  	entity work.muxGenerico2x1  generic map (larguraDados => 8)
 				saida_MUX 		=> MUX_ULA_B
 			);
 
--- O port map completo do Acumulador.
+-- O port map completo do acumulador.
 REG_A : 	entity work.registradorGenerico   generic map (larguraDados => 8)
 			port map (
 				DIN 		=> Saida_ULA, 
@@ -104,10 +104,11 @@ ULA1 : 	entity work.ULASomaSub  	generic map(larguraDados => 8)
 				seletor 	=> Operacao_ULA	-- largura 2 bits
 			);
 
-FLAG :	entity work.registradorGenerico   generic map (larguraDados => 1)
+-- port map do flip flop da flag de comparacao
+FLAG :	entity work.flipflopGenerico
 			port map (
-				DIN(0)	=> ULA_FLAG, 
-				DOUT(0)	=> FLAG_EQ,
+				DIN		=> ULA_FLAG, 
+				DOUT		=> FLAG_EQ,
 				ENABLE 	=> habilita_flag,
 				CLK 		=> CLK,
 				RST 		=> '0'

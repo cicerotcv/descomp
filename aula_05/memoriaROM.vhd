@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 library computer_constants;
-use computer_constants.mnemonics.all;
+use computer_constants.controls.all;
 
 entity memoriaROM is
    generic (
