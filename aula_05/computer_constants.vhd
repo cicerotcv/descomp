@@ -16,14 +16,14 @@ package controls is
 	
 	-- CONTROL INSTRUCTIONS --
 	constant CTRL_NOP		: std_logic_vector(8 downto 0) := b"0000_00_000";
-	constant cTRL_LDA		: std_logic_vector(8 downto 0) := b"0001_10_010";
-	constant cTRL_SOMA	: std_logic_vector(8 downto 0) := b"0001_01_010";
-	constant cTRL_SUBA	: std_logic_vector(8 downto 0) := b"0001_00_010";
-	constant cTRL_LDI		: std_logic_vector(8 downto 0) := b"0011_10_000";
-	constant cTRL_STA		: std_logic_vector(8 downto 0) := b"0000_00_001";
-	constant cTRL_JMP		: std_logic_vector(8 downto 0) := b"1000_00_000";
-	constant cTRL_JEQ		: std_logic_vector(8 downto 0) := b"0100_00_000";
-	constant cTRL_CEQ		: std_logic_vector(8 downto 0) := b"0000_00_110";
+	constant CTRL_LDA		: std_logic_vector(8 downto 0) := b"0001_10_010";
+	constant CTRL_SOMA	: std_logic_vector(8 downto 0) := b"0001_01_010";
+	constant CTRL_SUBA	: std_logic_vector(8 downto 0) := b"0001_00_010";
+	constant CTRL_LDI		: std_logic_vector(8 downto 0) := b"0011_10_000";
+	constant CTRL_STA		: std_logic_vector(8 downto 0) := b"0000_00_001";
+	constant CTRL_JMP		: std_logic_vector(8 downto 0) := b"1000_00_000";
+	constant CTRL_JEQ		: std_logic_vector(8 downto 0) := b"0100_00_000";
+	constant CTRL_CEQ		: std_logic_vector(8 downto 0) := b"0000_00_110";
 	
 	
 end package controls;
