@@ -1,30 +1,48 @@
 import argparse
+from os import read
+
+
+def parse_cmd(cmd):
+    parts = cmd.strip().split(' ')
+    mnemonic = parts[0]
+    hab_mem = 1 if (mnemonic in ["STA", "LDA", "CEQ", "SOMA", "SUBA"]) else 0
+    if len(parts) > 1:
+        number = parts[-1]
+        instr = hex(int(number)).lstrip('0x').zfill(2)
+    else:
+        instr = '00'
+
+    return (mnemonic, hab_mem, instr)
+
+
+def read_file(filename: str):
+    with open(filename, 'r', encoding='utf-8') as file:
+        commands = [line for line in file.read().strip().split("\n")]
+    return commands
+
+
+def save_file(lines: list, out: str):
+    filename = out.replace(".", "_out.")
+    with open(filename, 'w+', encoding='utf-8') as file:
+        file.write("\n".join(lines))
+        # for command in lines:
+        #     print(command, file=file)
 
 
 def main(source):
-    with open(source, 'r', encoding='utf-8') as file:
-        commands = [line for line in file.read().strip().split("\n")]
+    commands = read_file(source)
 
     template = "tmp({idx})\t:= {mnemonic}\t& '{hab_mem}' & x\"{instr}\";"
-    full_commands = []
+
+    commands_vhdl = []
     for (idx, cmd) in enumerate(commands):
-        parts = cmd.strip().split(' ')
-        mnemonic = parts[0]
-        hab_mem = 1 if (mnemonic in ["STA", "LDA",
-                        "CEQ", "SOMA", "SUBA"]) else 0
-        if len(parts) > 1:
-            number = parts[-1]
-            instr = hex(int(number)).lstrip('0x').zfill(2)
-        else:
-            instr = '00'
+        (mnemonic, hab_mem, instr) = parse_cmd(cmd)
         full_command = template.format(idx=idx, mnemonic=mnemonic,
                                        hab_mem=hab_mem, instr=instr)
         print(full_command)
-        full_commands.append(full_command)
+        commands_vhdl.append(full_command)
 
-    with open(source.replace(".", "_out."), 'w+') as file:
-        for command in full_commands:
-            print(command, file=file)
+    save_file(commands_vhdl, source)
 
 
 if __name__ == "__main__":
