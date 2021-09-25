@@ -21,6 +21,7 @@ after 2500 simTimestamp
 run -all
 quit -f
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -39,6 +40,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 </modelsim_script_timing>
 <hdl_lang>vhdl</hdl_lang>
@@ -185,7 +187,7 @@ SIGNAL("DEST[8]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[7]")
@@ -195,7 +197,7 @@ SIGNAL("DEST[7]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[6]")
@@ -205,7 +207,7 @@ SIGNAL("DEST[6]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[5]")
@@ -215,7 +217,7 @@ SIGNAL("DEST[5]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[4]")
@@ -225,7 +227,7 @@ SIGNAL("DEST[4]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[3]")
@@ -235,7 +237,7 @@ SIGNAL("DEST[3]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[2]")
@@ -245,7 +247,7 @@ SIGNAL("DEST[2]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[1]")
@@ -255,20 +257,10 @@ SIGNAL("DEST[1]")
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = OUTPUT;
-	PARENT = "DEST";
+	PARENT = "";
 }
 
 SIGNAL("DEST[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = OUTPUT;
-	PARENT = "DEST";
-}
-
-SIGNAL("FLAG_JMP")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
@@ -281,6 +273,36 @@ SIGNAL("FLAG_JMP")
 GROUP("DEST")
 {
 	MEMBERS = "DEST[7]", "DEST[6]", "DEST[5]", "DEST[4]", "DEST[3]", "DEST[2]", "DEST[1]", "DEST[0]";
+}
+
+SIGNAL("FLAG_JMP")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 2;
+	LSB_INDEX = 0;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("FLAG_JMP[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "FLAG_JMP";
+}
+
+SIGNAL("FLAG_JMP[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "FLAG_JMP";
 }
 
 TRANSITION_LIST("SAIDA[7]")
@@ -450,7 +472,16 @@ TRANSITION_LIST("DEST[0]")
 	}
 }
 
-TRANSITION_LIST("FLAG_JMP")
+TRANSITION_LIST("FLAG_JMP[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("FLAG_JMP[0]")
 {
 	NODE
 	{
@@ -664,6 +695,27 @@ DISPLAY_LINE
 	RADIX = Binary;
 	TREE_INDEX = 20;
 	TREE_LEVEL = 0;
+	CHILDREN = 21, 22;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "FLAG_JMP[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 21;
+	TREE_LEVEL = 1;
+	PARENT = 20;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "FLAG_JMP[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 22;
+	TREE_LEVEL = 1;
+	PARENT = 20;
 }
 
 TIME_BAR

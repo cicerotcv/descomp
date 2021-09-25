@@ -11,7 +11,10 @@ entity decoder is
     -- Input ports
     OP_CODE		  	: in  std_logic_vector(DATA_WIDTH-1 downto 0);
 	 -- Output ports
+	 ENABLE_RET		: out std_logic;
 	 JUMP				: out std_logic;
+	 RET_SR			: out std_logic;
+	 JUMP_SR			: out std_logic;
 	 JUMP_EQ			: out std_logic;
     SEL_MUX 		: out std_logic;
 	 HAB_A			: out std_logic;
@@ -43,13 +46,13 @@ begin
 		CTRL_JSR		when 	(OP_CODE = JSR)	else -- 1001
 		CTRL_RET		when 	(OP_CODE = RET)	else -- 1010
 		
-		CTRL_NOP;
+	CTRL_NOP;
 
 	
-	ENABLE_RET		<=  sinais_controle(11); -- configurar
+	ENABLE_RET		<=  sinais_controle(11);
 	JUMP				<=  sinais_controle(10);
-	RET_SR			<=  sinais_controle(9);  -- configurar
-	JUMP_SR			<=  sinais_controle(8);	 -- configurar
+	RET_SR			<=  sinais_controle(9);
+	JUMP_SR			<=  sinais_controle(8); -- 
 	JUMP_EQ			<=  sinais_controle(7);
 	SEL_MUX 			<=  sinais_controle(6);
 	HAB_A				<=  sinais_controle(5);

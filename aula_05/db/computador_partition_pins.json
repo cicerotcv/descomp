@@ -36,7 +36,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "FLAG_JMP",
+					"name" : "FLAG_JMP[0]",
+					"strict" : false
+				},
+				{
+					"name" : "FLAG_JMP[1]",
 					"strict" : false
 				},
 				{
