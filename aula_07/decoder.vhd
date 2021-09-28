@@ -34,17 +34,17 @@ begin
 	
 	sinais_controle <=
 	
-		CTRL_NOP		when	(OP_CODE = NOP) 	else -- 0000
-		CTRL_LDA 	when 	(OP_CODE = LDA) 	else -- 0001
-		CTRL_SOMA 	when 	(OP_CODE = SOMA) 	else -- 0010
-		CTRL_SUBA	when 	(OP_CODE = SUBA) 	else -- 0011
-		CTRL_LDI 	when 	(OP_CODE = LDI) 	else -- 0100
-		CTRL_STA  	when 	(OP_CODE = STA) 	else -- 0101
-		CTRL_JMP		when 	(OP_CODE = JMP) 	else -- 0110
-		CTRL_JEQ 	when 	(OP_CODE = JEQ) 	else -- 0111
-		CTRL_CEQ 	when 	(OP_CODE = CEQ) 	else -- 1000
-		CTRL_JSR		when 	(OP_CODE = JSR)	else -- 1001
-		CTRL_RET		when 	(OP_CODE = RET)	else -- 1010
+		CTRL_NOP		when	(OP_CODE = NOP) 	else -- 0000 0
+		CTRL_LDA 	when 	(OP_CODE = LDA) 	else -- 0001 1
+		CTRL_SOMA 	when 	(OP_CODE = SOMA) 	else -- 0010 2
+		CTRL_SUBA	when 	(OP_CODE = SUBA) 	else -- 0011 3
+		CTRL_LDI 	when 	(OP_CODE = LDI) 	else -- 0100 4
+		CTRL_STA  	when 	(OP_CODE = STA) 	else -- 0101 5
+		CTRL_JMP		when 	(OP_CODE = JMP) 	else -- 0110 6
+		CTRL_JEQ 	when 	(OP_CODE = JEQ) 	else -- 0111 7
+		CTRL_CEQ 	when 	(OP_CODE = CEQ) 	else -- 1000 8
+		CTRL_JSR		when 	(OP_CODE = JSR)	else -- 1001 9
+		CTRL_RET		when 	(OP_CODE = RET)	else -- 1010 10
 		
 	CTRL_NOP;
 

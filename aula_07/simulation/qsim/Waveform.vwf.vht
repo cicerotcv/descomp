@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "09/25/2021 02:10:40"
+-- Generated on "09/28/2021 04:11:47"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          computador
 -- 
@@ -34,28 +34,37 @@ END computador_vhd_vec_tst;
 ARCHITECTURE computador_arch OF computador_vhd_vec_tst IS
 -- constants                                                 
 -- signals                                                   
-SIGNAL CLOCK_50 : STD_LOGIC;
-SIGNAL DEST : STD_LOGIC_VECTOR(8 DOWNTO 0);
-SIGNAL FLAG_JMP : STD_LOGIC_VECTOR(1 DOWNTO 0);
+SIGNAL CLOCK : STD_LOGIC;
+SIGNAL DOUT : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL HAB_ESC : STD_LOGIC;
+SIGNAL HAB_LEI : STD_LOGIC;
 SIGNAL KEY : STD_LOGIC_VECTOR(3 DOWNTO 0);
-SIGNAL SAIDA : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL LED_R : STD_LOGIC_VECTOR(9 DOWNTO 0);
+SIGNAL PC : STD_LOGIC_VECTOR(8 DOWNTO 0);
+SIGNAL SAIDA : STD_LOGIC_VECTOR(12 DOWNTO 0);
 COMPONENT computador
 	PORT (
-	CLOCK_50 : IN STD_LOGIC;
-	DEST : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
-	FLAG_JMP : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+	CLOCK : IN STD_LOGIC;
+	DOUT : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	HAB_ESC : OUT STD_LOGIC;
+	HAB_LEI : OUT STD_LOGIC;
 	KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-	SAIDA : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	LED_R : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
+	PC : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
+	SAIDA : OUT STD_LOGIC_VECTOR(12 DOWNTO 0)
 	);
 END COMPONENT;
 BEGIN
 	i1 : computador
 	PORT MAP (
 -- list connections between master ports and signals
-	CLOCK_50 => CLOCK_50,
-	DEST => DEST,
-	FLAG_JMP => FLAG_JMP,
+	CLOCK => CLOCK,
+	DOUT => DOUT,
+	HAB_ESC => HAB_ESC,
+	HAB_LEI => HAB_LEI,
 	KEY => KEY,
+	LED_R => LED_R,
+	PC => PC,
 	SAIDA => SAIDA
 	);
 
