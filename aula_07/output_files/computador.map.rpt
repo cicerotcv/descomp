@@ -1,5 +1,5 @@
 Analysis & Synthesis report for computador
-Mon Sep 27 20:07:47 2021
+Mon Sep 27 23:18:24 2021
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -13,30 +13,38 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Parameter Settings for User Entity Instance: Top-level Entity: |computador
- 10. Parameter Settings for User Entity Instance: CPU:CPU
- 11. Parameter Settings for User Entity Instance: CPU:CPU|muxGenerico2x1:MUX1
- 12. Parameter Settings for User Entity Instance: CPU:CPU|registradorGenerico:REG_A
- 13. Parameter Settings for User Entity Instance: CPU:CPU|ULASomaSub:ULA1
- 14. Parameter Settings for User Entity Instance: CPU:CPU|decoder:DECODER
- 15. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR
- 16. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:PC
- 17. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|soma_constante:SOMA_CONST
- 18. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:END_RETORNO
- 19. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|muxGenerico4x1:MUX2
- 20. Parameter Settings for User Entity Instance: memoriaRAM:RAM
- 21. Parameter Settings for User Entity Instance: memoriaROM:ROM
- 22. Parameter Settings for User Entity Instance: decoder1:DECODER
- 23. Port Connectivity Checks: "CPU:CPU|proxima_instrucao:INSTR|muxGenerico4x1:MUX2"
- 24. Port Connectivity Checks: "CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:END_RETORNO"
- 25. Port Connectivity Checks: "CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:PC"
- 26. Port Connectivity Checks: "CPU:CPU|flipflopGenerico:FLAG"
- 27. Port Connectivity Checks: "CPU:CPU|registradorGenerico:REG_A"
- 28. Port Connectivity Checks: "CPU:CPU"
- 29. Post-Synthesis Netlist Statistics for Top Partition
- 30. Elapsed Time Per Partition
- 31. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |computador
+ 12. Parameter Settings for User Entity Instance: CPU:CPU
+ 13. Parameter Settings for User Entity Instance: CPU:CPU|muxGenerico2x1:MUX1
+ 14. Parameter Settings for User Entity Instance: CPU:CPU|registradorGenerico:REG_A
+ 15. Parameter Settings for User Entity Instance: CPU:CPU|ULASomaSub:ULA1
+ 16. Parameter Settings for User Entity Instance: CPU:CPU|decoder:DECODER
+ 17. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR
+ 18. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:PC
+ 19. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|soma_constante:SOMA_CONST
+ 20. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:END_RETORNO
+ 21. Parameter Settings for User Entity Instance: CPU:CPU|proxima_instrucao:INSTR|muxGenerico4x1:MUX2
+ 22. Parameter Settings for User Entity Instance: memoriaRAM:RAM
+ 23. Parameter Settings for User Entity Instance: memoriaROM:ROM
+ 24. Parameter Settings for User Entity Instance: decoder1:DECODER0
+ 25. Parameter Settings for User Entity Instance: decoder1:DECODER1
+ 26. Parameter Settings for User Entity Instance: led_r:LEDs_R
+ 27. Parameter Settings for User Entity Instance: led_r:LEDs_R|registradorGenerico:REG_8bits
+ 28. Port Connectivity Checks: "led_r:LEDs_R|registradorGenerico:REG_8bits"
+ 29. Port Connectivity Checks: "led_solo:FLIP_0|flipflopGenerico:FLIPS"
+ 30. Port Connectivity Checks: "decoder1:DECODER1"
+ 31. Port Connectivity Checks: "decoder1:DECODER0"
+ 32. Port Connectivity Checks: "CPU:CPU|proxima_instrucao:INSTR|muxGenerico4x1:MUX2"
+ 33. Port Connectivity Checks: "CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:END_RETORNO"
+ 34. Port Connectivity Checks: "CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:PC"
+ 35. Port Connectivity Checks: "CPU:CPU|flipflopGenerico:FLAG"
+ 36. Port Connectivity Checks: "CPU:CPU|registradorGenerico:REG_A"
+ 37. Post-Synthesis Netlist Statistics for Top Partition
+ 38. Elapsed Time Per Partition
+ 39. Analysis & Synthesis Messages
 
 
 
@@ -63,14 +71,14 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Sep 27 20:07:47 2021       ;
+; Analysis & Synthesis Status     ; Successful - Mon Sep 27 23:18:24 2021       ;
 ; Quartus Prime Version           ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                   ; computador                                  ;
 ; Top-level Entity Name           ; computador                                  ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 0                                           ;
-; Total pins                      ; 33                                          ;
+; Total pins                      ; 43                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -208,6 +216,8 @@ https://fpgasoftware.intel.com/eula.
 ; muxGenerico4x1.vhd               ; yes             ; User VHDL File  ; /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/muxGenerico4x1.vhd      ;         ;
 ; CPU.vhd                          ; yes             ; User VHDL File  ; /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/CPU.vhd                 ;         ;
 ; decoder1.vhd                     ; yes             ; User VHDL File  ; /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd            ;         ;
+; led_r.vhd                        ; yes             ; User VHDL File  ; /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/led_r.vhd               ;         ;
+; led_solo.vhd                     ; yes             ; User VHDL File  ; /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/led_solo.vhd            ;         ;
 +----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------+---------+
 
 
@@ -227,13 +237,13 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;       ;
 ; Dedicated logic registers                   ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 33    ;
+; I/O pins                                    ; 43    ;
 ;                                             ;       ;
 ; Total DSP Blocks                            ; 0     ;
 ;                                             ;       ;
 ; Maximum fan-out node                        ; CLOCK ;
 ; Maximum fan-out                             ; 1     ;
-; Total fan-out                               ; 33    ;
+; Total fan-out                               ; 43    ;
 ; Average fan-out                             ; 0.50  ;
 +---------------------------------------------+-------+
 
@@ -243,9 +253,22 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |computador                ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 33   ; 0            ; |computador         ; computador  ; work         ;
+; |computador                ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 43   ; 0            ; |computador         ; computador  ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                  ;
++-------------------------------------------------------+---------------------------------------------+
+; Register name                                         ; Reason for Removal                          ;
++-------------------------------------------------------+---------------------------------------------+
+; led_r:LEDs_R|registradorGenerico:REG_8bits|DOUT[0..7] ; Stuck at GND due to stuck port clock_enable ;
+; led_solo:FLIP_1|flipflopGenerico:FLIPS|DOUT           ; Stuck at GND due to stuck port clock_enable ;
+; led_solo:FLIP_0|flipflopGenerico:FLIPS|DOUT           ; Stuck at GND due to stuck port clock_enable ;
+; CPU:CPU|registradorGenerico:REG_A|DOUT[0..7]          ; Stuck at GND due to stuck port clock_enable ;
+; Total Number of Removed Registers = 18                ;                                             ;
++-------------------------------------------------------+---------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -261,6 +284,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |computador|CPU:CPU|decoder:DECODER|OP_ULA[1] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
 
 
 +----------------------------------------------------------------------------+
@@ -398,14 +430,81 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+---------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: decoder1:DECODER ;
-+----------------+-------+--------------------------------------+
-; Parameter Name ; Value ; Type                                 ;
-+----------------+-------+--------------------------------------+
-; data_width     ; 3     ; Signed Integer                       ;
-+----------------+-------+--------------------------------------+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: decoder1:DECODER0 ;
++----------------+-------+---------------------------------------+
+; Parameter Name ; Value ; Type                                  ;
++----------------+-------+---------------------------------------+
+; data_width     ; 3     ; Signed Integer                        ;
++----------------+-------+---------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: decoder1:DECODER1 ;
++----------------+-------+---------------------------------------+
+; Parameter Name ; Value ; Type                                  ;
++----------------+-------+---------------------------------------+
+; data_width     ; 3     ; Signed Integer                        ;
++----------------+-------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: led_r:LEDs_R ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; data_width     ; 8     ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: led_r:LEDs_R|registradorGenerico:REG_8bits ;
++----------------+-------+----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                           ;
++----------------+-------+----------------------------------------------------------------+
+; larguradados   ; 8     ; Signed Integer                                                 ;
++----------------+-------+----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Port Connectivity Checks: "led_r:LEDs_R|registradorGenerico:REG_8bits" ;
++------+-------+----------+----------------------------------------------+
+; Port ; Type  ; Severity ; Details                                      ;
++------+-------+----------+----------------------------------------------+
+; rst  ; Input ; Info     ; Stuck at GND                                 ;
++------+-------+----------+----------------------------------------------+
+
+
++--------------------------------------------------------------------+
+; Port Connectivity Checks: "led_solo:FLIP_0|flipflopGenerico:FLIPS" ;
++------+-------+----------+------------------------------------------+
+; Port ; Type  ; Severity ; Details                                  ;
++------+-------+----------+------------------------------------------+
+; rst  ; Input ; Info     ; Stuck at GND                             ;
++------+-------+----------+------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "decoder1:DECODER1"                                                                         ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; saida[7..3] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "decoder1:DECODER0"                                                                         ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; saida[7..5] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; saida[3..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------+
@@ -453,15 +552,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+-------+----------+-------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "CPU:CPU"                                                                                   ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port        ; Type   ; Severity ; Details                                                                             ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; rom_address ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-
-
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
@@ -470,7 +560,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; arriav_lcell_comb     ; 1                           ;
 ;     normal            ; 1                           ;
 ;         0 data inputs ; 1                           ;
-; boundary_port         ; 33                          ;
+; boundary_port         ; 43                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 0.00                        ;
 ; Average LUT depth     ; 0.00                        ;
@@ -492,7 +582,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Mon Sep 27 20:07:30 2021
+    Info: Processing started: Mon Sep 27 23:18:05 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off computador -c computador
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file ULASomaSub.vhd
@@ -526,7 +616,7 @@ Info (12021): Found 2 design units, including 1 entities, in source file decoder
 Info (12021): Found 1 design units, including 0 entities, in source file computer_constants.vhd
     Info (12022): Found design unit 1: controls File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computer_constants.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file computador.vhd
-    Info (12022): Found design unit 1: computador-arquitetura File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 21
+    Info (12022): Found design unit 1: computador-arquitetura File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 22
     Info (12023): Found entity 1: computador File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file logica_desvio.vhd
     Info (12022): Found design unit 1: logica_desvio-arch_name File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/logica_desvio.vhd Line: 15
@@ -543,15 +633,19 @@ Info (12021): Found 2 design units, including 1 entities, in source file CPU.vhd
 Info (12021): Found 2 design units, including 1 entities, in source file decoder1.vhd
     Info (12022): Found design unit 1: decoder1-arch_name File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 15
     Info (12023): Found entity 1: decoder1 File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file led_r.vhd
+    Info (12022): Found design unit 1: led_r-arch_name File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/led_r.vhd Line: 17
+    Info (12023): Found entity 1: led_r File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/led_r.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file led_solo.vhd
+    Info (12022): Found design unit 1: led_solo-arch_name File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/led_solo.vhd Line: 16
+    Info (12023): Found entity 1: led_solo File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/led_solo.vhd Line: 5
 Info (12127): Elaborating entity "computador" for the top level hierarchy
 Warning (10541): VHDL Signal Declaration warning at computador.vhd(13): used implicit default value for signal "SAIDA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 13
 Warning (10541): VHDL Signal Declaration warning at computador.vhd(14): used implicit default value for signal "FLAG_JMP" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 14
 Warning (10541): VHDL Signal Declaration warning at computador.vhd(15): used implicit default value for signal "DEST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 15
 Warning (10541): VHDL Signal Declaration warning at computador.vhd(16): used implicit default value for signal "PC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 16
-Warning (10541): VHDL Signal Declaration warning at computador.vhd(25): used implicit default value for signal "RST_PC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 25
-Warning (10036): Verilog HDL or VHDL warning at computador.vhd(29): object "END_ROM" assigned a value but never read File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 29
-Warning (10541): VHDL Signal Declaration warning at computador.vhd(33): used implicit default value for signal "BLOCO_0" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 33
-Info (12128): Elaborating entity "CPU" for hierarchy "CPU:CPU" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 50
+Warning (10541): VHDL Signal Declaration warning at computador.vhd(26): used implicit default value for signal "RST_PC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 26
+Info (12128): Elaborating entity "CPU" for hierarchy "CPU:CPU" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 56
 Warning (10541): VHDL Signal Declaration warning at CPU.vhd(32): used implicit default value for signal "MUX_IN_0" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/CPU.vhd Line: 32
 Warning (10541): VHDL Signal Declaration warning at CPU.vhd(34): used implicit default value for signal "instrucoes_decodificador" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/CPU.vhd Line: 34
 Warning (10541): VHDL Signal Declaration warning at CPU.vhd(40): used implicit default value for signal "RST_PC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/CPU.vhd Line: 40
@@ -566,9 +660,20 @@ Info (12128): Elaborating entity "proxima_instrucao" for hierarchy "CPU:CPU|prox
 Info (12128): Elaborating entity "registradorGenerico" for hierarchy "CPU:CPU|proxima_instrucao:INSTR|registradorGenerico:PC" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/proxima_instrucao.vhd Line: 31
 Info (12128): Elaborating entity "soma_constante" for hierarchy "CPU:CPU|proxima_instrucao:INSTR|soma_constante:SOMA_CONST" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/proxima_instrucao.vhd Line: 41
 Info (12128): Elaborating entity "muxGenerico4x1" for hierarchy "CPU:CPU|proxima_instrucao:INSTR|muxGenerico4x1:MUX2" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/proxima_instrucao.vhd Line: 60
-Info (12128): Elaborating entity "memoriaRAM" for hierarchy "memoriaRAM:RAM" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 64
-Info (12128): Elaborating entity "memoriaROM" for hierarchy "memoriaROM:ROM" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 76
-Info (12128): Elaborating entity "decoder1" for hierarchy "decoder1:DECODER" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 83
+Info (12128): Elaborating entity "memoriaRAM" for hierarchy "memoriaRAM:RAM" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 70
+Info (12128): Elaborating entity "memoriaROM" for hierarchy "memoriaROM:ROM" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 82
+Warning (10542): VHDL Variable Declaration warning at memoriaROM.vhd(23): used initial value expression for variable "tmp" because variable was never assigned a value File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/memoriaROM.vhd Line: 23
+Info (12128): Elaborating entity "decoder1" for hierarchy "decoder1:DECODER0" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 89
+Info (10041): Inferred latch for "out_signal[0]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (10041): Inferred latch for "out_signal[1]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (10041): Inferred latch for "out_signal[2]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (10041): Inferred latch for "out_signal[3]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (10041): Inferred latch for "out_signal[4]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (10041): Inferred latch for "out_signal[5]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (10041): Inferred latch for "out_signal[6]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (10041): Inferred latch for "out_signal[7]" at decoder1.vhd(19) File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/decoder1.vhd Line: 19
+Info (12128): Elaborating entity "led_solo" for hierarchy "led_solo:FLIP_0" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 107
+Info (12128): Elaborating entity "led_r" for hierarchy "led_r:LEDs_R" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 126
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "SAIDA[0]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 13
     Warning (13410): Pin "SAIDA[1]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 13
@@ -598,21 +703,31 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "PC[6]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 16
     Warning (13410): Pin "PC[7]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 16
     Warning (13410): Pin "PC[8]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 16
+    Warning (13410): Pin "LED_R[0]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[1]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[2]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[3]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[4]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[5]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[6]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[7]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[8]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
+    Warning (13410): Pin "LED_R[9]" is stuck at GND File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 17
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 5 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "CLOCK" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 11
-    Warning (15610): No output dependent on input pin "KEY[0]" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 12
     Warning (15610): No output dependent on input pin "KEY[1]" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 12
     Warning (15610): No output dependent on input pin "KEY[2]" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 12
     Warning (15610): No output dependent on input pin "KEY[3]" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 12
-Info (21057): Implemented 33 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "KEY[0]" File: /home/leviosa/Documents/Insper/Design de Computadores/descomp/aula_05/computador.vhd Line: 12
+Info (21057): Implemented 43 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 5 input pins
-    Info (21059): Implemented 28 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 46 warnings
-    Info: Peak virtual memory: 479 megabytes
-    Info: Processing ended: Mon Sep 27 20:07:47 2021
-    Info: Elapsed time: 00:00:17
+    Info (21059): Implemented 38 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 55 warnings
+    Info: Peak virtual memory: 476 megabytes
+    Info: Processing ended: Mon Sep 27 23:18:24 2021
+    Info: Elapsed time: 00:00:19
     Info: Total CPU time (on all processors): 00:00:34
 
 

@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Mon Sep 27 20:07:47 2021
+Analysis & Synthesis Status : Successful - Mon Sep 27 23:18:24 2021
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : computador
 Top-level Entity Name : computador
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
 Total registers : 0
-Total pins : 33
+Total pins : 43
 Total virtual pins : 0
 Total block memory bits : 0
 Total DSP Blocks : 0
