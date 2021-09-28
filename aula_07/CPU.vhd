@@ -121,7 +121,7 @@ LOG_DESVIO:
 		DESV_JUMP		=> DESV_JUMP
 	);
 			
-INSTR : 	
+INSTR:
 	entity work.proxima_instrucao generic map(DATA_WIDTH => 8)
 	port map (
 		CLK 				=> CLK,

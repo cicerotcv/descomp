@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition"
 
--- DATE "09/28/2021 04:11:48"
+-- DATE "09/28/2021 19:45:17"
 
 -- 
 -- Device: Altera 5CEBA4F23C7 Package FBGA484
@@ -40,11 +40,12 @@ ENTITY 	computador IS
     PORT (
 	CLOCK : IN std_logic;
 	KEY : IN std_logic_vector(3 DOWNTO 0);
-	PC : OUT std_logic_vector(8 DOWNTO 0);
-	SAIDA : OUT std_logic_vector(12 DOWNTO 0);
+	VALOR_INST : OUT std_logic_vector(12 DOWNTO 0);
 	DOUT : OUT std_logic_vector(7 DOWNTO 0);
 	HAB_LEI : OUT std_logic;
 	HAB_ESC : OUT std_logic;
+	HAB_LEDs : OUT std_logic_vector(2 DOWNTO 0);
+	ROM_ADDR : OUT std_logic_vector(8 DOWNTO 0);
 	LED_R : OUT std_logic_vector(9 DOWNTO 0)
 	);
 END computador;
@@ -61,38 +62,30 @@ SIGNAL ww_devclrn : std_logic;
 SIGNAL ww_devpor : std_logic;
 SIGNAL ww_CLOCK : std_logic;
 SIGNAL ww_KEY : std_logic_vector(3 DOWNTO 0);
-SIGNAL ww_PC : std_logic_vector(8 DOWNTO 0);
-SIGNAL ww_SAIDA : std_logic_vector(12 DOWNTO 0);
+SIGNAL ww_VALOR_INST : std_logic_vector(12 DOWNTO 0);
 SIGNAL ww_DOUT : std_logic_vector(7 DOWNTO 0);
 SIGNAL ww_HAB_LEI : std_logic;
 SIGNAL ww_HAB_ESC : std_logic;
+SIGNAL ww_HAB_LEDs : std_logic_vector(2 DOWNTO 0);
+SIGNAL ww_ROM_ADDR : std_logic_vector(8 DOWNTO 0);
 SIGNAL ww_LED_R : std_logic_vector(9 DOWNTO 0);
 SIGNAL \CLOCK~input_o\ : std_logic;
 SIGNAL \KEY[1]~input_o\ : std_logic;
 SIGNAL \KEY[2]~input_o\ : std_logic;
 SIGNAL \KEY[3]~input_o\ : std_logic;
-SIGNAL \PC[0]~output_o\ : std_logic;
-SIGNAL \PC[1]~output_o\ : std_logic;
-SIGNAL \PC[2]~output_o\ : std_logic;
-SIGNAL \PC[3]~output_o\ : std_logic;
-SIGNAL \PC[4]~output_o\ : std_logic;
-SIGNAL \PC[5]~output_o\ : std_logic;
-SIGNAL \PC[6]~output_o\ : std_logic;
-SIGNAL \PC[7]~output_o\ : std_logic;
-SIGNAL \PC[8]~output_o\ : std_logic;
-SIGNAL \SAIDA[0]~output_o\ : std_logic;
-SIGNAL \SAIDA[1]~output_o\ : std_logic;
-SIGNAL \SAIDA[2]~output_o\ : std_logic;
-SIGNAL \SAIDA[3]~output_o\ : std_logic;
-SIGNAL \SAIDA[4]~output_o\ : std_logic;
-SIGNAL \SAIDA[5]~output_o\ : std_logic;
-SIGNAL \SAIDA[6]~output_o\ : std_logic;
-SIGNAL \SAIDA[7]~output_o\ : std_logic;
-SIGNAL \SAIDA[8]~output_o\ : std_logic;
-SIGNAL \SAIDA[9]~output_o\ : std_logic;
-SIGNAL \SAIDA[10]~output_o\ : std_logic;
-SIGNAL \SAIDA[11]~output_o\ : std_logic;
-SIGNAL \SAIDA[12]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[0]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[1]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[2]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[3]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[4]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[5]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[6]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[7]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[8]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[9]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[10]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[11]~output_o\ : std_logic;
+SIGNAL \VALOR_INST[12]~output_o\ : std_logic;
 SIGNAL \DOUT[0]~output_o\ : std_logic;
 SIGNAL \DOUT[1]~output_o\ : std_logic;
 SIGNAL \DOUT[2]~output_o\ : std_logic;
@@ -103,6 +96,18 @@ SIGNAL \DOUT[6]~output_o\ : std_logic;
 SIGNAL \DOUT[7]~output_o\ : std_logic;
 SIGNAL \HAB_LEI~output_o\ : std_logic;
 SIGNAL \HAB_ESC~output_o\ : std_logic;
+SIGNAL \HAB_LEDs[0]~output_o\ : std_logic;
+SIGNAL \HAB_LEDs[1]~output_o\ : std_logic;
+SIGNAL \HAB_LEDs[2]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[0]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[1]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[2]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[3]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[4]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[5]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[6]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[7]~output_o\ : std_logic;
+SIGNAL \ROM_ADDR[8]~output_o\ : std_logic;
 SIGNAL \LED_R[0]~output_o\ : std_logic;
 SIGNAL \LED_R[1]~output_o\ : std_logic;
 SIGNAL \LED_R[2]~output_o\ : std_logic;
@@ -345,11 +350,12 @@ BEGIN
 
 ww_CLOCK <= CLOCK;
 ww_KEY <= KEY;
-PC <= ww_PC;
-SAIDA <= ww_SAIDA;
+VALOR_INST <= ww_VALOR_INST;
 DOUT <= ww_DOUT;
 HAB_LEI <= ww_HAB_LEI;
 HAB_ESC <= ww_HAB_ESC;
+HAB_LEDs <= ww_HAB_LEDs;
+ROM_ADDR <= ww_ROM_ADDR;
 LED_R <= ww_LED_R;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
@@ -453,115 +459,7 @@ ww_devpor <= devpor;
 \CPU|INSTR|PC|ALT_INV_DOUT\(0) <= NOT \CPU|INSTR|PC|DOUT\(0);
 \CPU|INSTR|PC|ALT_INV_DOUT\(8) <= NOT \CPU|INSTR|PC|DOUT\(8);
 
-\PC[0]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[0]~output_o\);
-
-\PC[1]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[1]~output_o\);
-
-\PC[2]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[2]~output_o\);
-
-\PC[3]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[3]~output_o\);
-
-\PC[4]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[4]~output_o\);
-
-\PC[5]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[5]~output_o\);
-
-\PC[6]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[6]~output_o\);
-
-\PC[7]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[7]~output_o\);
-
-\PC[8]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => GND,
-	devoe => ww_devoe,
-	o => \PC[8]~output_o\);
-
-\SAIDA[0]~output\ : cyclonev_io_obuf
+\VALOR_INST[0]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -571,9 +469,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~2_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[0]~output_o\);
+	o => \VALOR_INST[0]~output_o\);
 
-\SAIDA[1]~output\ : cyclonev_io_obuf
+\VALOR_INST[1]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -583,9 +481,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~4_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[1]~output_o\);
+	o => \VALOR_INST[1]~output_o\);
 
-\SAIDA[2]~output\ : cyclonev_io_obuf
+\VALOR_INST[2]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -595,9 +493,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~6_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[2]~output_o\);
+	o => \VALOR_INST[2]~output_o\);
 
-\SAIDA[3]~output\ : cyclonev_io_obuf
+\VALOR_INST[3]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -607,9 +505,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~7_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[3]~output_o\);
+	o => \VALOR_INST[3]~output_o\);
 
-\SAIDA[4]~output\ : cyclonev_io_obuf
+\VALOR_INST[4]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -619,9 +517,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~6_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[4]~output_o\);
+	o => \VALOR_INST[4]~output_o\);
 
-\SAIDA[5]~output\ : cyclonev_io_obuf
+\VALOR_INST[5]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -631,9 +529,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~8_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[5]~output_o\);
+	o => \VALOR_INST[5]~output_o\);
 
-\SAIDA[6]~output\ : cyclonev_io_obuf
+\VALOR_INST[6]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -643,9 +541,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~6_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[6]~output_o\);
+	o => \VALOR_INST[6]~output_o\);
 
-\SAIDA[7]~output\ : cyclonev_io_obuf
+\VALOR_INST[7]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -655,9 +553,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~8_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[7]~output_o\);
+	o => \VALOR_INST[7]~output_o\);
 
-\SAIDA[8]~output\ : cyclonev_io_obuf
+\VALOR_INST[8]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -667,9 +565,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~10_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[8]~output_o\);
+	o => \VALOR_INST[8]~output_o\);
 
-\SAIDA[9]~output\ : cyclonev_io_obuf
+\VALOR_INST[9]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -679,9 +577,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~12_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[9]~output_o\);
+	o => \VALOR_INST[9]~output_o\);
 
-\SAIDA[10]~output\ : cyclonev_io_obuf
+\VALOR_INST[10]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -691,9 +589,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~14_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[10]~output_o\);
+	o => \VALOR_INST[10]~output_o\);
 
-\SAIDA[11]~output\ : cyclonev_io_obuf
+\VALOR_INST[11]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -703,9 +601,9 @@ GENERIC MAP (
 PORT MAP (
 	i => \ROM|memROM~16_combout\,
 	devoe => ww_devoe,
-	o => \SAIDA[11]~output_o\);
+	o => \VALOR_INST[11]~output_o\);
 
-\SAIDA[12]~output\ : cyclonev_io_obuf
+\VALOR_INST[12]~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -715,7 +613,7 @@ GENERIC MAP (
 PORT MAP (
 	i => GND,
 	devoe => ww_devoe,
-	o => \SAIDA[12]~output_o\);
+	o => \VALOR_INST[12]~output_o\);
 
 \DOUT[0]~output\ : cyclonev_io_obuf
 -- pragma translate_off
@@ -836,6 +734,150 @@ PORT MAP (
 	i => \CPU|DECODER|Equal10~0_combout\,
 	devoe => ww_devoe,
 	o => \HAB_ESC~output_o\);
+
+\HAB_LEDs[0]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => VCC,
+	devoe => ww_devoe,
+	o => \HAB_LEDs[0]~output_o\);
+
+\HAB_LEDs[1]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => VCC,
+	devoe => ww_devoe,
+	o => \HAB_LEDs[1]~output_o\);
+
+\HAB_LEDs[2]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|DECODER|Equal10~0_combout\,
+	devoe => ww_devoe,
+	o => \HAB_LEDs[2]~output_o\);
+
+\ROM_ADDR[0]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(0),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[0]~output_o\);
+
+\ROM_ADDR[1]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(1),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[1]~output_o\);
+
+\ROM_ADDR[2]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(2),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[2]~output_o\);
+
+\ROM_ADDR[3]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(3),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[3]~output_o\);
+
+\ROM_ADDR[4]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(4),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[4]~output_o\);
+
+\ROM_ADDR[5]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(5),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[5]~output_o\);
+
+\ROM_ADDR[6]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(6),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[6]~output_o\);
+
+\ROM_ADDR[7]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(7),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[7]~output_o\);
+
+\ROM_ADDR[8]~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \CPU|INSTR|PC|DOUT\(8),
+	devoe => ww_devoe,
+	o => \ROM_ADDR[8]~output_o\);
 
 \LED_R[0]~output\ : cyclonev_io_obuf
 -- pragma translate_off
@@ -3347,49 +3389,31 @@ PORT MAP (
 	i => ww_KEY(3),
 	o => \KEY[3]~input_o\);
 
-ww_PC(0) <= \PC[0]~output_o\;
+ww_VALOR_INST(0) <= \VALOR_INST[0]~output_o\;
 
-ww_PC(1) <= \PC[1]~output_o\;
+ww_VALOR_INST(1) <= \VALOR_INST[1]~output_o\;
 
-ww_PC(2) <= \PC[2]~output_o\;
+ww_VALOR_INST(2) <= \VALOR_INST[2]~output_o\;
 
-ww_PC(3) <= \PC[3]~output_o\;
+ww_VALOR_INST(3) <= \VALOR_INST[3]~output_o\;
 
-ww_PC(4) <= \PC[4]~output_o\;
+ww_VALOR_INST(4) <= \VALOR_INST[4]~output_o\;
 
-ww_PC(5) <= \PC[5]~output_o\;
+ww_VALOR_INST(5) <= \VALOR_INST[5]~output_o\;
 
-ww_PC(6) <= \PC[6]~output_o\;
+ww_VALOR_INST(6) <= \VALOR_INST[6]~output_o\;
 
-ww_PC(7) <= \PC[7]~output_o\;
+ww_VALOR_INST(7) <= \VALOR_INST[7]~output_o\;
 
-ww_PC(8) <= \PC[8]~output_o\;
+ww_VALOR_INST(8) <= \VALOR_INST[8]~output_o\;
 
-ww_SAIDA(0) <= \SAIDA[0]~output_o\;
+ww_VALOR_INST(9) <= \VALOR_INST[9]~output_o\;
 
-ww_SAIDA(1) <= \SAIDA[1]~output_o\;
+ww_VALOR_INST(10) <= \VALOR_INST[10]~output_o\;
 
-ww_SAIDA(2) <= \SAIDA[2]~output_o\;
+ww_VALOR_INST(11) <= \VALOR_INST[11]~output_o\;
 
-ww_SAIDA(3) <= \SAIDA[3]~output_o\;
-
-ww_SAIDA(4) <= \SAIDA[4]~output_o\;
-
-ww_SAIDA(5) <= \SAIDA[5]~output_o\;
-
-ww_SAIDA(6) <= \SAIDA[6]~output_o\;
-
-ww_SAIDA(7) <= \SAIDA[7]~output_o\;
-
-ww_SAIDA(8) <= \SAIDA[8]~output_o\;
-
-ww_SAIDA(9) <= \SAIDA[9]~output_o\;
-
-ww_SAIDA(10) <= \SAIDA[10]~output_o\;
-
-ww_SAIDA(11) <= \SAIDA[11]~output_o\;
-
-ww_SAIDA(12) <= \SAIDA[12]~output_o\;
+ww_VALOR_INST(12) <= \VALOR_INST[12]~output_o\;
 
 ww_DOUT(0) <= \DOUT[0]~output_o\;
 
@@ -3410,6 +3434,30 @@ ww_DOUT(7) <= \DOUT[7]~output_o\;
 ww_HAB_LEI <= \HAB_LEI~output_o\;
 
 ww_HAB_ESC <= \HAB_ESC~output_o\;
+
+ww_HAB_LEDs(0) <= \HAB_LEDs[0]~output_o\;
+
+ww_HAB_LEDs(1) <= \HAB_LEDs[1]~output_o\;
+
+ww_HAB_LEDs(2) <= \HAB_LEDs[2]~output_o\;
+
+ww_ROM_ADDR(0) <= \ROM_ADDR[0]~output_o\;
+
+ww_ROM_ADDR(1) <= \ROM_ADDR[1]~output_o\;
+
+ww_ROM_ADDR(2) <= \ROM_ADDR[2]~output_o\;
+
+ww_ROM_ADDR(3) <= \ROM_ADDR[3]~output_o\;
+
+ww_ROM_ADDR(4) <= \ROM_ADDR[4]~output_o\;
+
+ww_ROM_ADDR(5) <= \ROM_ADDR[5]~output_o\;
+
+ww_ROM_ADDR(6) <= \ROM_ADDR[6]~output_o\;
+
+ww_ROM_ADDR(7) <= \ROM_ADDR[7]~output_o\;
+
+ww_ROM_ADDR(8) <= \ROM_ADDR[8]~output_o\;
 
 ww_LED_R(0) <= \LED_R[0]~output_o\;
 

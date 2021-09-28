@@ -10,12 +10,13 @@ entity computador is
 	port   (
 		CLOCK    : in 	std_logic;
 		KEY		: in 	std_logic_vector(3 downto 0);
-		PC			: out std_logic_vector(8 downto 0);
-		SAIDA		: out std_logic_vector(12 downto 0);
-		DOUT		: out std_logic_vector(7 downto 0);
-		HAB_LEI	: out std_logic;
-		HAB_ESC	: out std_logic;
-		LED_R		: out std_logic_vector(9 downto 0)
+		VALOR_INST		: out std_logic_vector(12 downto 0); 	-- debug
+		DOUT		: out std_logic_vector(7 downto 0); 			-- debug
+		HAB_LEI	: out std_logic; 										-- debug
+		HAB_ESC	: out std_logic; 										-- debug
+		HAB_LEDs : out std_logic_vector (2 downto 0); 			-- debug
+		ROM_ADDR : out std_logic_vector(8 downto 0); 			-- debug
+		LED_R		: out std_logic_vector(9 downto 0)				-- debug
 	);
 end entity;
 
@@ -52,10 +53,11 @@ end generate;
 
 
 RST_PC <= '0';
-SAIDA <= ROM_OUT;
+VALOR_INST <= ROM_OUT;
 DOUT <= DATA_OUT;
 HAB_ESC <= ENABLE_WRITE;
 HAB_LEI <= ENABLE_READ;
+ROM_ADDR <= END_ROM;
 
 CPU:
 	entity work.CPU
@@ -107,6 +109,8 @@ DECODER_ADDR:
 ENABLE_LEDR <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(0);
 ENABLE_LED8 <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(1);
 ENABLE_LED9 <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(2);
+
+HAB_LEDs <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(0);
 
 LEDR:
 	entity work.led_r generic map(DATA_WIDTH => 8)
