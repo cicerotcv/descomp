@@ -29,11 +29,25 @@ DOUT[4] <= cpu:CPU.DATA_OUT[4]
 DOUT[5] <= cpu:CPU.DATA_OUT[5]
 DOUT[6] <= cpu:CPU.DATA_OUT[6]
 DOUT[7] <= cpu:CPU.DATA_OUT[7]
+DIN[0] <= memoriaram:RAM.dado_out[0]
+DIN[1] <= memoriaram:RAM.dado_out[1]
+DIN[2] <= memoriaram:RAM.dado_out[2]
+DIN[3] <= memoriaram:RAM.dado_out[3]
+DIN[4] <= memoriaram:RAM.dado_out[4]
+DIN[5] <= memoriaram:RAM.dado_out[5]
+DIN[6] <= memoriaram:RAM.dado_out[6]
+DIN[7] <= memoriaram:RAM.dado_out[7]
 HAB_LEI <= cpu:CPU.READ_OUT
 HAB_ESC <= cpu:CPU.WRITE_OUT
-HAB_LEDs[0] <= decoder1:DECODER_ADDR.SAIDA[0]
-HAB_LEDs[1] <= decoder1:DECODER_BLOCKS.SAIDA[4]
-HAB_LEDs[2] <= cpu:CPU.WRITE_OUT
+HAB_LEDR[0] <= decoder3x8:DECODER_ADDR.SAIDA[0]
+HAB_LEDR[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
+HAB_LEDR[2] <= cpu:CPU.WRITE_OUT
+HAB_LED8[0] <= decoder3x8:DECODER_ADDR.SAIDA[1]
+HAB_LED8[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
+HAB_LED8[2] <= cpu:CPU.WRITE_OUT
+HAB_LED9[0] <= decoder3x8:DECODER_ADDR.SAIDA[2]
+HAB_LED9[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
+HAB_LED9[2] <= cpu:CPU.WRITE_OUT
 ROM_ADDR[0] <= cpu:CPU.ROM_ADDRESS[0]
 ROM_ADDR[1] <= cpu:CPU.ROM_ADDRESS[1]
 ROM_ADDR[2] <= cpu:CPU.ROM_ADDRESS[2]
@@ -53,6 +67,22 @@ LED_R[6] <= led_r:LEDR.OUT_LEDs[6]
 LED_R[7] <= led_r:LEDR.OUT_LEDs[7]
 LED_R[8] <= led_solo:LED8.OUT_LED
 LED_R[9] <= led_solo:LED9.OUT_LED
+DEC_BLOCKS[0] <= decoder3x8:DECODER_BLOCKS.SAIDA[0]
+DEC_BLOCKS[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[1]
+DEC_BLOCKS[2] <= decoder3x8:DECODER_BLOCKS.SAIDA[2]
+DEC_BLOCKS[3] <= decoder3x8:DECODER_BLOCKS.SAIDA[3]
+DEC_BLOCKS[4] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
+DEC_BLOCKS[5] <= decoder3x8:DECODER_BLOCKS.SAIDA[5]
+DEC_BLOCKS[6] <= decoder3x8:DECODER_BLOCKS.SAIDA[6]
+DEC_BLOCKS[7] <= decoder3x8:DECODER_BLOCKS.SAIDA[7]
+DEC_ADDRS[0] <= decoder3x8:DECODER_ADDR.SAIDA[0]
+DEC_ADDRS[1] <= decoder3x8:DECODER_ADDR.SAIDA[1]
+DEC_ADDRS[2] <= decoder3x8:DECODER_ADDR.SAIDA[2]
+DEC_ADDRS[3] <= decoder3x8:DECODER_ADDR.SAIDA[3]
+DEC_ADDRS[4] <= decoder3x8:DECODER_ADDR.SAIDA[4]
+DEC_ADDRS[5] <= decoder3x8:DECODER_ADDR.SAIDA[5]
+DEC_ADDRS[6] <= decoder3x8:DECODER_ADDR.SAIDA[6]
+DEC_ADDRS[7] <= decoder3x8:DECODER_ADDR.SAIDA[7]
 
 
 |computador|CPU:CPU
@@ -648,32 +678,68 @@ Dado[11] <= memROM.DATAOUT11
 Dado[12] <= memROM.DATAOUT12
 
 
-|computador|decoder1:DECODER_BLOCKS
-IN_E[0] => ~NO_FANOUT~
-IN_E[1] => ~NO_FANOUT~
-IN_E[2] => ~NO_FANOUT~
-SAIDA[0] <= <VCC>
-SAIDA[1] <= <VCC>
-SAIDA[2] <= <VCC>
-SAIDA[3] <= <VCC>
-SAIDA[4] <= <VCC>
-SAIDA[5] <= <VCC>
-SAIDA[6] <= <VCC>
-SAIDA[7] <= <VCC>
+|computador|decoder3x8:DECODER_BLOCKS
+IN_E[0] => Equal0.IN0
+IN_E[0] => Equal1.IN2
+IN_E[0] => Equal2.IN1
+IN_E[0] => Equal3.IN2
+IN_E[0] => Equal4.IN1
+IN_E[0] => Equal5.IN2
+IN_E[0] => Equal6.IN2
+IN_E[1] => Equal0.IN2
+IN_E[1] => Equal1.IN0
+IN_E[1] => Equal2.IN0
+IN_E[1] => Equal3.IN1
+IN_E[1] => Equal4.IN2
+IN_E[1] => Equal5.IN1
+IN_E[1] => Equal6.IN1
+IN_E[2] => Equal0.IN1
+IN_E[2] => Equal1.IN1
+IN_E[2] => Equal2.IN2
+IN_E[2] => Equal3.IN0
+IN_E[2] => Equal4.IN0
+IN_E[2] => Equal5.IN0
+IN_E[2] => Equal6.IN0
+SAIDA[0] <= Equal6.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[1] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[2] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[3] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[4] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[5] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[6] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[7] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|computador|decoder1:DECODER_ADDR
-IN_E[0] => ~NO_FANOUT~
-IN_E[1] => ~NO_FANOUT~
-IN_E[2] => ~NO_FANOUT~
-SAIDA[0] <= <VCC>
-SAIDA[1] <= <VCC>
-SAIDA[2] <= <VCC>
-SAIDA[3] <= <VCC>
-SAIDA[4] <= <VCC>
-SAIDA[5] <= <VCC>
-SAIDA[6] <= <VCC>
-SAIDA[7] <= <VCC>
+|computador|decoder3x8:DECODER_ADDR
+IN_E[0] => Equal0.IN0
+IN_E[0] => Equal1.IN2
+IN_E[0] => Equal2.IN1
+IN_E[0] => Equal3.IN2
+IN_E[0] => Equal4.IN1
+IN_E[0] => Equal5.IN2
+IN_E[0] => Equal6.IN2
+IN_E[1] => Equal0.IN2
+IN_E[1] => Equal1.IN0
+IN_E[1] => Equal2.IN0
+IN_E[1] => Equal3.IN1
+IN_E[1] => Equal4.IN2
+IN_E[1] => Equal5.IN1
+IN_E[1] => Equal6.IN1
+IN_E[2] => Equal0.IN1
+IN_E[2] => Equal1.IN1
+IN_E[2] => Equal2.IN2
+IN_E[2] => Equal3.IN0
+IN_E[2] => Equal4.IN0
+IN_E[2] => Equal5.IN0
+IN_E[2] => Equal6.IN0
+SAIDA[0] <= Equal6.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[1] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[2] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[3] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[4] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[5] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[6] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
+SAIDA[7] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |computador|led_r:LEDR

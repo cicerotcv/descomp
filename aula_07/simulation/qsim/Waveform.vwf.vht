@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "09/28/2021 19:45:16"
+-- Generated on "09/29/2021 02:20:19"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          computador
 -- 
@@ -35,9 +35,14 @@ ARCHITECTURE computador_arch OF computador_vhd_vec_tst IS
 -- constants                                                 
 -- signals                                                   
 SIGNAL CLOCK : STD_LOGIC;
+SIGNAL DEC_ADDRS : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL DEC_BLOCKS : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL DIN : STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL DOUT : STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL HAB_ESC : STD_LOGIC;
-SIGNAL HAB_LEDs : STD_LOGIC_VECTOR(2 DOWNTO 0);
+SIGNAL HAB_LED8 : STD_LOGIC_VECTOR(2 DOWNTO 0);
+SIGNAL HAB_LED9 : STD_LOGIC_VECTOR(2 DOWNTO 0);
+SIGNAL HAB_LEDR : STD_LOGIC_VECTOR(2 DOWNTO 0);
 SIGNAL HAB_LEI : STD_LOGIC;
 SIGNAL KEY : STD_LOGIC_VECTOR(3 DOWNTO 0);
 SIGNAL LED_R : STD_LOGIC_VECTOR(9 DOWNTO 0);
@@ -46,9 +51,14 @@ SIGNAL VALOR_INST : STD_LOGIC_VECTOR(12 DOWNTO 0);
 COMPONENT computador
 	PORT (
 	CLOCK : IN STD_LOGIC;
+	DEC_ADDRS : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	DEC_BLOCKS : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	DIN : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 	DOUT : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 	HAB_ESC : OUT STD_LOGIC;
-	HAB_LEDs : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+	HAB_LED8 : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+	HAB_LED9 : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+	HAB_LEDR : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
 	HAB_LEI : OUT STD_LOGIC;
 	KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 	LED_R : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
@@ -61,9 +71,14 @@ BEGIN
 	PORT MAP (
 -- list connections between master ports and signals
 	CLOCK => CLOCK,
+	DEC_ADDRS => DEC_ADDRS,
+	DEC_BLOCKS => DEC_BLOCKS,
+	DIN => DIN,
 	DOUT => DOUT,
 	HAB_ESC => HAB_ESC,
-	HAB_LEDs => HAB_LEDs,
+	HAB_LED8 => HAB_LED8,
+	HAB_LED9 => HAB_LED9,
+	HAB_LEDR => HAB_LEDR,
 	HAB_LEI => HAB_LEI,
 	KEY => KEY,
 	LED_R => LED_R,
@@ -76,9 +91,9 @@ t_prcs_KEY_0: PROCESS
 BEGIN
 LOOP
 	KEY(0) <= '0';
-	WAIT FOR 25000 ps;
+	WAIT FOR 20000 ps;
 	KEY(0) <= '1';
-	WAIT FOR 25000 ps;
+	WAIT FOR 20000 ps;
 	IF (NOW >= 1000000 ps) THEN WAIT; END IF;
 END LOOP;
 END PROCESS t_prcs_KEY_0;

@@ -84,6 +84,38 @@
 					"strict" : false
 				},
 				{
+					"name" : "DIN[0]",
+					"strict" : false
+				},
+				{
+					"name" : "DIN[1]",
+					"strict" : false
+				},
+				{
+					"name" : "DIN[2]",
+					"strict" : false
+				},
+				{
+					"name" : "DIN[3]",
+					"strict" : false
+				},
+				{
+					"name" : "DIN[4]",
+					"strict" : false
+				},
+				{
+					"name" : "DIN[5]",
+					"strict" : false
+				},
+				{
+					"name" : "DIN[6]",
+					"strict" : false
+				},
+				{
+					"name" : "DIN[7]",
+					"strict" : false
+				},
+				{
 					"name" : "HAB_LEI",
 					"strict" : false
 				},
@@ -92,7 +124,39 @@
 					"strict" : false
 				},
 				{
-					"name" : "HAB_LEDs[2]",
+					"name" : "HAB_LEDR[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LEDR[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LEDR[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LED8[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LED8[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LED8[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LED9[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LED9[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HAB_LED9[2]",
 					"strict" : false
 				},
 				{
@@ -169,6 +233,46 @@
 				},
 				{
 					"name" : "LED_R[9]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_BLOCKS[0]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_BLOCKS[1]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_BLOCKS[2]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_BLOCKS[4]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_BLOCKS[5]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_ADDRS[0]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_ADDRS[1]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_ADDRS[2]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_ADDRS[3]",
+					"strict" : false
+				},
+				{
+					"name" : "DEC_ADDRS[5]",
 					"strict" : false
 				},
 				{

@@ -12,11 +12,17 @@ entity computador is
 		KEY		: in 	std_logic_vector(3 downto 0);
 		VALOR_INST		: out std_logic_vector(12 downto 0); 	-- debug
 		DOUT		: out std_logic_vector(7 downto 0); 			-- debug
+		DIN		: out std_logic_vector(7 downto 0);
 		HAB_LEI	: out std_logic; 										-- debug
 		HAB_ESC	: out std_logic; 										-- debug
-		HAB_LEDs : out std_logic_vector (2 downto 0); 			-- debug
+		HAB_LEDR : out std_logic_vector (2 downto 0); 			-- debug
+		HAB_LED8 : out std_logic_vector (2 downto 0); 			-- debug
+		HAB_LED9 : out std_logic_vector (2 downto 0); 			-- debug
 		ROM_ADDR : out std_logic_vector(8 downto 0); 			-- debug
-		LED_R		: out std_logic_vector(9 downto 0)				-- debug
+		LED_R		: out std_logic_vector(9 downto 0);				-- debug
+		DEC_BLOCKS: out std_logic_vector(7 downto 0);
+		DEC_ADDRS: out std_logic_vector(7 downto 0)
+		
 	);
 end entity;
 
@@ -54,7 +60,8 @@ end generate;
 
 RST_PC <= '0';
 VALOR_INST <= ROM_OUT;
-DOUT <= DATA_OUT;
+DOUT 	<= DATA_OUT;
+DIN 	<= RAM_OUT;
 HAB_ESC <= ENABLE_WRITE;
 HAB_LEI <= ENABLE_READ;
 ROM_ADDR <= END_ROM;
@@ -93,14 +100,14 @@ ROM:
 	);
 
 DECODER_BLOCKS:
-	entity work.decoder1 generic map(DATA_WIDTH => 3)
+	entity work.decoder3x8
 	port map (
 		IN_E					=> DATA_ADDRESS(8 downto 6),
 		SAIDA					=> DEC_BLOCKS_OUT
 	);
 	
 DECODER_ADDR:
-	entity work.decoder1 generic map(DATA_WIDTH => 3)
+	entity work.decoder3x8
 	port map (
 		IN_E					=> DATA_ADDRESS(2 downto 0),
 		SAIDA					=> DEC_ADDR_OUT
@@ -110,7 +117,16 @@ ENABLE_LEDR <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(0);
 ENABLE_LED8 <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(1);
 ENABLE_LED9 <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(2);
 
-HAB_LEDs <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(0);
+
+-- debug purpose only --
+DEC_BLOCKS <= DEC_BLOCKS_OUT;
+DEC_ADDRS <= DEC_ADDR_OUT;
+
+HAB_LEDR <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(0);
+HAB_LED8 <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(1);
+HAB_LED9 <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(2);
+------------------------
+
 
 LEDR:
 	entity work.led_r generic map(DATA_WIDTH => 8)
