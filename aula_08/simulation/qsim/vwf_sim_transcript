@@ -7,7 +7,7 @@ Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-A
 
 **** Generating the ModelSim Testbench ****
 
-quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off computador -c computador --vector_source="C:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/Waveform.vwf" --testbench_file="C:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/simulation/qsim/Waveform.vwf.vht"
+quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off computador -c computador --vector_source="C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/Waveform.vwf" --testbench_file="C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim/Waveform.vwf.vht"
 
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
@@ -26,17 +26,17 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Wed Sep 29 12:02:57 2021
-Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off computador -c computador --vector_source=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/Waveform.vwf --testbench_file=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/simulation/qsim/Waveform.vwf.vht
+    Info: Processing started: Wed Sep 29 14:19:31 2021
+Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off computador -c computador --vector_source=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/Waveform.vwf --testbench_file=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim/Waveform.vwf.vht
 Info (119006): Selected device 5CEBA4F23C7 for design "computador"
 
-tput pin "HAB_LED8[2]" in vector source file when writing test bench files
+bench files
 
 Completed successfully. 
 
 **** Generating the functional simulation netlist ****
 
-quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory="C:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/simulation/qsim/" computador -c computador
+quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory="C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim/" computador -c computador
 
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
@@ -55,13 +55,13 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Wed Sep 29 12:02:58 2021
-Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/simulation/qsim/ computador -c computador
+    Info: Processing started: Wed Sep 29 14:19:32 2021
+Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory=C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim/ computador -c computador
 Info (119006): Selected device 5CEBA4F23C7 for design "computador"
-Info (204019): Generated file computador.vho in folder "C:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/simulation/qsim//" for EDA simulation tool
+Info (204019): Generated file computador.vho in folder "C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4718 megabytes
-    Info: Processing ended: Wed Sep 29 12:02:59 2021
+    Info: Peak virtual memory: 4715 megabytes
+    Info: Processing ended: Wed Sep 29 14:19:33 2021
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
@@ -79,18 +79,16 @@ c:/intelfpga_lite/20.1/modelsim_ase/win32aloem//vsim -c -do computador.do
 
 Reading pref.tcl
 
-
 # 2020.1
+
 
 # do computador.do
 # ** Warning: (vlib-34) Library already exists at "work".
 
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 12:03:00 on Sep 29,2021
+# Start time: 14:19:34 on Sep 29,2021
 # vcom -work work computador.vho 
-
 # -- Loading package STANDARD
-
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package VITAL_Timing
@@ -100,26 +98,26 @@ Reading pref.tcl
 # -- Loading package altera_lnsim_components
 # -- Loading package cyclonev_atom_pack
 # -- Loading package cyclonev_components
-
 # -- Compiling entity computador
 # -- Compiling architecture structure of computador
 
-# End time: 12:03:01 on Sep 29,2021, Elapsed time: 0:00:01
+# End time: 14:19:34 on Sep 29,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
+
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 12:03:01 on Sep 29,2021
+# Start time: 14:19:34 on Sep 29,2021
 # vcom -work work Waveform.vwf.vht 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
-
 # -- Loading package std_logic_1164
 # -- Compiling entity computador_vhd_vec_tst
 # -- Compiling architecture computador_arch of computador_vhd_vec_tst
-# End time: 12:03:01 on Sep 29,2021, Elapsed time: 0:00:00
+
+# End time: 14:19:34 on Sep 29,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 
 # vsim -c -t 1ps -L cyclonev -L altera -L altera_mf -L 220model -L sgate -L altera_lnsim work.computador_vhd_vec_tst 
-# Start time: 12:03:01 on Sep 29,2021
+# Start time: 14:19:34 on Sep 29,2021
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -137,11 +135,11 @@ Reading pref.tcl
 # Loading cyclonev.cyclonev_io_ibuf(arch)
 # Loading cyclonev.cyclonev_lcell_comb(vital_lcell_comb)
 # Loading altera.dffeas(vital_dffeas)
-# ** Warning: Design size of 40228 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
+# ** Warning: Design size of 54600 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
 # Expect performance to be adversely affected.
 # after#34
 
-# End time: 12:03:01 on Sep 29,2021, Elapsed time: 0:00:00
+# End time: 14:19:35 on Sep 29,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 1
 
 Completed successfully. 
@@ -154,91 +152,7 @@ Reading C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim
 
 Processing channel transitions... 
 
-Warning: HEX0[6] - signal not found in VCD.
-
-Warning: HEX0[5] - signal not found in VCD.
-
-Warning: HEX0[4] - signal not found in VCD.
-
-Warning: HEX0[3] - signal not found in VCD.
-
-Warning: HEX0[2] - signal not found in VCD.
-
-Warning: HEX0[1] - signal not found in VCD.
-
-Warning: HEX0[0] - signal not found in VCD.
-
-Warning: HEX1[6] - signal not found in VCD.
-
-Warning: HEX1[5] - signal not found in VCD.
-
-Warning: HEX1[4] - signal not found in VCD.
-
-Warning: HEX1[3] - signal not found in VCD.
-
-Warning: HEX1[2] - signal not found in VCD.
-
-Warning: HEX1[1] - signal not found in VCD.
-
-Warning: HEX1[0] - signal not found in VCD.
-
-Warning: HEX2[6] - signal not found in VCD.
-
-Warning: HEX2[5] - signal not found in VCD.
-
-Warning: HEX2[4] - signal not found in VCD.
-
-Warning: HEX2[3] - signal not found in VCD.
-
-Warning: HEX2[2] - signal not found in VCD.
-
-Warning: HEX2[1] - signal not found in VCD.
-
-Warning: HEX2[0] - signal not found in VCD.
-
-Warning: HEX3[6] - signal not found in VCD.
-
-Warning: HEX3[5] - signal not found in VCD.
-
-Warning: HEX3[4] - signal not found in VCD.
-
-Warning: HEX3[3] - signal not found in VCD.
-
-Warning: HEX3[2] - signal not found in VCD.
-
-Warning: HEX3[1] - signal not found in VCD.
-
-Warning: HEX3[0] - signal not found in VCD.
-
-Warning: HEX4[6] - signal not found in VCD.
-
-Warning: HEX4[5] - signal not found in VCD.
-
-Warning: HEX4[4] - signal not found in VCD.
-
-Warning: HEX4[3] - signal not found in VCD.
-
-Warning: HEX4[2] - signal not found in VCD.
-
-Warning: HEX4[1] - signal not found in VCD.
-
-Warning: HEX4[0] - signal not found in VCD.
-
-Warning: HEX5[6] - signal not found in VCD.
-
-Warning: HEX5[5] - signal not found in VCD.
-
-Warning: HEX5[4] - signal not found in VCD.
-
-Warning: HEX5[3] - signal not found in VCD.
-
-Warning: HEX5[2] - signal not found in VCD.
-
-Warning: HEX5[1] - signal not found in VCD.
-
-Warning: HEX5[0] - signal not found in VCD.
-
-Writing the resulting VWF to C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim/computador_20210929120302.sim.vwf
+Writing the resulting VWF to C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim/computador_20210929141935.sim.vwf
 
 Finished VCD to VWF conversion.
 

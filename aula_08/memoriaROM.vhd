@@ -17,35 +17,40 @@ end entity;
 
 architecture assincrona of memoriaROM is
 
-  type blocoMemoria is array(0 TO 2**addrWidth - 1) of std_logic_vector(dataWidth-1 DOWNTO 0);
+	type blocoMemoria is array(0 TO 2**addrWidth - 1) of std_logic_vector(dataWidth-1 DOWNTO 0);
 
-  function initMemory
-        return blocoMemoria is variable tmp : blocoMemoria := (others => (others => '0'));
-  begin
+	function initMemory
+		return blocoMemoria is variable tmp : blocoMemoria := (others => (others => '0'));
+	begin
+	
+		-- deve existir alguma maneira mais elegante 
+		-- de concatenar os numeros em hex com as instrucoes,
+		-- mas ate o momento nao conseguimos encontrar
+		tmp(0)     :=   LDI    &  '0' &  x"01";      	--  Carrega o acumulador com o valor 1
+		tmp(1)     :=   STA    &  '0' &  x"00";      	--  Armazena o valor do acumulador na posição zero da memória (MEM[0])
+		tmp(2)     :=   SOMA   &  '0' &  x"00";      	--  Soma o valor atual do acumulador com o conteúdo de MEM[0]
+		tmp(3)     :=   STA    &  '1' &  x"20";    		--  Armazena o valor do acumulador em HEX0
+		tmp(4)     :=   SOMA   &  '0' &  x"00";      	--  Incrementa o valor do acumulador em uma unidade
+		tmp(5)     :=   STA    &  '1' &  x"21";    		--  Armazena o valor do acumulador em HEX1
+		tmp(6)     :=   SOMA   &  '0' &  x"00";      	--  Incrementa o valor do acumulador em uma unidade
+		tmp(7)     :=   STA    &  '1' &  x"22";    		--  Armazena o valor do acumulador em HEX2
+		tmp(8)     :=   SOMA   &  '0' &  x"00";     		--  Incrementa o valor do acumulador em uma unidade
+		tmp(9)     :=   STA    &  '1' &  x"23";    		--  Armazena o valor do acumulador em HEX3
+		tmp(10)    :=   SOMA   &  '0' &  x"00";      	--  Incrementa o valor do acumulador em uma unidade
+		tmp(11)    :=   STA    &  '1' &  x"24";    		--  Armazena o valor do acumulador em HEX4
+		tmp(12)    :=   SOMA   &  '0' &  x"00";      	--  Incrementa o valor do acumulador em uma unidade
+		tmp(13)    :=   STA    &  '1' &  x"25";    		--  Armazena o valor do acumulador em HEX5
+		tmp(14)    :=   JMP    &  '0' &  x"02";      	--  Desvia e continua incrementando e escrevendo nos displays
 
-  
-  			tmp(0)	:= JSR	& '0' & x"0e"; --1  JMP 14; RET = 1
-			tmp(1)	:= JMP	& '0' & x"05"; --4  JMP 5
-			tmp(2)	:= JEQ	& '0' & x"09"; --9  JMP 9
-			tmp(3)	:= NOP	& '0' & x"00"; -- \\\
-			tmp(4)	:= NOP	& '0' & x"00"; --
-			tmp(5)	:= LDI	& '0' & x"05"; --5  A = 5
-			tmp(6)	:= STA	& '0' & x"00"; --6  MEM[0] = 5
-			tmp(7)	:= CEQ	& '0' & x"00"; --7  EQ = A == MEM[0] = true
-			tmp(8)	:= JMP	& '0' & x"02"; --8  JMP 2
-			tmp(9)	:= NOP	& '0' & x"00"; --10  
-			tmp(10)	:= LDI	& '0' & x"04"; --11  A = 4
-			tmp(11)	:= CEQ	& '0' & x"00"; --12  EQ = A == MEM[0] = false
-			tmp(12)	:= JEQ	& '0' & x"03"; --13  nao ocorre desvio
-			tmp(13)	:= JMP	& '0' & x"0d"; --14  fica no loop infinito com A = 4
-			tmp(14)	:= NOP	& '0' & x"00"; --2 
-			tmp(15)	:= RET	& '0' & x"00"; --3 JMP 1
+		return tmp;
+	end initMemory;
 
-        return tmp;
-    end initMemory;
-
-    signal memROM : blocoMemoria := initMemory;
+	signal memROM : blocoMemoria := initMemory;
 
 begin
+
     Dado <= memROM (to_integer(unsigned(Endereco)));
+
 end architecture;
+
+

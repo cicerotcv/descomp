@@ -10,7 +10,7 @@ z2
 cModel Technology
 dC:/Users/elm_t/Documents/grad/descomp/atividades/aula_07/simulation/qsim
 Ecomputador
-Z0 w1632892820
+Z0 w1632935973
 Z1 DPx8 cyclonev 18 cyclonev_atom_pack 0 22 ^K2eeK[IVbX]]MLcdOEI91
 Z2 DPx8 cyclonev 19 cyclonev_components 0 22 GFL[QAd@dAZF:`jjOGn9>2
 Z3 DPx12 altera_lnsim 23 altera_lnsim_components 0 22 3dzZ?YU_4FC5UU0cTXRET1
@@ -20,24 +20,24 @@ Z6 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
 Z7 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z8 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
 Z9 DPx6 altera 28 altera_primitives_components 0 22 VSD=32;3391kSOd?PDZYj3
-!i122 79
+!i122 87
 Z10 dC:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/simulation/qsim
 Z11 8computador.vho
 Z12 Fcomputador.vho
 l0
 L39 1
-VlS4`::hfWQ7`kzK3PSS1?3
-!s100 ?f1:`E`lQdYQZFC`GQF`71
+V9iVJ7NSd2IObnJaV?T]]n0
+!s100 _ZA7]2_SgH>5mPjd9<[?]3
 Z13 OV;C;2020.1;71
 32
-!s110 1632927780
+Z14 !s110 1632935974
 !i10b 1
-Z14 !s108 1632927780.000000
-Z15 !s90 -work|work|computador.vho|
-Z16 !s107 computador.vho|
+Z15 !s108 1632935974.000000
+Z16 !s90 -work|work|computador.vho|
+Z17 !s107 computador.vho|
 !i113 1
-Z17 o-work work
-Z18 tExplicit 1 CvgOpt 0
+Z18 o-work work
+Z19 tExplicit 1 CvgOpt 0
 Astructure
 R1
 R2
@@ -48,27 +48,27 @@ R6
 R7
 R8
 R9
-DEx4 work 10 computador 0 22 lS4`::hfWQ7`kzK3PSS1?3
-!i122 79
-l429
-L58 4395
-V<BiC_9GQWh1nSEk2GPA2@0
-!s100 >GSeQDnI;9CLWOJbo2N;S3
+DEx4 work 10 computador 0 22 9iVJ7NSd2IObnJaV?T]]n0
+!i122 87
+l419
+L64 5720
+VPTmAA^6X;PcWTKLdCn8G91
+!s100 SF8:Aghc0@2`JZ82_AnlY3
 R13
 32
-Z19 !s110 1632927781
-!i10b 1
 R14
+!i10b 1
 R15
 R16
-!i113 1
 R17
+!i113 1
 R18
+R19
 Ecomputador_vhd_vec_tst
-Z20 w1632892819
+Z20 w1632935972
 R7
 R8
-!i122 80
+!i122 88
 R10
 Z21 8Waveform.vwf.vht
 Z22 FWaveform.vwf.vht
@@ -78,30 +78,30 @@ VJ4U_`Dc]:a=0bA^CFGa8h0
 !s100 LNo5L0S4XJLJHbHhUo1hD0
 R13
 32
-R19
+R14
 !i10b 1
-Z23 !s108 1632927781.000000
-Z24 !s90 -work|work|Waveform.vwf.vht|
-Z25 !s107 Waveform.vwf.vht|
+R15
+Z23 !s90 -work|work|Waveform.vwf.vht|
+Z24 !s107 Waveform.vwf.vht|
 !i113 1
-R17
 R18
+R19
 Acomputador_arch
 R7
 R8
-Z26 DEx4 work 22 computador_vhd_vec_tst 0 22 J4U_`Dc]:a=0bA^CFGa8h0
-!i122 80
-l69
-Z27 L34 67
-Z28 Vg=aKZ`HjkO0hB7>^a4^mH2
-Z29 !s100 B81_[haQ1[af[<UUXTn]S1
+Z25 DEx4 work 22 computador_vhd_vec_tst 0 22 J4U_`Dc]:a=0bA^CFGa8h0
+!i122 88
+l81
+Z26 L34 85
+VG2^1QdXV]^Qm3EOE@HIT@1
+!s100 4gmlQYOMC61OC<U_dh4lH1
 R13
 32
-R19
+R14
 !i10b 1
+R15
 R23
 R24
-R25
 !i113 1
-R17
 R18
+R19
