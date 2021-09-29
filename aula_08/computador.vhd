@@ -1,27 +1,50 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+-- Mapa de blocos
+	--	bloco 0: 0   ~ 63
+	--	bloco 1: 64  ~ 127
+	--	bloco 2: 128 ~ 191
+	--	bloco 3: 192 ~ 255
+	--	bloco 4: 256 ~ 319
+	--	bloco 5: 320 ~ 383
+	--	bloco 6: 384 ~ 447
+	--	bloco 6: 448 ~ 511
+	
+-- Mapa de perifericos
+	-- HEX 0: 288
+	-- HEX 1: 289
+	-- HEX 2: 290
+	-- HEX 3: 291
+	-- HEX 4: 292
+	-- HEX 5: 293
+
 entity computador is
-	-- Total de bits das entradas e saidas
 	generic (
 		larguraDados 	: natural := 8;
 		simulacao 		: boolean := TRUE -- para gravar na placa, altere de TRUE para FALSE
 	);
 	port   (
-		CLOCK    : in 	std_logic;
-		KEY		: in 	std_logic_vector(3 downto 0);
-		VALOR_INST		: out std_logic_vector(12 downto 0); 	-- debug
-		DOUT		: out std_logic_vector(7 downto 0); 			-- debug
-		DIN		: out std_logic_vector(7 downto 0);
-		HAB_LEI	: out std_logic; 										-- debug
-		HAB_ESC	: out std_logic; 										-- debug
-		HAB_LEDR : out std_logic_vector (2 downto 0); 			-- debug
-		HAB_LED8 : out std_logic_vector (2 downto 0); 			-- debug
-		HAB_LED9 : out std_logic_vector (2 downto 0); 			-- debug
-		ROM_ADDR : out std_logic_vector(8 downto 0); 			-- debug
-		LED_R		: out std_logic_vector(9 downto 0);				-- debug
-		DEC_BLOCKS: out std_logic_vector(7 downto 0);
-		DEC_ADDRS: out std_logic_vector(7 downto 0)
+		CLOCK    	: in 	std_logic;
+		KEY			: in 	std_logic_vector	(3 downto 0);
+		HEX0			: out std_logic_vector	(6 downto 0);
+		HEX1			: out std_logic_vector	(6 downto 0);
+		HEX2			: out std_logic_vector	(6 downto 0);
+		HEX3			: out std_logic_vector	(6 downto 0);
+		HEX4			: out std_logic_vector	(6 downto 0);
+		HEX5			: out std_logic_vector	(6 downto 0);
+		VALOR_INST	: out std_logic_vector	(12 downto 0); 		-- debug
+		DOUT			: out std_logic_vector	(7 downto 0); 			-- debug
+		DIN			: out std_logic_vector	(7 downto 0);			-- debug
+		HAB_LEI		: out std_logic; 										-- debug
+		HAB_ESC		: out std_logic; 										-- debug
+		HAB_LEDR 	: out std_logic_vector 	(2 downto 0); 			-- debug
+		HAB_LED8 	: out std_logic_vector 	(2 downto 0); 			-- debug
+		HAB_LED9 	: out std_logic_vector 	(2 downto 0); 			-- debug
+		ROM_ADDR 	: out std_logic_vector	(8 downto 0); 			-- debug
+		LED_R			: out std_logic_vector	(9 downto 0);			-- debug
+		DEC_BLOCKS	: out std_logic_vector	(7 downto 0);			-- debug
+		DEC_ADDRS	: out std_logic_vector	(7 downto 0)			-- debug
 		
 	);
 end entity;
@@ -44,7 +67,8 @@ architecture arquitetura of computador is
 	signal ENABLE_LEDR						: std_logic;
 	signal ENABLE_LED8						: std_logic;
 	signal ENABLE_LED9						: std_logic;
-	
+	signal ENABLE_HEX							: std_logic_vector (5 downto 0);
+	signal A5									: std_logic;
 	
 begin
 
@@ -59,12 +83,15 @@ end generate;
 
 
 RST_PC <= '0';
+
+--- debug purpose only ---
 VALOR_INST <= ROM_OUT;
 DOUT 	<= DATA_OUT;
 DIN 	<= RAM_OUT;
 HAB_ESC <= ENABLE_WRITE;
 HAB_LEI <= ENABLE_READ;
 ROM_ADDR <= END_ROM;
+--------------------------
 
 CPU:
 	entity work.CPU
@@ -113,9 +140,20 @@ DECODER_ADDR:
 		SAIDA					=> DEC_ADDR_OUT
 	);
 
-ENABLE_LEDR <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(0);
-ENABLE_LED8 <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(1);
-ENABLE_LED9 <= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(2);
+
+-- leds, keys and buttons addressing
+A5 <= DATA_ADDRESS(5);
+
+ENABLE_LEDR 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(0) and not(A5);
+ENABLE_LED8 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(1) and not(A5);
+ENABLE_LED9 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(2) and not(A5);
+
+ENABLE_HEX(0) 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(0) and A5;
+ENABLE_HEX(1) 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(1) and A5;
+ENABLE_HEX(2) 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(2) and A5;
+ENABLE_HEX(3) 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(3) and A5;
+ENABLE_HEX(4) 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(4) and A5;
+ENABLE_HEX(5) 	<= ENABLE_WRITE and DEC_BLOCKS_OUT(4) and DEC_ADDR_OUT(5) and A5;
 
 
 -- debug purpose only --
@@ -153,6 +191,60 @@ LED9:
 		WRITE_ENABLE		=> ENABLE_LED9,
 		CLK					=> CLK,
 		OUT_LED				=> LED_R(9)
+	);
+	
+HEX0_DECODER:
+	entity work.d7segHex
+	port map (
+		DATA_IN 	=> DATA_OUT(3 downto 0),
+		ENABLE	=> ENABLE_HEX(0),
+		CLK		=> CLK,
+		DATA_OUT	=> HEX0
+	);
+	
+HEX1_DECODER:
+	entity work.d7segHex
+	port map (
+		DATA_IN 	=> DATA_OUT(3 downto 0),
+		ENABLE	=> ENABLE_HEX(1),
+		CLK		=> CLK,
+		DATA_OUT	=> HEX1
+	);
+
+HEX2_DECODER:
+	entity work.d7segHex
+	port map (
+		DATA_IN 	=> DATA_OUT(3 downto 0),
+		ENABLE	=> ENABLE_HEX(2),
+		CLK		=> CLK,
+		DATA_OUT	=> HEX2
+	);
+
+HEX3_DECODER:
+	entity work.d7segHex
+	port map (
+		DATA_IN 	=> DATA_OUT(3 downto 0),
+		ENABLE	=> ENABLE_HEX(3),
+		CLK		=> CLK,
+		DATA_OUT	=> HEX3
+	);
+
+HEX4_DECODER:
+	entity work.d7segHex
+	port map (
+		DATA_IN 	=> DATA_OUT(3 downto 0),
+		ENABLE	=> ENABLE_HEX(4),
+		CLK		=> CLK,
+		DATA_OUT	=> HEX4
+	);
+
+HEX5_DECODER:
+	entity work.d7segHex
+	port map (
+		DATA_IN 	=> DATA_OUT(3 downto 0),
+		ENABLE	=> ENABLE_HEX(5),
+		CLK		=> CLK,
+		DATA_OUT	=> HEX5
 	);
 
 end architecture;

@@ -1,0 +1,34 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity led_r is
+
+  port   (
+	 IN_FLOPS				: in  std_logic;
+	 WRITE_ENABLE			: in  std_logic;
+	 CLK						: in  std_logic;
+	 OUT_LED					: out std_logic
+  );
+end entity;
+
+
+architecture arch_name of led_r is
+	signal out_signal		: std_logic := '0';
+
+begin
+
+FLAG:
+	entity work.flipflopGenerico
+	port map (
+		DIN		=> IN_FLOPS,
+		DOUT		=> out_signal,
+		ENABLE 	=> WRITE_ENABLE,
+		CLK 		=> CLK,
+		RST 		=> '0'
+	);		
+
+OUT_LED <= out_signal;
+	
+	
+end architecture;
