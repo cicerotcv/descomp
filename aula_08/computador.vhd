@@ -1,23 +1,29 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
--- Mapa de blocos
-	--	bloco 0: 0   ~ 63
-	--	bloco 1: 64  ~ 127
-	--	bloco 2: 128 ~ 191
-	--	bloco 3: 192 ~ 255
-	--	bloco 4: 256 ~ 319
-	--	bloco 5: 320 ~ 383
-	--	bloco 6: 384 ~ 447
-	--	bloco 6: 448 ~ 511
+-- Mapa de blocos:
+	--	bloco 0: 0   ~ 63		(0x000 ~ 0x03f)
+	--	bloco 1: 64  ~ 127	(0x040 ~ 0x07f)
+	--	bloco 2: 128 ~ 191	(0x080 ~ 0x0bf)
+	--	bloco 3: 192 ~ 255	(0x0c0 ~ 0x0ff)
+	--	bloco 4: 256 ~ 319	(0x100 ~ 0x13f)
+	--	bloco 5: 320 ~ 383	(0x140 ~ 0x17f)
+	--	bloco 6: 384 ~ 447	(0x180 ~ 0x1bf)
+	--	bloco 6: 448 ~ 511	(0x1c0 ~ 0x1ff)
 	
--- Mapa de perifericos
-	-- HEX 0: 288
-	-- HEX 1: 289
-	-- HEX 2: 290
-	-- HEX 3: 291
-	-- HEX 4: 292
-	-- HEX 5: 293
+-- Mapa de perifericos	
+	-- LEDs:
+		-- LEDsR: 256 (0x100)
+		-- LED 8: 257 (0x101)
+		-- LED 9: 258 (0x102)
+	
+	-- 7seg:
+		-- HEX 0: 288 (0x120)
+		-- HEX 1: 289 (0x121)
+		-- HEX 2: 290 (0x122)
+		-- HEX 3: 291 (0x123)
+		-- HEX 4: 292 (0x124)
+		-- HEX 5: 293 (0x125)
 
 entity computador is
 	generic (
