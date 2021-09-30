@@ -1,0 +1,38 @@
+Quartus Prime Archive log --	C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/computador.qarlog
+
+Archive:	C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/computador.qar
+Date:		Wed Sep 29 21:13:47 2021
+Quartus Prime		20.1.0 Build 711 06/05/2020 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/CPU.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/ULASomaSub.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/Waveform.vwf
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/Waveform1.vwf
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/Waveform3.vwf
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/buffer3state.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/computador.qpf
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/computador.qsf
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/computador.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/computer_constants.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/conversorHex7Seg.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/d7segHex.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/decoder.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/decoder1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/edgeDetector.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/flipflopGenerico.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/led_r.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/led_solo.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/logica_desvio.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/memoriaRAM.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/memoriaROM.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/muxGenerico2x1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/muxGenerico4x1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/proxima_instrucao.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/registradorGenerico.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_08/soma_constante.vhd
+c:/intelfpga_lite/20.1/quartus/bin64/assignment_defaults.qdf
+	======= Total: 27 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

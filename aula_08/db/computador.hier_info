@@ -1,136 +1,90 @@
 |computador
-CLOCK => ~NO_FANOUT~
-KEY[0] => cpu:CPU.CLK
-KEY[0] => memoriaram:RAM.clk
-KEY[0] => led_r:LEDR.CLK
-KEY[0] => led_solo:LED8.CLK
-KEY[0] => led_solo:LED9.CLK
-KEY[0] => d7seghex:HEX0_DECODER.CLK
-KEY[0] => d7seghex:HEX1_DECODER.CLK
-KEY[0] => d7seghex:HEX2_DECODER.CLK
-KEY[0] => d7seghex:HEX3_DECODER.CLK
-KEY[0] => d7seghex:HEX4_DECODER.CLK
-KEY[0] => d7seghex:HEX5_DECODER.CLK
-KEY[1] => ~NO_FANOUT~
-KEY[2] => ~NO_FANOUT~
-KEY[3] => ~NO_FANOUT~
-HEX0[0] <= d7seghex:HEX0_DECODER.DATA_OUT[0]
-HEX0[1] <= d7seghex:HEX0_DECODER.DATA_OUT[1]
-HEX0[2] <= d7seghex:HEX0_DECODER.DATA_OUT[2]
-HEX0[3] <= d7seghex:HEX0_DECODER.DATA_OUT[3]
-HEX0[4] <= d7seghex:HEX0_DECODER.DATA_OUT[4]
-HEX0[5] <= d7seghex:HEX0_DECODER.DATA_OUT[5]
-HEX0[6] <= d7seghex:HEX0_DECODER.DATA_OUT[6]
-HEX1[0] <= d7seghex:HEX1_DECODER.DATA_OUT[0]
-HEX1[1] <= d7seghex:HEX1_DECODER.DATA_OUT[1]
-HEX1[2] <= d7seghex:HEX1_DECODER.DATA_OUT[2]
-HEX1[3] <= d7seghex:HEX1_DECODER.DATA_OUT[3]
-HEX1[4] <= d7seghex:HEX1_DECODER.DATA_OUT[4]
-HEX1[5] <= d7seghex:HEX1_DECODER.DATA_OUT[5]
-HEX1[6] <= d7seghex:HEX1_DECODER.DATA_OUT[6]
-HEX2[0] <= d7seghex:HEX2_DECODER.DATA_OUT[0]
-HEX2[1] <= d7seghex:HEX2_DECODER.DATA_OUT[1]
-HEX2[2] <= d7seghex:HEX2_DECODER.DATA_OUT[2]
-HEX2[3] <= d7seghex:HEX2_DECODER.DATA_OUT[3]
-HEX2[4] <= d7seghex:HEX2_DECODER.DATA_OUT[4]
-HEX2[5] <= d7seghex:HEX2_DECODER.DATA_OUT[5]
-HEX2[6] <= d7seghex:HEX2_DECODER.DATA_OUT[6]
-HEX3[0] <= d7seghex:HEX3_DECODER.DATA_OUT[0]
-HEX3[1] <= d7seghex:HEX3_DECODER.DATA_OUT[1]
-HEX3[2] <= d7seghex:HEX3_DECODER.DATA_OUT[2]
-HEX3[3] <= d7seghex:HEX3_DECODER.DATA_OUT[3]
-HEX3[4] <= d7seghex:HEX3_DECODER.DATA_OUT[4]
-HEX3[5] <= d7seghex:HEX3_DECODER.DATA_OUT[5]
-HEX3[6] <= d7seghex:HEX3_DECODER.DATA_OUT[6]
-HEX4[0] <= d7seghex:HEX4_DECODER.DATA_OUT[0]
-HEX4[1] <= d7seghex:HEX4_DECODER.DATA_OUT[1]
-HEX4[2] <= d7seghex:HEX4_DECODER.DATA_OUT[2]
-HEX4[3] <= d7seghex:HEX4_DECODER.DATA_OUT[3]
-HEX4[4] <= d7seghex:HEX4_DECODER.DATA_OUT[4]
-HEX4[5] <= d7seghex:HEX4_DECODER.DATA_OUT[5]
-HEX4[6] <= d7seghex:HEX4_DECODER.DATA_OUT[6]
-HEX5[0] <= d7seghex:HEX5_DECODER.DATA_OUT[0]
-HEX5[1] <= d7seghex:HEX5_DECODER.DATA_OUT[1]
-HEX5[2] <= d7seghex:HEX5_DECODER.DATA_OUT[2]
-HEX5[3] <= d7seghex:HEX5_DECODER.DATA_OUT[3]
-HEX5[4] <= d7seghex:HEX5_DECODER.DATA_OUT[4]
-HEX5[5] <= d7seghex:HEX5_DECODER.DATA_OUT[5]
-HEX5[6] <= d7seghex:HEX5_DECODER.DATA_OUT[6]
-VALOR_INST[0] <= memoriarom:ROM.Dado[0]
-VALOR_INST[1] <= memoriarom:ROM.Dado[1]
-VALOR_INST[2] <= memoriarom:ROM.Dado[2]
-VALOR_INST[3] <= memoriarom:ROM.Dado[3]
-VALOR_INST[4] <= memoriarom:ROM.Dado[4]
-VALOR_INST[5] <= memoriarom:ROM.Dado[5]
-VALOR_INST[6] <= memoriarom:ROM.Dado[6]
-VALOR_INST[7] <= memoriarom:ROM.Dado[7]
-VALOR_INST[8] <= memoriarom:ROM.Dado[8]
-VALOR_INST[9] <= memoriarom:ROM.Dado[9]
-VALOR_INST[10] <= memoriarom:ROM.Dado[10]
-VALOR_INST[11] <= memoriarom:ROM.Dado[11]
-VALOR_INST[12] <= memoriarom:ROM.Dado[12]
-DOUT[0] <= cpu:CPU.DATA_OUT[0]
-DOUT[1] <= cpu:CPU.DATA_OUT[1]
-DOUT[2] <= cpu:CPU.DATA_OUT[2]
-DOUT[3] <= cpu:CPU.DATA_OUT[3]
-DOUT[4] <= cpu:CPU.DATA_OUT[4]
-DOUT[5] <= cpu:CPU.DATA_OUT[5]
-DOUT[6] <= cpu:CPU.DATA_OUT[6]
-DOUT[7] <= cpu:CPU.DATA_OUT[7]
-DIN[0] <= memoriaram:RAM.dado_out[0]
-DIN[1] <= memoriaram:RAM.dado_out[1]
-DIN[2] <= memoriaram:RAM.dado_out[2]
-DIN[3] <= memoriaram:RAM.dado_out[3]
-DIN[4] <= memoriaram:RAM.dado_out[4]
-DIN[5] <= memoriaram:RAM.dado_out[5]
-DIN[6] <= memoriaram:RAM.dado_out[6]
-DIN[7] <= memoriaram:RAM.dado_out[7]
-HAB_LEI <= cpu:CPU.READ_OUT
-HAB_ESC <= cpu:CPU.WRITE_OUT
-HAB_LEDR[0] <= decoder3x8:DECODER_ADDR.SAIDA[0]
-HAB_LEDR[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
-HAB_LEDR[2] <= cpu:CPU.WRITE_OUT
-HAB_LED8[0] <= decoder3x8:DECODER_ADDR.SAIDA[1]
-HAB_LED8[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
-HAB_LED8[2] <= cpu:CPU.WRITE_OUT
-HAB_LED9[0] <= decoder3x8:DECODER_ADDR.SAIDA[2]
-HAB_LED9[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
-HAB_LED9[2] <= cpu:CPU.WRITE_OUT
-ROM_ADDR[0] <= cpu:CPU.ROM_ADDRESS[0]
-ROM_ADDR[1] <= cpu:CPU.ROM_ADDRESS[1]
-ROM_ADDR[2] <= cpu:CPU.ROM_ADDRESS[2]
-ROM_ADDR[3] <= cpu:CPU.ROM_ADDRESS[3]
-ROM_ADDR[4] <= cpu:CPU.ROM_ADDRESS[4]
-ROM_ADDR[5] <= cpu:CPU.ROM_ADDRESS[5]
-ROM_ADDR[6] <= cpu:CPU.ROM_ADDRESS[6]
-ROM_ADDR[7] <= cpu:CPU.ROM_ADDRESS[7]
-ROM_ADDR[8] <= cpu:CPU.ROM_ADDRESS[8]
-LED_R[0] <= led_r:LEDR.OUT_LEDs[0]
-LED_R[1] <= led_r:LEDR.OUT_LEDs[1]
-LED_R[2] <= led_r:LEDR.OUT_LEDs[2]
-LED_R[3] <= led_r:LEDR.OUT_LEDs[3]
-LED_R[4] <= led_r:LEDR.OUT_LEDs[4]
-LED_R[5] <= led_r:LEDR.OUT_LEDs[5]
-LED_R[6] <= led_r:LEDR.OUT_LEDs[6]
-LED_R[7] <= led_r:LEDR.OUT_LEDs[7]
-LED_R[8] <= led_solo:LED8.OUT_LED
-LED_R[9] <= led_solo:LED9.OUT_LED
-DEC_BLOCKS[0] <= decoder3x8:DECODER_BLOCKS.SAIDA[0]
-DEC_BLOCKS[1] <= decoder3x8:DECODER_BLOCKS.SAIDA[1]
-DEC_BLOCKS[2] <= decoder3x8:DECODER_BLOCKS.SAIDA[2]
-DEC_BLOCKS[3] <= decoder3x8:DECODER_BLOCKS.SAIDA[3]
-DEC_BLOCKS[4] <= decoder3x8:DECODER_BLOCKS.SAIDA[4]
-DEC_BLOCKS[5] <= decoder3x8:DECODER_BLOCKS.SAIDA[5]
-DEC_BLOCKS[6] <= decoder3x8:DECODER_BLOCKS.SAIDA[6]
-DEC_BLOCKS[7] <= decoder3x8:DECODER_BLOCKS.SAIDA[7]
-DEC_ADDRS[0] <= decoder3x8:DECODER_ADDR.SAIDA[0]
-DEC_ADDRS[1] <= decoder3x8:DECODER_ADDR.SAIDA[1]
-DEC_ADDRS[2] <= decoder3x8:DECODER_ADDR.SAIDA[2]
-DEC_ADDRS[3] <= decoder3x8:DECODER_ADDR.SAIDA[3]
-DEC_ADDRS[4] <= decoder3x8:DECODER_ADDR.SAIDA[4]
-DEC_ADDRS[5] <= decoder3x8:DECODER_ADDR.SAIDA[5]
-DEC_ADDRS[6] <= decoder3x8:DECODER_ADDR.SAIDA[6]
-DEC_ADDRS[7] <= decoder3x8:DECODER_ADDR.SAIDA[7]
+CLOCK_50 => edgedetector:detectorSub0.clk
+CLOCK_50 => cpu:CPU.CLK
+CLOCK_50 => memoriaram:RAM.clk
+CLOCK_50 => led_r:LED_R.CLK
+CLOCK_50 => led_solo:LED8.CLK
+CLOCK_50 => led_solo:LED9.CLK
+CLOCK_50 => d7seghex:HEX0_DECODER.CLK
+CLOCK_50 => d7seghex:HEX1_DECODER.CLK
+CLOCK_50 => d7seghex:HEX2_DECODER.CLK
+CLOCK_50 => d7seghex:HEX3_DECODER.CLK
+CLOCK_50 => d7seghex:HEX4_DECODER.CLK
+CLOCK_50 => d7seghex:HEX5_DECODER.CLK
+KEY[0] => edgedetector:detectorSub0.entrada
+KEY[1] => buffer3state:KEY1.INPUT[0]
+KEY[2] => buffer3state:KEY2.INPUT[0]
+KEY[3] => buffer3state:KEY3.INPUT[0]
+FPGA_RESET_N => buffer3state:RST_FPGA.INPUT[0]
+SW[0] => buffer3state:SWR.INPUT[0]
+SW[1] => buffer3state:SWR.INPUT[1]
+SW[2] => buffer3state:SWR.INPUT[2]
+SW[3] => buffer3state:SWR.INPUT[3]
+SW[4] => buffer3state:SWR.INPUT[4]
+SW[5] => buffer3state:SWR.INPUT[5]
+SW[6] => buffer3state:SWR.INPUT[6]
+SW[7] => buffer3state:SWR.INPUT[7]
+SW[8] => buffer3state:SW8.INPUT[0]
+SW[9] => buffer3state:SW9.INPUT[0]
+HEX0[0] << d7seghex:HEX0_DECODER.DATA_OUT[0]
+HEX0[1] << d7seghex:HEX0_DECODER.DATA_OUT[1]
+HEX0[2] << d7seghex:HEX0_DECODER.DATA_OUT[2]
+HEX0[3] << d7seghex:HEX0_DECODER.DATA_OUT[3]
+HEX0[4] << d7seghex:HEX0_DECODER.DATA_OUT[4]
+HEX0[5] << d7seghex:HEX0_DECODER.DATA_OUT[5]
+HEX0[6] << d7seghex:HEX0_DECODER.DATA_OUT[6]
+HEX1[0] << d7seghex:HEX1_DECODER.DATA_OUT[0]
+HEX1[1] << d7seghex:HEX1_DECODER.DATA_OUT[1]
+HEX1[2] << d7seghex:HEX1_DECODER.DATA_OUT[2]
+HEX1[3] << d7seghex:HEX1_DECODER.DATA_OUT[3]
+HEX1[4] << d7seghex:HEX1_DECODER.DATA_OUT[4]
+HEX1[5] << d7seghex:HEX1_DECODER.DATA_OUT[5]
+HEX1[6] << d7seghex:HEX1_DECODER.DATA_OUT[6]
+HEX2[0] << d7seghex:HEX2_DECODER.DATA_OUT[0]
+HEX2[1] << d7seghex:HEX2_DECODER.DATA_OUT[1]
+HEX2[2] << d7seghex:HEX2_DECODER.DATA_OUT[2]
+HEX2[3] << d7seghex:HEX2_DECODER.DATA_OUT[3]
+HEX2[4] << d7seghex:HEX2_DECODER.DATA_OUT[4]
+HEX2[5] << d7seghex:HEX2_DECODER.DATA_OUT[5]
+HEX2[6] << d7seghex:HEX2_DECODER.DATA_OUT[6]
+HEX3[0] << d7seghex:HEX3_DECODER.DATA_OUT[0]
+HEX3[1] << d7seghex:HEX3_DECODER.DATA_OUT[1]
+HEX3[2] << d7seghex:HEX3_DECODER.DATA_OUT[2]
+HEX3[3] << d7seghex:HEX3_DECODER.DATA_OUT[3]
+HEX3[4] << d7seghex:HEX3_DECODER.DATA_OUT[4]
+HEX3[5] << d7seghex:HEX3_DECODER.DATA_OUT[5]
+HEX3[6] << d7seghex:HEX3_DECODER.DATA_OUT[6]
+HEX4[0] << d7seghex:HEX4_DECODER.DATA_OUT[0]
+HEX4[1] << d7seghex:HEX4_DECODER.DATA_OUT[1]
+HEX4[2] << d7seghex:HEX4_DECODER.DATA_OUT[2]
+HEX4[3] << d7seghex:HEX4_DECODER.DATA_OUT[3]
+HEX4[4] << d7seghex:HEX4_DECODER.DATA_OUT[4]
+HEX4[5] << d7seghex:HEX4_DECODER.DATA_OUT[5]
+HEX4[6] << d7seghex:HEX4_DECODER.DATA_OUT[6]
+HEX5[0] << d7seghex:HEX5_DECODER.DATA_OUT[0]
+HEX5[1] << d7seghex:HEX5_DECODER.DATA_OUT[1]
+HEX5[2] << d7seghex:HEX5_DECODER.DATA_OUT[2]
+HEX5[3] << d7seghex:HEX5_DECODER.DATA_OUT[3]
+HEX5[4] << d7seghex:HEX5_DECODER.DATA_OUT[4]
+HEX5[5] << d7seghex:HEX5_DECODER.DATA_OUT[5]
+HEX5[6] << d7seghex:HEX5_DECODER.DATA_OUT[6]
+LEDR[0] << led_r:LED_R.OUT_LEDs[0]
+LEDR[1] << led_r:LED_R.OUT_LEDs[1]
+LEDR[2] << led_r:LED_R.OUT_LEDs[2]
+LEDR[3] << led_r:LED_R.OUT_LEDs[3]
+LEDR[4] << led_r:LED_R.OUT_LEDs[4]
+LEDR[5] << led_r:LED_R.OUT_LEDs[5]
+LEDR[6] << led_r:LED_R.OUT_LEDs[6]
+LEDR[7] << led_r:LED_R.OUT_LEDs[7]
+LEDR[8] << led_solo:LED8.OUT_LED
+LEDR[9] << led_solo:LED9.OUT_LED
+
+
+|computador|edgeDetector:detectorSub0
+clk => saidaQ.CLK
+entrada => saida.IN1
+entrada => saidaQ.DATAIN
+saida <= saida.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |computador|CPU:CPU
@@ -790,7 +744,7 @@ SAIDA[6] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
 SAIDA[7] <= SAIDA.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|computador|led_r:LEDR
+|computador|led_r:LED_R
 IN_REGIS[0] => registradorgenerico:REG_8bits.DIN[0]
 IN_REGIS[1] => registradorgenerico:REG_8bits.DIN[1]
 IN_REGIS[2] => registradorgenerico:REG_8bits.DIN[2]
@@ -811,7 +765,7 @@ OUT_LEDs[6] <= registradorgenerico:REG_8bits.DOUT[6]
 OUT_LEDs[7] <= registradorgenerico:REG_8bits.DOUT[7]
 
 
-|computador|led_r:LEDR|registradorGenerico:REG_8bits
+|computador|led_r:LED_R|registradorGenerico:REG_8bits
 DIN[0] => DOUT[0]~reg0.DATAIN
 DIN[1] => DOUT[1]~reg0.DATAIN
 DIN[2] => DOUT[2]~reg0.DATAIN
@@ -1626,5 +1580,82 @@ saida7seg[3] <= saida7seg.DB_MAX_OUTPUT_PORT_TYPE
 saida7seg[4] <= saida7seg.DB_MAX_OUTPUT_PORT_TYPE
 saida7seg[5] <= saida7seg.DB_MAX_OUTPUT_PORT_TYPE
 saida7seg[6] <= saida7seg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|buffer3state:SWR
+INPUT[0] => OUTPUT[0].DATAIN
+INPUT[1] => OUTPUT[1].DATAIN
+INPUT[2] => OUTPUT[2].DATAIN
+INPUT[3] => OUTPUT[3].DATAIN
+INPUT[4] => OUTPUT[4].DATAIN
+INPUT[5] => OUTPUT[5].DATAIN
+INPUT[6] => OUTPUT[6].DATAIN
+INPUT[7] => OUTPUT[7].DATAIN
+ENABLE => OUTPUT[0].OE
+ENABLE => OUTPUT[1].OE
+ENABLE => OUTPUT[2].OE
+ENABLE => OUTPUT[3].OE
+ENABLE => OUTPUT[4].OE
+ENABLE => OUTPUT[5].OE
+ENABLE => OUTPUT[6].OE
+ENABLE => OUTPUT[7].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
+OUTPUT[1] <= OUTPUT[1].DB_MAX_OUTPUT_PORT_TYPE
+OUTPUT[2] <= OUTPUT[2].DB_MAX_OUTPUT_PORT_TYPE
+OUTPUT[3] <= OUTPUT[3].DB_MAX_OUTPUT_PORT_TYPE
+OUTPUT[4] <= OUTPUT[4].DB_MAX_OUTPUT_PORT_TYPE
+OUTPUT[5] <= OUTPUT[5].DB_MAX_OUTPUT_PORT_TYPE
+OUTPUT[6] <= OUTPUT[6].DB_MAX_OUTPUT_PORT_TYPE
+OUTPUT[7] <= OUTPUT[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|buffer3state:SW8
+INPUT[0] => OUTPUT[0].DATAIN
+ENABLE => OUTPUT[0].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|buffer3state:SW9
+INPUT[0] => OUTPUT[0].DATAIN
+ENABLE => OUTPUT[0].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|flipflopGenerico:FF_DEBOUNCER
+DIN => DOUT~reg0.DATAIN
+DOUT <= DOUT~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ENABLE => DOUT~reg0.ENA
+CLK => DOUT~reg0.CLK
+RST => DOUT~reg0.ACLR
+
+
+|computador|buffer3state:KEY0_INTERFACE_EXISTENTE
+INPUT[0] => OUTPUT[0].DATAIN
+ENABLE => OUTPUT[0].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|buffer3state:KEY1
+INPUT[0] => OUTPUT[0].DATAIN
+ENABLE => OUTPUT[0].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|buffer3state:KEY2
+INPUT[0] => OUTPUT[0].DATAIN
+ENABLE => OUTPUT[0].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|buffer3state:KEY3
+INPUT[0] => OUTPUT[0].DATAIN
+ENABLE => OUTPUT[0].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|buffer3state:RST_FPGA
+INPUT[0] => OUTPUT[0].DATAIN
+ENABLE => OUTPUT[0].OE
+OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
 
 

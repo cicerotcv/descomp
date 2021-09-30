@@ -26,12 +26,12 @@ package controls is
 	constant CTRL_SOMA	: std_logic_vector(INST_WIDTH-1 downto 0) := b"0000001_01_010";
 	constant CTRL_SUBA	: std_logic_vector(INST_WIDTH-1 downto 0) := b"0000001_00_010";
 	constant CTRL_LDI		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0000011_10_000";
-	constant CTRL_STA		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0000000_00_001"; -- original: 0000000_00_001
+	constant CTRL_STA		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0000000_00_001";
 	constant CTRL_JMP		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0100000_00_000";
 	constant CTRL_JEQ		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0000100_00_000";
 	constant CTRL_CEQ		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0000000_00_110";
-	constant CTRL_JSR		: std_logic_vector(INST_WIDTH-1 downto 0) := b"1001000_00_000"; -- editar
-	constant CTRL_RET		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0010000_00_000"; -- editar
+	constant CTRL_JSR		: std_logic_vector(INST_WIDTH-1 downto 0) := b"1001000_00_000";
+	constant CTRL_RET		: std_logic_vector(INST_WIDTH-1 downto 0) := b"0010000_00_000";
 	
 	
 end package controls;

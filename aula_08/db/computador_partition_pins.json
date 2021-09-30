@@ -172,211 +172,103 @@
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[0]",
+					"name" : "LEDR[0]",
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[1]",
+					"name" : "LEDR[1]",
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[2]",
+					"name" : "LEDR[2]",
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[5]",
+					"name" : "LEDR[3]",
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[8]",
+					"name" : "LEDR[4]",
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[9]",
+					"name" : "LEDR[5]",
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[10]",
+					"name" : "LEDR[6]",
 					"strict" : false
 				},
 				{
-					"name" : "VALOR_INST[11]",
+					"name" : "LEDR[7]",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[0]",
+					"name" : "LEDR[8]",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[1]",
+					"name" : "LEDR[9]",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[2]",
+					"name" : "CLOCK_50",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[3]",
+					"name" : "SW[0]",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[4]",
+					"name" : "KEY[2]",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[5]",
+					"name" : "KEY[1]",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[6]",
+					"name" : "KEY[3]",
 					"strict" : false
 				},
 				{
-					"name" : "DOUT[7]",
+					"name" : "SW[8]",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[0]",
+					"name" : "SW[9]",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[1]",
+					"name" : "FPGA_RESET_N",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[2]",
+					"name" : "SW[3]",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[3]",
+					"name" : "SW[1]",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[4]",
+					"name" : "SW[2]",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[5]",
+					"name" : "SW[4]",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[6]",
+					"name" : "SW[5]",
 					"strict" : false
 				},
 				{
-					"name" : "DIN[7]",
+					"name" : "SW[6]",
 					"strict" : false
 				},
 				{
-					"name" : "HAB_LEI",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_ESC",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LEDR[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LEDR[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LEDR[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LED8[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LED8[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LED8[2]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LED9[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LED9[1]",
-					"strict" : false
-				},
-				{
-					"name" : "HAB_LED9[2]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[0]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[1]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[2]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[3]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[4]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[5]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[6]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[7]",
-					"strict" : false
-				},
-				{
-					"name" : "ROM_ADDR[8]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_BLOCKS[0]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_BLOCKS[4]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_ADDRS[0]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_ADDRS[1]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_ADDRS[2]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_ADDRS[3]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_ADDRS[4]",
-					"strict" : false
-				},
-				{
-					"name" : "DEC_ADDRS[5]",
+					"name" : "SW[7]",
 					"strict" : false
 				},
 				{
