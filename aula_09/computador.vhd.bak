@@ -103,32 +103,20 @@ architecture arquitetura of computador is
 	signal ENABLE_KEY3						: std_logic;
 	signal ENABLE_FPGA_RST					: std_logic;
 	signal A5									: std_logic;
-	signal ADDR_510							: std_logic;
 	signal ADDR_511							: std_logic;
-	signal ED_OUT_KEY0						: std_logic;
-	signal ED_OUT_KEY1						: std_logic;
-	signal KEY0_DEBOUNCER_OUT				: std_logic;
-	signal KEY1_DEBOUNCER_OUT				: std_logic;
+	signal ED_OUT								: std_logic;
+	signal DEBOUNCER_OUT						: std_logic;
 	
 	
 begin
 
 -- Para simular, fica mais simples tirar o edgeDetector
 -- gravar:  if simulacao generate
-	CLK <= CLOCK_50; 
-
-detectorSub0: work.edgeDetector(bordaSubida)
-	port map (
-		clk => CLK, 
-		entrada => (not KEY(0)), 
-		saida => ED_OUT_KEY0
-	);
-detectorSub1: work.edgeDetector(bordaSubida)
-	port map (
-		clk => CLK, 
-		entrada => (not KEY(1)), 
-		saida => ED_OUT_KEY1
-	);
+	CLK <= CLOCK_50;
+-- else generate
+	detectorSub0: work.edgeDetector(bordaSubida)
+				port map (clk => CLOCK_50, entrada => (not KEY(0)), saida => ED_OUT);
+-- end generate;
 
 
 
@@ -337,46 +325,32 @@ SW9:
 ADDR_511 	<= 	DATA_ADDRESS(8) and DATA_ADDRESS(7) and DATA_ADDRESS(6) and
 						DATA_ADDRESS(5) and DATA_ADDRESS(4) and DATA_ADDRESS(3) and
 						DATA_ADDRESS(2) and DATA_ADDRESS(1) and DATA_ADDRESS(0);
-						
-ADDR_510 	<= 	DATA_ADDRESS(8) and DATA_ADDRESS(7) and DATA_ADDRESS(6) and
-						DATA_ADDRESS(5) and DATA_ADDRESS(4) and DATA_ADDRESS(3) and
-						DATA_ADDRESS(2) and DATA_ADDRESS(1) and not(DATA_ADDRESS(0));
 
 -- endereco 511 é o reset do flipflop
 
-DEBOUNCER_KEY0:
+FF_DEBOUNCER:
 	entity work.flipflopGenerico
 	port map(
 		DIN 		=> '1',
-		DOUT 		=> KEY0_DEBOUNCER_OUT,
+		DOUT 		=> DEBOUNCER_OUT,
 		ENABLE 	=> '1',
-		CLK		=> ED_OUT_KEY0,
+		CLK		=> ED_OUT,
 		RST		=> ADDR_511
 	);
 
 KEY0_INTERFACE_EXISTENTE:
 	entity work.buffer3state generic map (DATA_WIDTH => 1)
 	port map(
-		INPUT(0)	=> KEY0_DEBOUNCER_OUT,
+		INPUT(0)	=> DEBOUNCER_OUT,
 		ENABLE	=> ENABLE_KEY0,
 		OUTPUT(0)=> READ_BUS(0) 
 	);	
 
 
-DEBOUNCER_KEY1:
-	entity work.flipflopGenerico
-	port map(
-		DIN 		=> '1',
-		DOUT 		=> KEY1_DEBOUNCER_OUT,
-		ENABLE 	=> '1',
-		CLK		=> ED_OUT_KEY1,
-		RST		=> ADDR_510
-	);
-	
-KEY1_INTERFACE_EXISTENTE:
+KEY1:
 	entity work.buffer3state generic map (DATA_WIDTH => 1)
 	port map(
-		INPUT(0)	=> KEY1_DEBOUNCER_OUT,
+		INPUT(0)	=> KEY(1),
 		ENABLE	=> ENABLE_KEY1,
 		OUTPUT(0)=> READ_BUS(0)
 	);

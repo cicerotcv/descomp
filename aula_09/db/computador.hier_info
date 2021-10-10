@@ -1,5 +1,6 @@
 |computador
 CLOCK_50 => edgedetector:detectorSub0.clk
+CLOCK_50 => edgedetector:detectorSub1.clk
 CLOCK_50 => cpu:CPU.CLK
 CLOCK_50 => memoriaram:RAM.clk
 CLOCK_50 => led_r:LED_R.CLK
@@ -12,7 +13,7 @@ CLOCK_50 => d7seghex:HEX3_DECODER.CLK
 CLOCK_50 => d7seghex:HEX4_DECODER.CLK
 CLOCK_50 => d7seghex:HEX5_DECODER.CLK
 KEY[0] => edgedetector:detectorSub0.entrada
-KEY[1] => buffer3state:KEY1.INPUT[0]
+KEY[1] => edgedetector:detectorSub1.entrada
 KEY[2] => buffer3state:KEY2.INPUT[0]
 KEY[3] => buffer3state:KEY3.INPUT[0]
 FPGA_RESET_N => buffer3state:RST_FPGA.INPUT[0]
@@ -81,6 +82,13 @@ LEDR[9] <= led_solo:LED9.OUT_LED
 
 
 |computador|edgeDetector:detectorSub0
+clk => saidaQ.CLK
+entrada => saida.IN1
+entrada => saidaQ.DATAIN
+saida <= saida.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|computador|edgeDetector:detectorSub1
 clk => saidaQ.CLK
 entrada => saida.IN1
 entrada => saidaQ.DATAIN
@@ -1621,7 +1629,7 @@ ENABLE => OUTPUT[0].OE
 OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|computador|flipflopGenerico:FF_DEBOUNCER
+|computador|flipflopGenerico:DEBOUNCER_KEY0
 DIN => DOUT~reg0.DATAIN
 DOUT <= DOUT~reg0.DB_MAX_OUTPUT_PORT_TYPE
 ENABLE => DOUT~reg0.ENA
@@ -1635,7 +1643,15 @@ ENABLE => OUTPUT[0].OE
 OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|computador|buffer3state:KEY1
+|computador|flipflopGenerico:DEBOUNCER_KEY1
+DIN => DOUT~reg0.DATAIN
+DOUT <= DOUT~reg0.DB_MAX_OUTPUT_PORT_TYPE
+ENABLE => DOUT~reg0.ENA
+CLK => DOUT~reg0.CLK
+RST => DOUT~reg0.ACLR
+
+
+|computador|buffer3state:KEY1_INTERFACE_EXISTENTE
 INPUT[0] => OUTPUT[0].DATAIN
 ENABLE => OUTPUT[0].OE
 OUTPUT[0] <= OUTPUT[0].DB_MAX_OUTPUT_PORT_TYPE

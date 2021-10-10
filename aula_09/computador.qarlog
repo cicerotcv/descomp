@@ -1,0 +1,35 @@
+Quartus Prime Archive log --	C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/computador.qarlog
+
+Archive:	C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/computador.qar
+Date:		Fri Oct 08 23:59:32 2021
+Quartus Prime		20.1.0 Build 711 06/05/2020 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/CPU.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/ULASomaSub.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/buffer3state.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/computador.qpf
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/computador.qsf
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/computador.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/computer_constants.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/conversorHex7Seg.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/d7segHex.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/decoder.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/decoder1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/edgeDetector.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/flipflopGenerico.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/led_r.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/led_solo.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/logica_desvio.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/memoriaRAM.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/memoriaROM.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/muxGenerico2x1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/muxGenerico4x1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/proxima_instrucao.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/registradorGenerico.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/soma_constante.vhd
+c:/intelfpga_lite/20.1/quartus/bin64/assignment_defaults.qdf
+	======= Total: 24 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
