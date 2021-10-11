@@ -1,3 +1,25 @@
+CONSTANT ADDR_ZERO : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"00"; -- endereco da constante 0
+CONSTANT ADDR_ONE : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"01"; -- endereco da constante 1
+CONSTANT ADDR_TEN : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"02"; -- endereco da constante 9
+
+CONSTANT ADDR_CARRY : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"03"; -- endereco do bit de resto
+CONSTANT ADDR_OFLOW : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"04"; -- endereco do bit de overflow
+CONSTANT ADDR_FLAG : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"05"; -- endereco do bit de flag
+
+CONSTANT ADDR_U : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"06"; -- endereco das unidades
+CONSTANT ADDR_D : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"07"; -- endereco das dezenas
+CONSTANT ADDR_C : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"08"; -- endereco das centenas
+CONSTANT ADDR_M : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"09"; -- endereco das unidades de milhares
+CONSTANT ADDR_DM : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"0a"; -- endereco das dezenas de milhares
+CONSTANT ADDR_CM : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"0b"; -- endereco das centenas de milhares
+
+CONSTANT ADDR_LMT_U : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"0c"; -- endereco do limite das unidades
+CONSTANT ADDR_LMT_D : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"0d"; -- endereco do limite das dezenas
+CONSTANT ADDR_LMT_C : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"0e"; -- endereco do limite das centenas
+CONSTANT ADDR_LMT_M : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"0f"; -- endereco do limite das unidades de milhares
+CONSTANT ADDR_LMT_DM : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"10"; -- endereco do limite das dezenas de milhares
+CONSTANT ADDR_LMT_CM : STD_LOGIC_VECTOR(8 DOWNTO 0) := '0' & x"11"; -- endereco do limite das centenas de milhares
+
 JMP '1' x"20"; -- desvia para 0x120 (rotina principal)
 
 -- 0x001 | inicializa memoria
