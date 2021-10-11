@@ -1,0 +1,322 @@
+JMP '1' x"20"; -- desvia para 0x120 (rotina principal)
+
+-- 0x001 | inicializa memoria
+LDI '0' x"00";
+STA ADDR_U; -- unidades = 0
+STA ADDR_D; -- dezenas  = 0
+STA ADDR_C; -- centenas = 0
+STA ADDR_M; -- unidades de milhares = 0
+STA ADDR_DM; -- dezenas de milhares = 0
+STA ADDR_CM; -- centenas de milhares = 0
+
+STA ADDR_ZERO; -- MEM[0] = 0
+
+LDI '0' x"01"; -- A = 1
+STA ADDR_ONE; -- MEM[1] = 1
+
+LDI '0' x"0a"; -- A = 10
+STA ADDR_TEN; -- MEM[2] = 10
+
+RET '0' x"00"; -- retorna retorna da sub-rotina
+-- 0x00f | atualiza leds
+LDI '0' x"00"; -- carrega imediato 0
+STA ADDR_LEDR; -- LEDS 0 ~ 7 = 0
+
+LDA ADDR_FLAG; -- carrega flag
+STA ADDR_LED8; -- LED 8 = 0
+
+LDA ADDR_OFLOW; -- carrega indicador de overflow
+STA ADDR_LED9; -- LED 9 = indicador de overflow
+
+RET '0' x"00"; -- retorna retorna da sub-rotina
+
+-- 0x020 | rotina de aumentar contagem | 32 ~ 95 (64 instrucoes)
+STA '1' x"ff"; -- limpa o botao em 0x1ff
+LDA ADDR_FLAG; -- carrega flag de inibicao
+CEQ ADDR_ONE; -- compara com 1
+JEQ '0' x"56"; -- desvia para 0x056 se flag == 1
+
+NOP ADDR_ZERO; -- faz nada
+
+-- incrementa unidades
+LDA ADDR_U; -- carrega unidades
+SOMA ADDR_ONE; -- soma 1
+CEQ ADDR_TEN; -- compara com 10
+JEQ '0' x"2b"; -- se for igual, desvia para 0x02b
+-- se nao for igual
+STA ADDR_U;
+RET ADDR_ZERO; -- RET  '0'  x"00"; retorna da sub-rotina
+-- se for igual
+LDI ADDR_ZERO; -- 0x02b | carrega imediato 0
+STA ADDR_U; -- atualiza unidades
+
+-- incrementa dezenas
+LDA ADDR_D; -- carrega dezenas
+SOMA ADDR_ONE; -- soma 1
+CEQ ADDR_TEN; -- compara com 10
+JEQ '0' x"33"; -- se for igual, desvia para 0x033
+-- se nao for igual
+STA ADDR_D; -- atualiza dezenas
+RET ADDR_ZERO; -- RET  '0'  x"00"; retorna da sub-rotina;
+-- se for igual
+LDI ADDR_ZERO; -- 0x033 | carrega imediato 0
+STA ADDR_D; -- atualiza dezenas
+
+-- incrementa centenas
+LDA ADDR_C; -- carrega centenas
+SOMA ADDR_ONE; -- soma 1
+CEQ ADDR_TEN; -- compara com 10
+JEQ '0' x"3b"; -- se for igual, desvia para 0x03b
+-- se nao for igual
+STA ADDR_C; -- atualiza centenas
+RET ADDR_ZERO; -- RET  '0'  x"00"; retorna da sub-rotina;
+-- se for igual
+LDI ADDR_ZERO; -- 0x03b | carrega imediato 0
+STA ADDR_C; -- atualiza centenas
+
+-- incrementa unidades de milhares
+LDA ADDR_M; -- carrega unidades de milhares
+SOMA ADDR_ONE; -- soma 1
+CEQ ADDR_TEN; -- compara com 10
+JEQ '0' x"43"; -- se for igual, desvia para 0x043
+-- se nao for igual
+STA ADDR_M; -- atualiza unidades de milhares
+RET ADDR_ZERO; -- RET  '0'  x"00"; retorna da sub-rotina;
+-- se for igual
+LDI ADDR_ZERO; -- 0x043 | carrega imediato 0
+STA ADDR_M; -- atualiza unidades de milhares
+
+-- incrementa dezenas de milhares
+LDA ADDR_DM; -- carrega dezenas de milhares
+SOMA ADDR_ONE; -- soma 1
+CEQ ADDR_TEN; -- compara com 10
+JEQ '0' x"4b"; -- se for igual, desvia para 0x04b
+-- se nao for igual
+STA ADDR_DM; -- atualiza dezenas de milhares
+RET ADDR_ZERO; -- RET  '0'  x"00"; retorna da sub-rotina;
+-- se for igual
+LDI ADDR_ZERO; -- 0x04b | carrega imediato 0
+STA ADDR_DM; -- atualiza dezenas de milhares
+
+-- incrementa centenas de milhares
+LDA ADDR_CM; -- carrega centenas de milhares
+SOMA ADDR_ONE; -- soma 1
+CEQ ADDR_TEN; -- compara com 10
+JEQ '0' x"53"; -- se for igual, desvia para 0x053
+-- se nao for igual
+STA ADDR_CM; -- atualiza centenas de milhares
+RET ADDR_ZERO; -- RET  '0'  x"00"; retorna da sub-rotina;
+-- se for igual
+LDI ADDR_ONE; -- 0x053 | carrega imediato 1
+STA ADDR_OFLOW; -- flag de overflow = 1
+STA ADDR_FLAG; -- flag de inibicao = 1
+
+RET ADDR_ZERO; -- 0x056 | retorna da sub-rotina
+
+-- 0x060 | atualizar LCDs | 96 ~ 127 (32 instrucoes)
+LDA ADDR_U; -- carrega o valor das unidades
+STA ADDR_HEX0; -- escreve em HEX0
+LDA ADDR_D; -- carrega o valor das dezenas
+STA ADDR_HEX1; -- escreve em HEX1
+LDA ADDR_C; -- carrega o valor das centenas
+STA ADDR_HEX2; -- escreve em HEX2
+LDA ADDR_M; -- carrega o valor das unidades de milhares
+STA ADDR_HEX3; -- escreve em HEX3
+LDA ADDR_DM; -- carrega o valor das dezenas de milhares
+STA ADDR_HEX4; -- escreve em HEX4
+LDA ADDR_CM; -- carrega o valor das centenas de milhares
+STA ADDR_HEX5; -- escreve em HEX5
+
+RET '0' x"00"; -- retorna da sub-rotina
+
+-- 0x080 | reiniciar contagem | 128 ~ 143 (16 instrucoes)
+LDI '0' x"00"; -- carrega imediato zero
+STA ADDR_U; -- atualiza valor das unidades
+STA ADDR_D; -- atualiza valor das dezenas
+STA ADDR_C; -- atualiza valor das centenas
+STA ADDR_M; -- atualiza valor das unidades de milhares
+STA ADDR_DM; -- atualiza valor das dezenas de milhares
+STA ADDR_CM; -- atualiza valor das centenas de milhares
+STA ADDR_FLAG; -- atualiza valor da flag;
+STA ADDR_OFLOW; -- atualiza valor da flag;
+
+JMP '0' x"60"; -- 0x060 | deve saltar para atualizar os LCDs
+
+-- 0x090 alterar limites | 144 ~ 239 (96 instrucoes)
+STA '1' x"fe"; -- 0x090 (step 1) | limpa KEY[1]
+--  145
+LDI '0' b"0000_0001"; -- carrega imediato 1
+STA ADDR_LEDR; -- acende LEDs "0000 0001"
+LDA ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA ADDR_LMT_U; -- armazena chaves no limite das unidades
+STA ADDR_HEX0; -- armazena chaves em HEX0 (mera visualizacao)
+--  151
+LDA ADDR_KEY1; -- carrega KEY[1]
+CEQ ADDR_ONE; -- compara com 1
+JEQ '0' x"9c"; -- desvia para 0x09c (step 2)
+-- se botao nao pressionado
+JMP '0' x"92"; -- volta para 0x092 (step 1)
+-- se botao pressionado, continua
+
+STA '1' x"fe"; -- 0x09c (step 2) | limpa KEY[1]
+--  157
+LDI '0' b"0000_0011"; -- carrega imediato 3
+STA ADDR_LEDR; -- acende LEDs "0000 0011"
+LDA ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA ADDR_LMT_D; -- armazena chaves no limite das dezenas
+STA ADDR_HEX1; -- armazena chaves em HEX1 (mera visualizacao)
+--  163
+LDA ADDR_KEY1; -- carrega KEY[1]
+CEQ ADDR_ONE; -- compara com 1
+JEQ '0' x"a8"; -- desvia para 0x0a8 (step 3)
+-- se botao nao pressionado
+JMP '0' x"9c"; -- volta para 0x09c (step 2)
+-- se botao pressionado, continua
+
+STA '1' x"fe"; -- 0x0a8 (step 3) | limpa KEY[1]
+--  169
+LDI '0' b"0000_0111"; -- carrega imediato 7
+STA ADDR_LEDR; -- acende LEDs "0000 0111"
+LDA ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA ADDR_LMT_C; -- armazena chaves no limite das centenas
+STA ADDR_HEX2; -- armazena chaves em HEX2 (mera visualizacao)
+--  175
+LDA ADDR_KEY1; -- carrega KEY[1]
+CEQ ADDR_ONE; -- compara com 1
+JEQ '0' x"b4"; -- desvia para 0x0b4 (step 4)
+-- se botao nao pressionado
+JMP '0' x"a8"; -- volta para 0x0a8 (step 3)
+-- se botao pressionado, continua
+
+STA '1' x"fe"; -- 0x0b4 (step 4) | limpa KEY[1]
+--  182
+LDI '0' b"0000_1111"; -- carrega imediato 15
+STA ADDR_LEDR; -- acende LEDs "0000 1111"
+LDA ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA ADDR_LMT_M; -- armazena chaves no limite das unidades de milhares
+STA ADDR_HEX3; -- armazena chaves em HEX3 (mera visualizacao)
+--  188
+LDA ADDR_KEY1; -- carrega KEY[1]
+CEQ ADDR_ONE; -- compara com 1
+JEQ '0' x"c2"; -- desvia para 0x0c2 (step 5)
+-- se botao nao pressionado
+JMP '0' x"b4"; -- desvia para 0x0b4 (step 4)
+-- se botao pressionado, continua
+
+STA '1' x"fe"; -- 0x0c2 (step 5) | limpa KEY[1]
+--  195
+LDI '0' b"0001_1111"; -- carrega imediato 31
+STA ADDR_LEDR; -- acende LEDs "0001 1111"
+LDA ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA ADDR_LMT_DM; -- armazena chaves no limite das dezenas de milhares
+STA ADDR_HEX4; -- armazena chaves em HEX4 (mera visualizacao)
+--  201
+LDA ADDR_KEY1; -- carrega KEY[1]
+CEQ ADDR_ONE; -- compara com 1
+JEQ '0' x"ce"; -- desvia para 0x0ce (step 6)
+-- se botao nao pressionado
+JMP '0' x"c2"; -- desvia para 0x0c2 (step 5)
+-- se botao pressionado, continua
+
+STA '1' x"fe"; -- 0x0ce (step 6) | limpa KEY[1]
+--  207
+LDI '0' b"0011_1111"; -- carrega imediato 63
+STA ADDR_LEDR; -- acende LEDs "0011 1111"
+LDA ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA ADDR_LMT_CM; -- armazena chaves no limite das centenas de milhares
+STA ADDR_HEX5; -- armazena chaves em HEX5 (mera visualizacao)
+--  213
+LDA ADDR_KEY1; -- carrega KEY[1]
+CEQ ADDR_ONE; -- compara com 1
+JEQ '0' x"da"; -- desvia para 0x0da
+-- se botao nao pressionado
+JMP '0' x"ce"; -- desvia para 0x0ce (step 6)
+-- se botao pressionado, continua
+
+STA '1' x"fe"; -- 0x0da | limpeza final em KEY[1]
+LDA ADDR_ZERO; -- carrega zero
+STA ADDR_LEDR; -- zera LEDs
+
+RET '0' x"00"; -- retorna da sub-rotina
+
+-- 0x0f0 | verifica contagem
+LDA ADDR_U; -- carrega valor das unidades
+CEQ ADDR_LMT_U; -- compara com valor limite
+JEQ '0' x"f4"; -- se for igual, desvia para 0x0f4
+JMP '1' x"08"; -- desvia para 0x108
+
+LDA ADDR_D; -- 0x0f4 | carrega valor das dezenas 
+CEQ ADDR_LMT_D; -- compara com o valor limite
+JEQ '0' x"f8"; -- se for igual, desvia para 0x0f8
+JMP '1' x"08"; -- desvia para 0x108
+
+LDA ADDR_C; -- 0x0f8 | carrega o valor das centenas
+CEQ ADDR_LMT_C; -- compara com o valor limite
+JEQ '0' x"fc"; -- se for igual, desvia para 0x0fc
+JMP '1' x"08"; -- desvia para 0x108
+
+LDA ADDR_M; -- 0x0fc | carrega unidades de milhares
+CEQ ADDR_LMT_M; -- compara com o valor limite
+JEQ '1' x"00"; -- se for igual, desvia para 0x100
+JMP '1' x"08"; -- desvia para 0x108
+
+LDA ADDR_DM; -- 0x100 | carrega dezenas de milhares
+CEQ ADDR_LMT_DM; -- compara com o valor limite
+JEQ '1' x"04"; -- se for igual, desvia para 0x104
+JMP '1' x"08"; -- desvia para 0x108
+
+LDA ADDR_CM; -- 0x104 | carrega centenas de milhares
+CEQ ADDR_LMT_CM; -- compara com o valor limite
+JEQ '1' x"0b"; -- se for igual, desvia para 0x10b
+
+-- se algum dos valores não for igual a seu respectivo limite,
+-- garantimos que a contagem pode continuar
+LDI '0' x"00"; -- 0x108 | carrega zero
+STA ADDR_FLAG; -- flag = zero
+RET '0' x"00"; -- retorna da sub-rotina
+
+-- se todos os valores (unidades, dezenas...) forem iguais 
+-- aos seus respectivos limites, devemos ativar a flag de inibicao
+LDI '0' x"01"; -- 0x10b | carrega imediato 1
+STA ADDR_FLAG; -- flag = 1
+STA ADDR_LED8; -- led da flag de inibicao
+RET '0' x"00"; -- retorna da sub-rotina
+
+-- 0x120 rotina principal
+STA '1' x"fe"; -- limpeza KEY[1]
+STA '1' x"ff"; -- limpeza KEY[0]
+JSR '0' x"01"; -- desvia para 0x001 (inicializa memoria)
+
+JSR '0' x"80"; -- desvia para 0x080 (reinicia contagem)
+JMP '1' x"40"; -- desvia para 0x140 (loop principal)
+
+-- 0x12c
+JSR '0' x"20"; -- desvia para 0x020 (incrementa contagem)
+JSR '0' x"60"; -- desvia para 0x060 (atualiza LCDs)
+JMP '1' x"46"; -- desvia para 0x140 (retorna para o loop principal)
+
+-- 0x136
+JSR '0' x"90"; -- desvia para 0x090 (atualiza limites)
+JSR '0' x"80"; -- desvia para 0x080 (reinicia contagem)
+JMP '1' x"43"; -- desvia para 0x140 (retorna para o loop principal)
+
+-- 0x140
+LDA ADDR_KEY1; -- carrega KEY[1]
+CEQ ADDR_ONE; -- compara com 1 (pressionado)
+JEQ '1' x"36"; -- desvia para 0x136 se KEY1 pressionado
+
+-- 0x143
+LDA ADDR_KEY0; -- carrega KEY[0]
+CEQ ADDR_ONE; -- compara com 1 (pressionado)
+JEQ '1' x"2c"; -- desvia para 0x12c se KEY0 pressionado
+
+-- 0x146
+LDA ADDR_FPGA_RST; -- carrega botao de reset
+CEQ ADDR_ZERO; -- compara com zero (pressionado)
+JEQ '1' x"20"; -- desvia para 0x120 (reseta o loop principal)
+
+-- 0x149
+JSR '0' x"f0"; -- desvia para 0x0f0 (verifica contagem)
+JSR '0' x"0f"; -- desvia para 0x00f (atualiza leds)
+
+JMP '1' x"40"; -- desvia para 0x140
