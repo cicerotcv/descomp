@@ -42,10 +42,10 @@ architecture assincrona of memoriaROM is
     constant ADDR_LMT_DM    : std_logic_vector(8 downto 0) := '0' & x"10"; -- endereco do limite das dezenas de milhares
     constant ADDR_LMT_CM    : std_logic_vector(8 downto 0) := '0' & x"11"; -- endereco do limite das centenas de milhares
     
-    constant R1 : std_logic_vector(1 downto 0) := "00"; -- registrador 1
-    constant R2 : std_logic_vector(1 downto 0) := "01"; -- registrador 2
-    constant R3 : std_logic_vector(1 downto 0) := "10"; -- registrador 3
-    constant R4 : std_logic_vector(1 downto 0) := "11"; -- registrador 4
+    constant R0 : std_logic_vector(1 downto 0) := "00"; -- registrador 1
+    constant R1 : std_logic_vector(1 downto 0) := "01"; -- registrador 2
+    constant R2 : std_logic_vector(1 downto 0) := "10"; -- registrador 3
+    constant R3 : std_logic_vector(1 downto 0) := "11"; -- registrador 4
     
     function initMemory
         return blocoMemoria is variable tmp : blocoMemoria := (others => (others => '0'));

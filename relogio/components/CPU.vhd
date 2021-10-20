@@ -27,7 +27,7 @@ architecture arquitetura of CPU is
 	signal SAIDA_REG_A						: std_logic_vector (larguraDados-1 downto 0);
 	signal Saida_ULA 							: std_logic_vector (larguraDados-1 downto 0);
 	signal MUX_IN_0							: std_logic_vector (larguraDados-1 downto 0);
-	signal instrucoes_decodificador 		: std_logic_vector (12 downto 0);
+	signal instrucoes_decodificador 		: std_logic_vector (14 downto 0);
 	signal Operacao_ULA 						: std_logic_vector (1 downto 0);
 	signal habilita_leitura					: std_logic;
 	signal habilita_escrita					: std_logic;

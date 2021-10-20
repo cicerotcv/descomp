@@ -1,1 +1,6 @@
 /**/*.vhd.bak
+
+/*/output_files/*.asm.rpt
+/*/output_files/*.eda.rpt
+/*/output_files/*.fit.rpt
+/*/output_files/*.done
