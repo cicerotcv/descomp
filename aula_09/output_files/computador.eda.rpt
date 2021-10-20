@@ -1,5 +1,5 @@
 EDA Netlist Writer report for computador
-Sun Oct 10 18:54:52 2021
+Tue Oct 19 23:52:01 2021
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -37,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Sun Oct 10 18:54:52 2021 ;
+; EDA Netlist Writer Status ; Successful - Tue Oct 19 23:52:01 2021 ;
 ; Revision Name             ; computador                            ;
 ; Top-level Entity Name     ; computador                            ;
 ; Family                    ; Cyclone V                             ;
@@ -81,12 +81,12 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Sun Oct 10 18:54:51 2021
+    Info: Processing started: Tue Oct 19 23:51:59 2021
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off computador -c computador
 Info (204019): Generated file computador.vho in folder "C:/Users/elm_t/Documents/grad/descomp/atividades/aula_09/simulation/modelsim/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4724 megabytes
-    Info: Processing ended: Sun Oct 10 18:54:53 2021
+    Info: Peak virtual memory: 4722 megabytes
+    Info: Processing ended: Tue Oct 19 23:52:01 2021
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
