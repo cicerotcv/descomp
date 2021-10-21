@@ -23,11 +23,13 @@ architecture assincrona of memoriaROM is
     constant ADDR_ZERO    : std_logic_vector(8 downto 0) := '0' & x"00"; -- endereco da constante 0
     constant ADDR_ONE     : std_logic_vector(8 downto 0) := '0' & x"01"; -- endereco da constante 1
     constant ADDR_TWO     : std_logic_vector(8 downto 0) := '0' & x"02"; -- endereco da constante 2
-    constant ADDR_SIX     : std_logic_vector(8 downto 0) := '0' & x"03"; -- endereco da constante 6
-    constant ADDR_TEN     : std_logic_vector(8 downto 0) := '0' & x"04"; -- endereco da constante 10
+    constant ADDR_THREE   : std_logic_vector(8 downto 0) := '0' & x"03"; -- endereco da constante 2
+    constant ADDR_FOUR    : std_logic_vector(8 downto 0) := '0' & x"04"; -- endereco da constante 2
+    constant ADDR_SIX     : std_logic_vector(8 downto 0) := '0' & x"05"; -- endereco da constante 6
+    constant ADDR_TEN     : std_logic_vector(8 downto 0) := '0' & x"06"; -- endereco da constante 10
 
-    constant ADDR_OFLOW   : std_logic_vector(8 downto 0) := '0' & x"05"; -- endereco do bit de overflow
-    constant ADDR_FLAG    : std_logic_vector(8 downto 0) := '0' & x"06"; -- endereco do bit de flag
+    constant ADDR_MODE   : std_logic_vector(8 downto 0) := '0' & x"07"; -- endereco do bit de "modo 12h"
+    constant ADDR_FLAG    : std_logic_vector(8 downto 0) := '0' & x"08"; -- endereco do bit de flag que indica AM/PM
 
     constant ADDR_US      : std_logic_vector(8 downto 0) := '0' & x"0a"; -- endereco das unidades de segundos
     constant ADDR_DS      : std_logic_vector(8 downto 0) := '0' & x"0b"; -- endereco das dezenas de segundos
@@ -73,19 +75,24 @@ architecture assincrona of memoriaROM is
         
         tmp(9)  := LDI  & R3 & '0' & x"0a"; -- R3 = 10
         tmp(10) := STA  & R3 & ADDR_TEN;    -- inicializa dez
+        tmp(11) := LDI  & R1 & '0' & x"03"; -- R1 = 3
+        tmp(12) := STA  & R1 & ADDR_THREE;    -- inicializa dez
 
-        tmp(11) := RET  & R0 & '0' & x"00"; -- retorna da sub-rotina
+        tmp(13) := LDA  & R0 & ADDR_KEY3; -- carrega botao KEY(3)
+        tmp(14) := STA  & R0 & ADDR_MODE; -- atualzia flag de "modo 12h"
+
+        tmp(15) := RET  & R0 & '0' & x"00"; -- retorna da sub-rotina
 
 
         -- 0x020 | atualiza leds | 32 ~ 55 (24 instrucoes)
         tmp(32) := LDI  & R0 & '0' & x"00"; -- carrega imediato 0
         tmp(33) := STA  & R0 & ADDR_LEDR;   -- LEDS 0 ~ 7 = 0
 
-        tmp(34) := LDA  & R0 & ADDR_FLAG;   -- carrega flag
-        tmp(35) := STA  & R0 & ADDR_LED8;   -- LED 8 = 0
+        tmp(34) := LDA  & R0 & ADDR_FLAG;   -- carrega flag AM/PM
+        tmp(35) := STA  & R0 & ADDR_LED8;   -- LED 8 = flag AM/PM
 
-        tmp(36) := LDA  & R0 & ADDR_OFLOW;  -- carrega indicador de overflow
-        tmp(37) := STA  & R0 & ADDR_LED9;   -- LED 9 = indicador de overflow
+        tmp(36) := LDA  & R0 & ADDR_MODE;   -- carrega indicador de "modo 12h" ligado
+        tmp(37) := STA  & R0 & ADDR_LED9;   -- LED 9 = flag "modo 12h"
 
         tmp(38) := RET  & R0 & '0' & x"00"; -- retorna retorna da sub-rotina
 
@@ -93,9 +100,9 @@ architecture assincrona of memoriaROM is
 
         -- 0x038 | rotina de aumentar contagem | 56 ~ 159 (104 instrucoes)
         tmp(56) := STA  & R0 & CLEAR_TIME;  -- limpa o botao em 0x1ff
-        tmp(57) := LDA  & R0 & ADDR_FLAG;    -- carrega flag de inibicao
-        tmp(58) := CEQ  & R0 & ADDR_ONE;     -- compara com 1
-        tmp(59) := JEQ  & R0 & '0' & x"75";  -- desvia para 0x075 se flag == 1
+        -- tmp(57) := LDA  & R0 & ADDR_FLAG;    -- carrega flag de inibicao
+        -- tmp(58) := CEQ  & R0 & ADDR_ONE;     -- compara com 1
+        -- tmp(59) := JEQ  & R0 & '0' & x"75";  -- desvia para 0x075 se flag == 1
 
         tmp(60) := NOP  & R0 & '0' & x"00";    -- faz nada
 
@@ -151,29 +158,68 @@ architecture assincrona of memoriaROM is
         tmp(93) := LDA  & R0 & ADDR_UH;     -- carrega unidades de horas
         tmp(94) := SOMA & R0 & ADDR_ONE;    -- soma 1
         tmp(95) := CEQ  & R0 & ADDR_TEN;    -- compara com 10
-        tmp(96) := JEQ  & R0 & '0' & x"70"; -- se for igual, desvia para 0x070
+        tmp(96) := JEQ  & R0 & '0' & x"70"; -- se for igual, desvia para 0xf00
             -- se nao for igual (0)
-            tmp(97)  := CEQ & R0 & ADDR_TWO;    -- compara com 2
-            tmp(98)  := JEQ & R0 & '0' & x"65"; -- desvia para 0x065
+            tmp(97) := LDA & R1 & ADDR_MODE;
+            tmp(98) := CEQ & R0 & ADDR_ONE;
+            tmp(99) := JEQ & '0' & x""; -- se for igual desvia para 
                 -- se nao for igual (1)
-                tmp(99)  := STA & R0 & ADDR_UH;     -- atualiza unidades das horas
-                tmp(100) := RET & R0 & ADDR_ZERO;   -- retorna da sub-rotina
-                -- se for igual (1)
-                tmp(101) := LDA & R1 & ADDR_DH;     -- 0x065 | carrega dezenas de horas
-                tmp(102) := CEQ & R1 & ADDR_ONE;    -- compara com 1
-                tmp(103) := JEQ & R0 & '0' & x"6a"; -- desvia para 0x06a
+                tmp(100) := CEQ & R0 & ADDR_FOUR; -- compara unidades de horas com 4
+                tmp(101) := JEQ & '0' & x""; -- se for igual, desvia para 0xff0
                     -- se nao for igual (2)
-                    tmp(104) := STA & R0 & ADDR_UH;     -- atualiza unidades de horas
-                    tmp(105) := RET & R0 & ADDR_ZERO;   -- retorna da sub-rotina
+                    tmp(102) := STA & R0 & ADDR_UH; -- atualiza unidades de horas
+                    tmp(103) := RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
                     -- se for igual (2)
-                    tmp(106) := LDI & R0 & ADDR_ONE;    -- 0x06a | carrega 1
-                    tmp(107) := STA & R0 & ADDR_OFLOW;  -- flag de overflow = 1
-                    tmp(108) := STA & R0 & ADDR_FLAG;   -- flag de inibicao = 1
-                    tmp(109) := LDA & R0 & ADDR_TWO;    -- carrega 2 
-                    tmp(110) := STA & R0 & ADDR_UH;     -- carrega 2 
-                    tmp(111) := RET & R0 & ADDR_ZERO;   -- retorna da sub-rotina
+                    tmp(104) := LDA & R1 & ADDR_DH; -- 0xff0 | carrega dezenas de horas
+                    tmp(105) := CEQ & R0 & ADDR_TWO; -- compara com 2
+                    tmp(106) := JEQ & R0 & '0' & x""; -- se for igual, desvia para 0xf0f
+                        -- se nao for igual (3)
+                        tmp(107) := STA & R0 & ADDR_UH; -- atualiza unidades de horas
+                        tmp(108) := RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+                        -- se for igual (3)
+                        tmp(109) := LDA & R2 & ADDR_ZERO; -- 0xf0f
+                        tmp(110) := STA & R2 & ADDR_UH;
+                        tmp(111) := STA & R2 & ADDR_DH;
+                        tmp(112) := RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+                
+                -- se for igual (1)
+                tmp(113) := CEQ & R0 & ADDR_THREE;
+                tmp(114) := JEQ & R0 & '0' & x"";
+                    -- se nao for igual (2)
+                    tmp(115) := STA & R0 & ADDR_UH;   -- atualiza unidades de horas
+                    tmp(116) := RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+                    -- se for igual (2)
+                    tmp(117) := LDA & R1 & ADDR_DH;
+                    tmp(118) := CEQ & R1 & ADDR_ONE;
+                    tmp(119) := JEQ & R0 & '0' & x"";
+                        -- se nao for igual
+                        tmp(120) := STA & R0 & ADDR_UH;
+                        tmp(121) := RET & R0 & ADDR_ZERO;
+
+
+            -- -- se nao for igual (0)
+            -- tmp(97)  := CEQ & R0 & ADDR_TWO;    -- compara com 2
+            -- tmp(98)  := JEQ & R0 & '0' & x"65"; -- desvia para 0x065
+            --     -- se nao for igual (1)
+            --     tmp(99)  := STA & R0 & ADDR_UH;     -- atualiza unidades das horas
+            --     tmp(100) := RET & R0 & ADDR_ZERO;   -- retorna da sub-rotina
+            --     -- se for igual (1)
+            --     tmp(101) := LDA & R1 & ADDR_DH;     -- 0x065 | carrega dezenas de horas
+            --     tmp(102) := CEQ & R1 & ADDR_ONE;    -- compara com 1
+            --     tmp(103) := JEQ & R0 & '0' & x"6a"; -- desvia para 0x06a
+            --         -- se nao for igual (2)
+            --         tmp(104) := STA & R0 & ADDR_UH;     -- atualiza unidades de horas
+            --         tmp(105) := RET & R0 & ADDR_ZERO;   -- retorna da sub-rotina
+            --         -- se for igual (2)
+            --         tmp(106) := 
+            --         tmp(106) := LDI & R0 & ADDR_ONE;    -- 0x06a | carrega 1
+            --         tmp(107) := STA & R0 & ADDR_MODE;  -- flag de "modo 12h" = 1
+            --         tmp(108) := STA & R0 & ADDR_FLAG;   -- flag de inibicao = 1
+            --         tmp(109) := LDA & R0 & ADDR_TWO;    -- carrega 2 
+            --         tmp(110) := STA & R0 & ADDR_UH;     -- carrega 2 
+            --         tmp(111) := RET & R0 & ADDR_ZERO;   -- retorna da sub-rotina
             -- se for igual (0)
-            tmp(112) := LDI  & R0 & ADDR_ZERO;  -- 0x070 | carrega imediato 0
+            tmp(112) := LDI  & R0 & ADDR_ZERO;  -- 0xf00 | carrega imediato 0
             tmp(113) := STA & R0 & ADDR_UH;     -- atualiza dezenas de milhares
                 
         -- incrementa dezenas de horas
@@ -217,7 +263,7 @@ architecture assincrona of memoriaROM is
 
         tmp(220) := LDI & R0 & '0' & x"00";   -- carrega imediato 0
         tmp(221) := STA & R0 & ADDR_FLAG;     -- atualiza valor da flag;
-        tmp(222) := STA & R0 & ADDR_OFLOW;    -- atualiza valor da flag;
+        tmp(222) := STA & R0 & ADDR_MODE;    -- atualiza valor da flag;
 
         tmp(223) := JMP  & R0 & '0' & x"a0";  -- 0x0a0 | deve saltar para atualizar os LCDs
 
