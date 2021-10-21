@@ -66,7 +66,6 @@ set_global_assignment -name VHDL_FILE components/logica_desvio.vhd
 set_global_assignment -name VHDL_FILE components/led_solo.vhd
 set_global_assignment -name VHDL_FILE components/led_r.vhd
 set_global_assignment -name VHDL_FILE components/flipflopGenerico.vhd
-set_global_assignment -name VHDL_FILE components/flip_flop.vhd
 set_global_assignment -name VHDL_FILE components/edgeDetector.vhd
 set_global_assignment -name VHDL_FILE components/decoder1.vhd
 set_global_assignment -name VHDL_FILE components/decoder.vhd
@@ -606,4 +605,6 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[9]
 #============================================================
 # Fim da configuração dos pinos.
 #============================================================
+set_global_assignment -name VHDL_FILE components/divisorGenerico.vhd
+set_global_assignment -name VHDL_FILE components/divisorGenerico_e_Interface.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

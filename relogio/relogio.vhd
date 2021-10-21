@@ -56,28 +56,13 @@ entity relogio is
 		HEX3			: out std_logic_vector	(6 downto 0);
 		HEX4			: out std_logic_vector	(6 downto 0);
 		HEX5			: out std_logic_vector	(6 downto 0);
-		LEDR			: out std_logic_vector	(9 downto 0)
---		VALOR_INST	: out std_logic_vector	(12 downto 0); 		-- debug
---		DOUT			: out std_logic_vector	(7 downto 0); 			-- debug
---		DIN			: out std_logic_vector	(7 downto 0);			-- debug
---		HAB_LEI		: out std_logic; 										-- debug
---		HAB_ESC		: out std_logic; 										-- debug
---		HAB_LEDR 	: out std_logic_vector 	(2 downto 0); 			-- debug
---		HAB_LED8 	: out std_logic_vector 	(2 downto 0); 			-- debug
---		HAB_LED9 	: out std_logic_vector 	(2 downto 0); 			-- debug
---		ROM_ADDR 	: out std_logic_vector	(8 downto 0); 			-- debug
---		DEC_BLOCKS	: out std_logic_vector	(7 downto 0);			-- debug
---		
---		BARRAMENTO_LEITURA : out std_logic_vector (7 downto 0);	-- debug
---		DEC_ADDRS	: out std_logic_vector	(7 downto 0)			-- debug
-		
+		LEDR			: out std_logic_vector	(9 downto 0);
+		TIME_COUNTER: out std_logic
 	);
 end entity;
 
 
 architecture arquitetura of relogio is
-	
--- Faltam alguns sinais:
 	signal CLK									: std_logic;
 	signal RST_PC								: std_logic;
 	signal ENABLE_WRITE						: std_logic;
@@ -103,18 +88,20 @@ architecture arquitetura of relogio is
 	signal ENABLE_KEY3						: std_logic;
 	signal ENABLE_FPGA_RST					: std_logic;
 	signal A5									: std_logic;
-	signal ADDR_510							: std_logic;
-	signal ADDR_511							: std_logic;
+	signal CLEAR_KEY1							: std_logic;
+	signal CLEAR_KEY0							: std_logic;
 	signal ED_OUT_KEY0						: std_logic;
 	signal ED_OUT_KEY1						: std_logic;
 	signal KEY0_DEBOUNCER_OUT				: std_logic;
 	signal KEY1_DEBOUNCER_OUT				: std_logic;
+	signal ENABLE_TIME						: std_logic;
+	signal CLEAR_TIME 						: std_logic;
+	signal TIME_INTERF_OUT					: std_logic_vector(3 downto 0);
+	signal SELECTED_TIME_SRC				: std_logic;
 	
 	
 begin
 
--- Para simular, fica mais simples tirar o edgeDetector
--- gravar:  if simulacao generate
 	CLK <= CLOCK_50; 
 
 detectorSub0: work.edgeDetector(bordaSubida)
@@ -123,6 +110,7 @@ detectorSub0: work.edgeDetector(bordaSubida)
 		entrada => (not KEY(0)), 
 		saida => ED_OUT_KEY0
 	);
+
 detectorSub1: work.edgeDetector(bordaSubida)
 	port map (
 		clk => CLK, 
@@ -134,15 +122,6 @@ detectorSub1: work.edgeDetector(bordaSubida)
 
 RST_PC <= '0';
 
---- debug purpose only ---
---VALOR_INST <= ROM_OUT;
---DOUT 	<= DATA_OUT;
---DIN 	<= RAM_OUT;
---HAB_ESC <= ENABLE_WRITE;
---HAB_LEI <= ENABLE_READ;
---ROM_ADDR <= END_ROM;
---BARRAMENTO_LEITURA <= READ_BUS;
---------------------------
 
 CPU:
 	entity work.CPU
@@ -218,19 +197,86 @@ ENABLE_KEY2			<=	ENABLE_READ  and DEC_BLOCKS_OUT(5) and DEC_ADDR_OUT(2) and A5;
 ENABLE_KEY3			<=	ENABLE_READ  and DEC_BLOCKS_OUT(5) and DEC_ADDR_OUT(3) and A5;
 ENABLE_FPGA_RST	<=	ENABLE_READ  and DEC_BLOCKS_OUT(5) and DEC_ADDR_OUT(4) and A5;
 
+---- block 6
+ENABLE_TIME		<= ENABLE_READ  and DEC_BLOCKS_OUT(6) and DEC_ADDR_OUT(0) and not(A5);
 
--- debug purpose only --
---DEC_BLOCKS <= DEC_BLOCKS_OUT;
---DEC_ADDRS <= DEC_ADDR_OUT;
---
---HAB_LEDR <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(0);
---HAB_LED8 <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(1);
---HAB_LED9 <= ENABLE_WRITE & DEC_BLOCKS_OUT(4) & DEC_ADDR_OUT(2);
-------------------------
+-- endereco 509 limpa leitura
+CLEAR_TIME 		<= DATA_ADDRESS(8) and DATA_ADDRESS(7) and DATA_ADDRESS(6) and
+						DATA_ADDRESS(5) and DATA_ADDRESS(4) and DATA_ADDRESS(3) and
+						DATA_ADDRESS(2) and not(DATA_ADDRESS(1)) and DATA_ADDRESS(0);
 
 
+interfaceBaseTempo0 : entity work.divisorGenerico_e_Interface
+	generic map(divisor => 25000000)
+   port map (
+		clk 					=> CLK,
+		habilitaLeitura 	=> ENABLE_TIME and not(SW(9)) and not(SW(8)),
+		limpaLeitura 		=> CLEAR_TIME,
+		leituraUmSegundo 	=> READ_BUS(0)
+	);
+
+interfaceBaseTempo1 : entity work.divisorGenerico_e_Interface
+	generic map(divisor => 2500000)
+   port map (
+		clk 					=> CLK,
+		habilitaLeitura 	=> ENABLE_TIME and not(SW(9)) and SW(8),
+		limpaLeitura 		=> CLEAR_TIME,
+		leituraUmSegundo 	=> READ_BUS(0)
+	);
+
+interfaceBaseTempo2 : entity work.divisorGenerico_e_Interface
+	generic map(divisor => 250000)
+   port map (
+		clk 					=> CLK,
+		habilitaLeitura 	=> ENABLE_TIME and SW(9) and not(SW(8)),
+		limpaLeitura 		=> CLEAR_TIME,
+		leituraUmSegundo 	=> READ_BUS(0)
+	);
+
+interfaceBaseTempo3 : entity work.divisorGenerico_e_Interface
+	generic map(divisor => 25000)
+   port map (
+		clk 					=> CLK,
+		habilitaLeitura 	=> ENABLE_TIME and SW(9) and SW(8),
+		limpaLeitura 		=> CLEAR_TIME,
+		leituraUmSegundo 	=> READ_BUS(0)
+	);
+
+
+--muxTimer: entity work.muxGenerico4x1
+--	generic map(larguraDados => 1)
+--	port map (
+--		SEL_MUX	  => SW(9) & SW(8),
+--		E0(0)		  => TIME_INTERF_OUT(0), 
+--		E1(0)		  => TIME_INTERF_OUT(1), 		
+--		E2(0)		  => TIME_INTERF_OUT(2), 
+--		E3(0)		  => TIME_INTERF_OUT(3),
+--		MUx_OUT(0) => SELECTED_TIME_SRC
+--	);
+--	
+--flipFlopTimer: entity work.flipflopGenerico
+--	port map (
+--		DIN 		=> SELECTED_TIME_SRC,
+--		DOUT		=> READ_BUS(0),
+--		ENABLE	=> ENABLE_TIME,
+--		CLK		=> CLK,
+--		RST		=> CLEAR_TIME
+--	);
+
+--regTimer: entity work.registradorGenerico
+--	generic map(larguraDados => 1)
+--	port map (
+--		DIN(0)	=> SELECTED_TIME_SRC,
+--		DOUT(0)	=> READ_BUS(0),
+--		ENABLE 	=> ENABLE_TIME,
+--		CLK		=> CLK,
+--		RST		=> CLEAR_TIME
+--	);
+	
+	
 LED_R:
-	entity work.led_r generic map(DATA_WIDTH => 8)
+	entity work.led_r 
+	generic map(DATA_WIDTH => 8)
 	port map (
 		IN_REGIS				=> DATA_OUT(7 downto 0),
 		WRITE_ENABLE		=> ENABLE_LEDR,
@@ -334,15 +380,15 @@ SW9:
 		OUTPUT(0)=> READ_BUS(0) 
 	);
 
-ADDR_511 	<= 	DATA_ADDRESS(8) and DATA_ADDRESS(7) and DATA_ADDRESS(6) and
+
+CLEAR_KEY0 	<= 	DATA_ADDRESS(8) and DATA_ADDRESS(7) and DATA_ADDRESS(6) and
 						DATA_ADDRESS(5) and DATA_ADDRESS(4) and DATA_ADDRESS(3) and
 						DATA_ADDRESS(2) and DATA_ADDRESS(1) and DATA_ADDRESS(0);
 						
-ADDR_510 	<= 	DATA_ADDRESS(8) and DATA_ADDRESS(7) and DATA_ADDRESS(6) and
+CLEAR_KEY1 	<= 	DATA_ADDRESS(8) and DATA_ADDRESS(7) and DATA_ADDRESS(6) and
 						DATA_ADDRESS(5) and DATA_ADDRESS(4) and DATA_ADDRESS(3) and
 						DATA_ADDRESS(2) and DATA_ADDRESS(1) and not(DATA_ADDRESS(0));
 
--- endereco 511 é o reset do flipflop
 
 DEBOUNCER_KEY0:
 	entity work.flipflopGenerico
@@ -351,7 +397,7 @@ DEBOUNCER_KEY0:
 		DOUT 		=> KEY0_DEBOUNCER_OUT,
 		ENABLE 	=> '1',
 		CLK		=> ED_OUT_KEY0,
-		RST		=> ADDR_511
+		RST		=> CLEAR_KEY0
 	);
 
 KEY0_INTERFACE_EXISTENTE:
@@ -370,7 +416,7 @@ DEBOUNCER_KEY1:
 		DOUT 		=> KEY1_DEBOUNCER_OUT,
 		ENABLE 	=> '1',
 		CLK		=> ED_OUT_KEY1,
-		RST		=> ADDR_510
+		RST		=> CLEAR_KEY1
 	);
 	
 KEY1_INTERFACE_EXISTENTE:
@@ -408,8 +454,3 @@ RST_FPGA:
 
 	
 end architecture;
-
-
-
-
-

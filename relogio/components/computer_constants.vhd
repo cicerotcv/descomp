@@ -61,6 +61,12 @@ package controls is
 		-- KEY 2		: 354 (0x162)
 		-- KEY 3		: 355 (0x163)
 		-- FPGA RST : 356 (0x164)
+		
+	-- Base de tempo
+	   -- BASE 0   : 384 (0x180)
+	   -- BASE 1   : 384 (0x181)
+	   -- BASE 2   : 384 (0x182)
+	   -- BASE 3   : 384 (0x183)
 
 	constant ADDR_LEDR 		: std_logic_vector(8 downto 0) := '1' & x"00";
 	constant ADDR_LED8 		: std_logic_vector(8 downto 0) := '1' & x"01";
@@ -82,6 +88,8 @@ package controls is
 	constant ADDR_KEY2 		: std_logic_vector(8 downto 0) := '1' & x"62";
 	constant ADDR_KEY3 		: std_logic_vector(8 downto 0) := '1' & x"63";
 	constant ADDR_FPGA_RST 	: std_logic_vector(8 downto 0) := '1' & x"64";
+	
+	constant ADDR_TIME		: std_logic_vector(8 downto 0) := '1' & x"80";
 	
 	
 	
