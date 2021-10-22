@@ -1,5 +1,5 @@
 Archive Project report for relogio
-Thu Oct 21 13:38:20 2021
+Thu Oct 21 22:36:34 2021
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -36,7 +36,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------+
 ; Archive Project Summary                                        ;
 +------------------------+---------------------------------------+
-; Archive Project Status ; Successful - Thu Oct 21 13:38:20 2021 ;
+; Archive Project Status ; Successful - Thu Oct 21 22:36:34 2021 ;
 ; Revision Name          ; relogio                               ;
 ; Top-level Entity Name  ; relogio                               ;
 ; Family                 ; Cyclone V                             ;
@@ -60,10 +60,10 @@ Info: ----------------------------------------------------------
 Info: Generated report 'relogio.archive.rpt'
 Info (23030): Evaluation of Tcl script c:/intelfpga_lite/20.1/quartus/common/tcl/apps/qpm/qar.tcl was successful
 Info: Quartus Prime Shell was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4820 megabytes
-    Info: Processing ended: Thu Oct 21 13:38:20 2021
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Peak virtual memory: 4823 megabytes
+    Info: Processing ended: Thu Oct 21 22:36:34 2021
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:02
 
 
 +--------------------------------------------------------------+

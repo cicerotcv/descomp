@@ -243,37 +243,6 @@ interfaceBaseTempo3 : entity work.divisorGenerico_e_Interface
 	);
 
 
---muxTimer: entity work.muxGenerico4x1
---	generic map(larguraDados => 1)
---	port map (
---		SEL_MUX	  => SW(9) & SW(8),
---		E0(0)		  => TIME_INTERF_OUT(0), 
---		E1(0)		  => TIME_INTERF_OUT(1), 		
---		E2(0)		  => TIME_INTERF_OUT(2), 
---		E3(0)		  => TIME_INTERF_OUT(3),
---		MUx_OUT(0) => SELECTED_TIME_SRC
---	);
---	
---flipFlopTimer: entity work.flipflopGenerico
---	port map (
---		DIN 		=> SELECTED_TIME_SRC,
---		DOUT		=> READ_BUS(0),
---		ENABLE	=> ENABLE_TIME,
---		CLK		=> CLK,
---		RST		=> CLEAR_TIME
---	);
-
---regTimer: entity work.registradorGenerico
---	generic map(larguraDados => 1)
---	port map (
---		DIN(0)	=> SELECTED_TIME_SRC,
---		DOUT(0)	=> READ_BUS(0),
---		ENABLE 	=> ENABLE_TIME,
---		CLK		=> CLK,
---		RST		=> CLEAR_TIME
---	);
-	
-	
 LED_R:
 	entity work.led_r 
 	generic map(DATA_WIDTH => 8)
