@@ -1,0 +1,38 @@
+Quartus Prime Archive log --	C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/relogio.qarlog
+
+Archive:	C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/relogio.qar
+Date:		Thu Oct 21 22:36:34 2021
+Quartus Prime		20.1.0 Build 711 06/05/2020 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/CPU.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/ULASomaSub.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/bancoRegistradoresArqRegMem.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/buffer3state.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/computer_constants.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/conversorHex7Seg.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/d7segHex.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/decoder.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/decoder1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/divisorGenerico.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/divisorGenerico_e_Interface.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/edgeDetector.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/flipflopGenerico.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/led_r.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/led_solo.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/logica_desvio.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/memoriaRAM.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/memoriaROM.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/muxGenerico2x1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/muxGenerico4x1.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/proxima_instrucao.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/registradorGenerico.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/components/soma_constante.vhd
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/relogio.qpf
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/relogio.qsf
+C:/Users/elm_t/Documents/grad/descomp/atividades/relogio/relogio.vhd
+c:/intelfpga_lite/20.1/quartus/bin64/assignment_defaults.qdf
+	======= Total: 27 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
