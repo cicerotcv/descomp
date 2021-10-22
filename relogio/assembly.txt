@@ -1,0 +1,405 @@
+-- definicao de variaveis
+
+ADDR_ZERO : (8 DOWNTO 0) := '0' & x"00"; -- endereco da constante 0
+ADDR_ONE : (8 DOWNTO 0) := '0' & x"01"; -- endereco da constante 1
+ADDR_TWO : (8 DOWNTO 0) := '0' & x"02"; -- endereco da constante 2
+ADDR_THREE : (8 DOWNTO 0) := '0' & x"03"; -- endereco da constante 2
+ADDR_FOUR : (8 DOWNTO 0) := '0' & x"04"; -- endereco da constante 2
+ADDR_SIX : (8 DOWNTO 0) := '0' & x"05"; -- endereco da constante 6
+ADDR_TEN : (8 DOWNTO 0) := '0' & x"06"; -- endereco da constante 10
+
+ADDR_MODE : (8 DOWNTO 0) := '0' & x"07"; -- endereco do bit de "modo 12h"
+ADDR_FLAG : (8 DOWNTO 0) := '0' & x"08"; -- endereco do bit de flag que indica AM/PM
+
+ADDR_US : (8 DOWNTO 0) := '0' & x"0a"; -- endereco das unidades de segundos
+ADDR_DS : (8 DOWNTO 0) := '0' & x"0b"; -- endereco das dezenas de segundos
+ADDR_UM : (8 DOWNTO 0) := '0' & x"0c"; -- endereco das unidades de minutos
+ADDR_DM : (8 DOWNTO 0) := '0' & x"0d"; -- endereco das dezenas de minutos
+ADDR_UH : (8 DOWNTO 0) := '0' & x"0e"; -- endereco das unidades de horas
+ADDR_DH : (8 DOWNTO 0) := '0' & x"0f"; -- endereco das dezenas de horas
+
+ADDR_START_US : (8 DOWNTO 0) := '0' & x"10"; -- endereco do limite das unidades de segundos
+ADDR_START_DS : (8 DOWNTO 0) := '0' & x"11"; -- endereco do limite das dezenas de segundos
+ADDR_START_UM : (8 DOWNTO 0) := '0' & x"12"; -- endereco do limite das unidades de minutos
+ADDR_START_DM : (8 DOWNTO 0) := '0' & x"13"; -- endereco do limite das dezenas de minutos
+ADDR_START_UH : (8 DOWNTO 0) := '0' & x"14"; -- endereco do limite das unidades de horas
+ADDR_START_DH : (8 DOWNTO 0) := '0' & x"15"; -- endereco do limite das dezenas de horas
+
+CLEAR_KEY1 : (8 DOWNTO 0) := '1' & x"fe";
+CLEAR_KEY0 : (8 DOWNTO 0) := '1' & x"ff";
+CLEAR_TIME : (8 DOWNTO 0) := '1' & x"fd";
+
+R0 : (1 DOWNTO 0) := "00"; -- registrador 1
+R1 : (1 DOWNTO 0) := "01"; -- registrador 2
+R2 : (1 DOWNTO 0) := "10"; -- registrador 3
+R3 : (1 DOWNTO 0) := "11"; -- registrador 4
+
+
+-- instrucoes
+
+JMP & R0 & '1' & x"d0"; -- desvia para 0x1d0 (rotina principal)
+
+-- 0x001 | inicializa memoria | 1 ~ 31 (31 instrucoes)
+-- inicializa contador de segundos, minutos e horas como zero
+LDI & R0 & '0' & x"00"; -- R0 = 0
+LDI & R1 & '0' & x"01"; -- R1 = 1
+LDI & R2 & '0' & x"02"; -- R2 = 2
+LDI & R3 & '0' & x"03"; -- R3 = 3
+
+STA & R0 & ADDR_ZERO; -- inicializa zero na memoria
+STA & R1 & ADDR_ONE; -- inicializa um na memoria
+STA & R2 & ADDR_TWO; -- inicialzia dois na memoria
+STA & R3 & ADDR_THREE; -- inicializa tres na memoria
+
+LDI & R1 & '0' & x"04"; -- R1 = 4
+LDI & R2 & '0' & x"06"; -- R2 = 6 
+LDI & R3 & '0' & x"0a"; -- R3 = 10
+
+STA & R1 & ADDR_FOUR; -- inicializa tres na memoria
+STA & R2 & ADDR_SIX; -- inicializa quatro na memoria
+STA & R3 & ADDR_TEN; -- inicializa dez
+
+LDA & R0 & ADDR_KEY3; -- carrega botao KEY(3)
+CEQ & R0 & ADDR_ZERO; -- compara key3 com zero (botao pressionado)
+JEQ & R0 & '0' & x"16"; -- se for igual, desvia para 0x016
+-- se nao for igual (botao nao pressionado)
+LDA & R1 & ADDR_ZERO; -- R1 = 0
+STA & R1 & ADDR_MODE; -- atualiza flag de "modo 24h"
+STA & R1 & ADDR_START_UH; -- unidades de horas = 0
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- se for igual (botao pressionado)
+LDA & R1 & ADDR_ONE; -- 0x016
+STA & R1 & ADDR_MODE; -- modo am/pm = 1
+STA & R1 & ADDR_LED9; -- acende LED9
+STA & R1 & ADDR_START_UH; -- unidades de horas = 1
+
+RET & R0 & '0' & x"00"; -- retorna da sub-rotina
+-- 0x020 | atualiza leds | 32 ~ 55 (24 instrucoes)
+LDI & R0 & '0' & x"00"; -- carrega imediato 0
+STA & R0 & ADDR_LEDR; -- LEDS 0 ~ 7 = 0
+
+LDA & R0 & ADDR_FLAG; -- carrega flag AM/PM
+STA & R0 & ADDR_LED8; -- LED 8 = flag AM/PM
+
+LDA & R0 & ADDR_MODE; -- carrega indicador de "modo 12h" ligado
+STA & R0 & ADDR_LED9; -- LED 9 = flag "modo 12h"
+
+RET & R0 & '0' & x"00"; -- retorna retorna da sub-rotina
+
+-- 0x038 | rotina de aumentar contagem | 56 ~ 159 (104 instrucoes)
+STA & R0 & CLEAR_TIME; -- limpa a leitura de tempo
+
+-- incrementa unidades de segundos
+LDA & R0 & ADDR_US; -- carrega unidades de segundos
+SOMA & R0 & ADDR_ONE; -- soma 1
+CEQ & R0 & ADDR_TEN; -- compara com 10
+JEQ & R0 & '0' & x"43"; -- se for igual, desvia para 0x043
+-- se nao for igual
+STA & R0 & ADDR_US; -- atualiza unidades de segundos
+RET & R0 & ADDR_ZERO; -- RET & '0' & x"00"; retorna da sub-rotina
+-- se for igual
+LDI & R0 & ADDR_ZERO; -- 0x043 | carrega imediato 0 --edit
+STA & R0 & ADDR_US; -- atualiza unidades
+
+-- incrementa dezenas de segundos
+LDA & R0 & ADDR_DS; -- carrega dezenas de segundos
+SOMA & R0 & ADDR_ONE; -- soma 1
+CEQ & R0 & ADDR_SIX; -- compara com 6
+JEQ & R0 & '0' & x"4b"; -- se for igual, desvia para 0x04b
+-- se nao for igual
+STA & R0 & ADDR_DS; -- atualiza dezenas de segundos
+RET & R0 & ADDR_ZERO; -- RET & '0' & x"00"; retorna da sub-rotina;
+-- se for igual
+LDI & R0 & ADDR_ZERO; -- 0x04b | carrega imediato 0 --edit
+STA & R0 & ADDR_DS; -- atualiza dezenas
+
+-- incrementa unidades de minutos
+LDA & R0 & ADDR_UM; -- carrega unidades de minutos
+SOMA & R0 & ADDR_ONE; -- soma 1
+CEQ & R0 & ADDR_TEN; -- compara com 10
+JEQ & R0 & '0' & x"53"; -- se for igual, desvia para 0x053
+-- se nao for igual
+STA & R0 & ADDR_UM; -- atualiza unidades de minutos
+RET & R0 & ADDR_ZERO; -- RET & '0' & x"00"; retorna da sub-rotina;
+-- se for igual
+LDI & R0 & ADDR_ZERO; -- 0x053 | carrega imediato 0
+STA & R0 & ADDR_UM; -- atualiza unidades de minutos
+
+-- incrementa dezenas de minutos
+LDA & R0 & ADDR_DM; -- carrega dezenas de minutos
+SOMA & R0 & ADDR_ONE; -- soma 1
+CEQ & R0 & ADDR_SIX; -- compara com 6
+JEQ & R0 & '0' & x"5b"; -- se for igual, desvia para 0x05b
+-- se nao for igual
+STA & R0 & ADDR_DM; -- atualiza dezenas de minutos
+RET & R0 & ADDR_ZERO; -- RET & '0' & x"00"; retorna da sub-rotina;
+-- se for igual
+LDI & R0 & ADDR_ZERO; -- 0x05b | carrega imediato 0
+STA & R0 & ADDR_DM; -- atualiza dezenas de minutos
+
+-- incrementa unidades de horas
+LDA & R0 & ADDR_UH; -- carrega unidades de horas
+SOMA & R0 & ADDR_ONE; -- soma 1
+CEQ & R0 & ADDR_TEN; -- compara com 10
+JEQ & R0 & '0' & x"85"; -- se for igual, desvia para 0x085
+-- se nao for igual (0)
+LDA & R1 & ADDR_MODE; -- R1 = flag de "modo"
+CEQ & R1 & ADDR_ONE; -- compara R1 com 1
+JEQ & R0 & '0' & x"71"; -- se for igual desvia para 0x071
+-- se nao for igual (1) -- modo 24h
+CEQ & R0 & ADDR_FOUR; -- compara unidades de horas com 4
+JEQ & R0 & '0' & x"68"; -- se for igual, desvia para 0x068
+-- se nao for igual (2)
+STA & R0 & ADDR_UH; -- atualiza unidades de horas
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- se for igual (2)
+LDA & R1 & ADDR_DH; -- 0x068 | carrega dezenas de horas
+CEQ & R1 & ADDR_TWO; -- compara com 2
+JEQ & R0 & '0' & x"6d"; -- se for igual, desvia para 0x06d
+-- se nao for igual (3)
+STA & R0 & ADDR_UH; -- atualiza unidades de horas
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- se for igual (3)
+LDA & R2 & ADDR_ZERO; -- 0x06d
+STA & R2 & ADDR_UH;
+STA & R2 & ADDR_DH;
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+
+-- se for igual (1) -- modo 12h
+CEQ & R0 & ADDR_THREE; -- 0x071 | compara unidades de horas com 3
+JEQ & R0 & '0' & x"75"; -- desvia para 0x075
+-- se nao for igual (2)
+STA & R0 & ADDR_UH; -- atualiza unidades de horas
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- se for igual (2)
+LDA & R1 & ADDR_DH; -- R1 = dezenas de horas
+CEQ & R1 & ADDR_ONE; -- compara com 1
+JEQ & R0 & '0' & x"7a"; -- desvia para 0x07a
+-- se nao for igual (3)
+STA & R0 & ADDR_UH; -- atualiza unidades de horas
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- se for igual (3)
+LDA & R2 & ADDR_ZERO; -- 0x07a | R2 = 0
+STA & R2 & ADDR_DH; -- dezenas de horas = 0
+LDA & R3 & ADDR_ONE; -- R3 = 1
+STA & R3 & ADDR_UH; -- unidades de horas = 1
+
+LDA & R1 & ADDR_FLAG; -- R1 = flag
+CEQ & R1 & ADDR_ONE; -- compara R1 com 1
+JEQ & R0 & '0' & x"83"; -- desvia para 0x083
+-- se nao for igual
+STA & R3 & ADDR_FLAG; -- flag am/pm = 1
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- se for igual
+STA & R2 & ADDR_FLAG; -- 0x083 | flag am/pm = 0
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotine
+
+-- se for igual (0)
+LDI & R0 & ADDR_ZERO; -- 0x085 | carrega imediato 0
+STA & R0 & ADDR_UH; -- atualiza dezenas de horas
+
+-- incrementa dezenas de horas
+LDA & R0 & ADDR_DH; -- carrega dezenas de horas
+SOMA & R0 & ADDR_ONE; -- soma 1
+STA & R0 & ADDR_DH; -- atualiza dezenas de horas
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- 0x0a0 | atualizar LCDs | 160 ~ 207 (48 instrucoes)
+LDA & R0 & ADDR_US; -- carrega o valor das unidades de segundos
+STA & R0 & ADDR_HEX0; -- escreve em HEX0
+LDA & R0 & ADDR_DS; -- carrega o valor das dezenas de segundos
+STA & R0 & ADDR_HEX1; -- escreve em HEX1
+LDA & R0 & ADDR_UM; -- carrega o valor das unidades de minutos
+STA & R0 & ADDR_HEX2; -- escreve em HEX2
+LDA & R0 & ADDR_DM; -- carrega o valor das dezenas de minutos
+STA & R0 & ADDR_HEX3; -- escreve em HEX3
+LDA & R0 & ADDR_UH; -- carrega o valor das unitades de horas
+STA & R0 & ADDR_HEX4; -- escreve em HEX4
+LDA & R0 & ADDR_DH; -- carrega o valor das dezenas de horas
+STA & R0 & ADDR_HEX5; -- escreve em HEX5
+
+RET & R0 & '0' & x"00"; -- retorna da sub-rotina
+
+-- 0x0d0 | reiniciar contagem | 208 ~ 239 (32 instrucoes)
+LDA & R0 & ADDR_START_US; -- carrega start das unidades de segundos
+STA & R0 & ADDR_US; -- atualiza valor das unidades de segundos
+LDA & R0 & ADDR_START_DS; -- carrega start das dezenas de minutos
+STA & R0 & ADDR_DS; -- atualiza valor das dezenas de minutos
+LDA & R0 & ADDR_START_UM; -- carrega start das unidades de minutos
+STA & R0 & ADDR_UM; -- atualiza valor das unidades de minutos
+LDA & R0 & ADDR_START_DM; -- carrega start das dezenas de minutos
+STA & R0 & ADDR_DM; -- atualiza valor das dezenas de minutos
+LDA & R0 & ADDR_START_UH; -- carrega start das unidades de horas
+STA & R0 & ADDR_UH; -- atualiza valor das unidades de horas
+LDA & R0 & ADDR_START_DH; -- carrega start das dezenas de horas
+STA & R0 & ADDR_DH; -- atualiza valor das dezenas de horas
+
+LDI & R0 & '0' & x"00"; -- carrega imediato 0
+STA & R0 & ADDR_FLAG; -- atualiza valor da flag;
+--  STA & R0 & ADDR_MODE;     -- atualiza valor da flag;
+
+JMP & R0 & '0' & x"a0"; -- 0x0a0 | deve saltar para atualizar os LCDs
+
+-- 0x0f0 alterar hora | 240 ~ 399 (160 instrucoes)
+STA & R0 & CLEAR_KEY1; -- 0x0f0 (step 1) | limpa KEY[1]
+--  241
+LDI & R0 & '0' & b"0000_0001"; -- carrega imediato 1
+STA & R0 & ADDR_LEDR; -- acende LEDs "0000 0001"
+LDA & R0 & ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA & R0 & ADDR_START_US; -- armazena chaves no start das unidades de segundos
+STA & R0 & ADDR_HEX0; -- armazena chaves em HEX0 (mera visualizacao)
+--  247
+LDA & R0 & ADDR_KEY1; -- carrega KEY[1]
+CEQ & R0 & ADDR_ONE; -- compara com 1
+JEQ & R0 & '0' & x"fc"; -- desvia para 0x0fc (step 2)
+-- se botao nao pressionado
+JMP & R0 & '0' & x"f2"; -- volta para 0x0f2 (step 1, linha 242)
+-- se botao pressionado, continua
+
+STA & R0 & CLEAR_KEY1; -- 0x0fc (step 2) | limpa KEY[1]
+--  253
+LDI & R0 & '0' & b"0000_0011"; -- carrega imediato 3
+STA & R0 & ADDR_LEDR; -- acende LEDs "0000 0011"
+LDA & R0 & ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA & R0 & ADDR_START_DS; -- armazena chaves no start das dezenas de segundos
+STA & R0 & ADDR_HEX1; -- armazena chaves em HEX1 (mera visualizacao)
+--  259
+LDA & R0 & ADDR_KEY1; -- carrega KEY[1]
+CEQ & R0 & ADDR_ONE; -- compara com 1
+JEQ & R0 & '1' & x"08"; -- desvia para 0x108 (step 3)
+-- se botao nao pressionado
+JMP & R0 & '0' & x"fc"; -- volta para 0x0fc (step 2)
+-- se botao pressionado, continua
+
+STA & R0 & CLEAR_KEY1; -- 0x108 (step 3) | limpa KEY[1]
+--  265
+LDI & R0 & '0' & b"0000_0111"; -- carrega imediato 7
+STA & R0 & ADDR_LEDR; -- acende LEDs "0000 0111"
+LDA & R0 & ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA & R0 & ADDR_START_UM; -- armazena chaves no start das unidades de minutos
+STA & R0 & ADDR_HEX2; -- armazena chaves em HEX2 (mera visualizacao)
+--  271
+LDA & R0 & ADDR_KEY1; -- carrega KEY[1]
+CEQ & R0 & ADDR_ONE; -- compara com 1
+JEQ & R0 & '1' & x"14"; -- desvia para 0x114 (step 4)
+-- se botao nao pressionado
+JMP & R0 & '1' & x"08"; -- volta para 0x108 (step 3)
+-- se botao pressionado, continua
+
+STA & R0 & CLEAR_KEY1; -- 0x114 (step 4) | limpa KEY[1]
+--  277
+LDI & R0 & '0' & b"0000_1111"; -- carrega imediato 15
+STA & R0 & ADDR_LEDR; -- acende LEDs "0000 1111"
+LDA & R0 & ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA & R0 & ADDR_START_DM; -- armazena chaves no start das dezenas de minutos
+STA & R0 & ADDR_HEX3; -- armazena chaves em HEX3 (mera visualizacao)
+--  283
+LDA & R0 & ADDR_KEY1; -- carrega KEY[1]
+CEQ & R0 & ADDR_ONE; -- compara com 1
+JEQ & R0 & '1' & x"20"; -- desvia para 0x120 (step 5)
+-- se botao nao pressionado
+JMP & R0 & '1' & x"14"; -- desvia para 0x114 (step 4)
+-- se botao pressionado, continua
+
+STA & R0 & CLEAR_KEY1; -- 0x120 (step 5) | limpa KEY[1]
+--  289
+LDI & R0 & '0' & b"0001_1111"; -- carrega imediato 31
+STA & R0 & ADDR_LEDR; -- acende LEDs "0001 1111"
+LDA & R0 & ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA & R0 & ADDR_START_UH; -- armazena chaves no start das unidades de horas
+STA & R0 & ADDR_HEX4; -- armazena chaves em HEX4 (mera visualizacao)
+--  295
+LDA & R0 & ADDR_KEY1; -- carrega KEY[1]
+CEQ & R0 & ADDR_ONE; -- compara com 1
+JEQ & R0 & '1' & x"2c"; -- desvia para 0x12c (step 6)
+-- se botao nao pressionado
+JMP & R0 & '1' & x"20"; -- desvia para 0x120 (step 5)
+-- se botao pressionado, continua
+
+STA & R0 & CLEAR_KEY1; -- 0x12c (step 6) | limpa KEY[1]
+--  301
+LDI & R0 & '0' & b"0011_1111"; -- carrega imediato 63
+STA & R0 & ADDR_LEDR; -- acende LEDs "0011 1111"
+LDA & R0 & ADDR_SWR; -- faz leitura das chaves SW 7~0
+STA & R0 & ADDR_START_DH; -- armazena chaves no start das dezenas de horas
+STA & R0 & ADDR_HEX5; -- armazena chaves em HEX5 (mera visualizacao)
+--  307
+LDA & R0 & ADDR_KEY1; -- carrega KEY[1]
+CEQ & R0 & ADDR_ONE; -- compara com 1
+JEQ & R0 & '1' & x"38"; -- desvia para 0x138
+-- se botao nao pressionado
+JMP & R0 & '1' & x"2c"; -- desvia para 0x12c (step 6)
+-- se botao pressionado, continua
+
+STA & R0 & CLEAR_KEY1; -- 0x138 | limpeza final em KEY[1]
+LDA & R0 & ADDR_ZERO; -- carrega zero
+STA & R0 & ADDR_LEDR; -- zera LEDs
+
+RET & R0 & '0' & x"00"; -- retorna da sub-rotina
+
+-- 0x190 | zerar LCDs | 400 ~ 407 (8 instrucoes)
+LDA & R0 & ADDR_ZERO; -- carrega 0
+STA & R0 & ADDR_HEX0; -- zera display 0
+STA & R0 & ADDR_HEX1; -- zera display 1
+STA & R0 & ADDR_HEX2; -- zera display 2
+STA & R0 & ADDR_HEX3; -- zera display 3
+STA & R0 & ADDR_HEX4; -- zera display 4
+STA & R0 & ADDR_HEX5; -- zera display 5
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- 0x198 | resetar valores | 408 ~ 422 (8 instrucoes)
+LDA & R0 & ADDR_ZERO; -- carrega 0
+STA & R0 & ADDR_START_US; -- zera display 0
+STA & R0 & ADDR_START_DS; -- zera display 1
+STA & R0 & ADDR_START_UM; -- zera display 2
+STA & R0 & ADDR_START_DM; -- zera display 3
+STA & R0 & ADDR_START_DH; -- zera display 3
+
+LDA & R1 & ADDR_MODE; -- carrega flag de '12h/24h'
+CEQ & R1 & ADDR_ONE; -- compara com um (modo 12h)
+JEQ & R0 & '1' & x"a4"; -- se for igual, desvia para 0x1a4
+-- se nao for 1
+LDI & R2 & ADDR_ZERO; -- R2 = 0
+STA & R2 & ADDR_START_UH; -- atualiza start das unidades de horas
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- se for 1
+LDI & R2 & ADDR_ONE; -- 0x1a4 | R2 = 1
+STA & R2 & ADDR_START_UH; -- atualzia start das unidades de horas
+RET & R0 & ADDR_ZERO; -- retorna da sub-rotina
+-- 0x1d0 rotina principal | 464 ~ 509 (46 instrucoes)
+STA & R0 & CLEAR_KEY1; -- limpeza KEY[1]
+STA & R0 & CLEAR_KEY0; -- limpeza KEY[0]
+JSR & R0 & '0' & x"01"; -- desvia para 0x001 (inicializa memoria)
+JSR & R0 & '1' & x"98"; -- desvia para 0x198 (reset de valores)
+JSR & R0 & '0' & x"d0"; -- desvia para 0x0d0 (reinicia contagem)
+JMP & R0 & '1' & x"e5"; -- desvia para 0x1e5 (loop principal)
+
+-- 0x1dc
+JSR & R0 & '0' & x"38"; -- desvia para 0x038 (incrementa contagem)
+JSR & R0 & '0' & x"a0"; -- desvia para 0x0a0 (atualiza LCDs)
+JMP & R0 & '1' & x"e5"; -- desvia para 0x1e5 (retorna para o loop principal)
+
+-- 0x1e0
+JSR & R0 & '1' & x"90"; -- desvia para 0x190 (zerar LCDs)
+JSR & R0 & '0' & x"f0"; -- desvia para 0x0f0 (atualiza hora)
+JSR & R0 & '0' & x"d0"; -- desvia para 0x0d0 (reinicia contagem)
+JMP & R0 & '1' & x"e5"; -- desvia para 0x1e5 (retorna para o loop principal)
+
+-- 0x1e5
+LDA & R0 & ADDR_KEY1; -- carrega KEY[1]
+CEQ & R0 & ADDR_ONE; -- compara com 1 (pressionado)
+JEQ & R0 & '1' & x"e0"; -- desvia para 0x1e0 se KEY1 pressionado
+
+-- 0x143
+LDA & R0 & ADDR_TIME; -- carrega KEY[0]
+CEQ & R0 & ADDR_ONE; -- compara com 1 (pressionado)
+JEQ & R0 & '1' & x"dc"; -- desvia para 0x1dc se KEY0 pressionado
+
+-- 0x146
+LDA & R0 & ADDR_FPGA_RST; -- carrega botao de reset
+CEQ & R0 & ADDR_ZERO; -- compara com zero (pressionado)
+JEQ & R0 & '1' & x"d0"; -- desvia para 0x1d0 (reseta o loop principal)
+
+-- 0x149
+--  JSR  & R0 & '1' & x"90"; -- desvia para 0x190 (verifica contagem)
+JSR & R0 & '0' & x"20"; -- desvia para 0x020 (atualiza leds)
+
+JMP & R0 & '1' & x"e5"; -- desvia para 0x1e5
